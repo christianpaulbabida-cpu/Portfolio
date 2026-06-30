@@ -32,8 +32,17 @@
         </div>
     </nav>
 
-    <header class="pt-32 pb-20 min-h-screen flex items-center relative px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
+    <!-- Hero Section na may Live Background Video -->
+    <header class="pt-32 pb-20 min-h-screen flex items-center relative px-6 overflow-hidden">
+        
+        <!-- Live Video Element Container (Dito lang siya iikot) -->
+        <div class="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="background.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full relative z-10">
             <div data-aos="fade-right" data-aos-duration="1000">
                 <span class="text-xs uppercase tracking-widest text-gold font-bold bg-gold/10 px-3 py-1 rounded">Specialized Partnership</span>
                 <h1 class="text-4xl md:text-6xl font-black tracking-tight mt-4 mb-2">CHRISTIAN PAUL BABIDA</h1>
@@ -180,7 +189,7 @@
                 <div class="bg-navy-card p-8 rounded-2xl border border-gray-800" data-aos="fade-left">
                     <h3 class="text-xs uppercase tracking-widest text-gold font-bold">Career Performance</h3>
                     <h2 class="text-2xl font-bold mt-2 mb-6">Proven Scalability Metrics</h2>
-                    
+                     
                     <div class="space-y-6">
                         <div>
                             <div class="flex justify-between text-sm mb-2">
