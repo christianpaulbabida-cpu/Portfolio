@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christian Paul Babida | Proactive Transaction Coordinator</title>
+    <link rel="icon" type="image/jpeg" href="pavicon.jpg">
+    <!-- Tailwind CSS and FontAwesome for modern UI elements -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter for structured Apple-like layouts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { light: '#0ea5e9', dark: '#2563eb' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        /* Glassmorphism Classes */
+        .glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Ambient Floating Bubbles CSS */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(37, 99, 219, 0.05) 100%);
+            backdrop-filter: blur(4px);
+            animation: float 25s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+            50% { transform: translateY(-60px) translateX(40px) scale(1.1); }
+        }
+        
+        /* Custom Scrolling Hide Effects */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
+
+    <!-- Ambient iOS Decorative Floating Bubbles -->
+    <div class="absolute top-20 left-10 w-72 h-72 bubble" style="animation-delay: 0s;"></div>
+    <div class="absolute top-[1200px] right-20 w-96 h-96 bubble" style="animation-delay: 3s; background: linear-gradient(135deg, rgba(37,99,219,0.1) 0%, rgba(168,85,247,0.05) 100%);"></div>
+    <div class="absolute top-[2600px] left-5 w-80 h-80 bubble" style="animation-delay: 6s;"></div>
+    <div class="absolute top-[4200px] right-12 w-64 h-64 bubble" style="animation-delay: 2s;"></div>
+
+    <!-- Sticky Glassmorphism Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass shadow-sm mx-4 my-3 rounded-2xl max-w-7xl lg:mx-auto transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Logo" class="h-10 w-auto object-contain">
+                <span class="font-semibold tracking-tight text-sm hidden sm:inline-block">Christian Paul Babida</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <a href="#about" class="hover:text-brand-light transition">About</a>
+                <a href="#services" class="hover:text-brand-light transition">Services</a>
+                <a href="#workflow" class="hover:text-brand-light transition">Workflow</a>
+                <a href="#why-me" class="hover:text-brand-light transition">Benefits</a>
+                <a href="#tools" class="hover:text-brand-light transition">Tech Stack</a>
+                <a href="#contact" class="hover:text-brand-light transition">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button id="themeToggle" class="p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:scale-105 transition" aria-label="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block"></i>
+                </button>
+                <a href="#calendar" class="bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md hover:opacity-95 transition hidden sm:block">Book Strategy Session</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden pt-16">
+        <video autoplay loop muted playsinline class="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover opacity-35 dark:opacity-20 pointer-events-none">
+            <source src="background.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/50 to-slate-50 dark:via-slate-950/50 dark:to-slate-950 z-10"></div>
+        
+        <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center">
+            <img src="profile.jpg" alt="Christian Paul Babida" class="w-32 h-32 rounded-full object-cover border-4 border-white dark:border-slate-900 shadow-2xl mb-6 hover:scale-105 transition duration-300">
+            <div class="inline-flex items-center gap-2 bg-white/60 dark:bg-slate-900/60 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide border border-white/40 dark:border-white/10 mb-4 shadow-sm">
+                <span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span> 
+                California Market Specialist
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-brand-dark to-slate-950 dark:from-white dark:via-brand-light dark:to-slate-200 max-w-4xl leading-tight">
+                Reliable Transaction Coordination for Real Estate Professionals
+            </h1>
+            <p class="mt-4 text-md sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl font-light">
+                Scaling Your Business, One Deal at a Time. I handle the operational heavy lifting, complex administrative compliance, and timelines so you can confidently focus on closing commissions.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+                <a href="#calendar" class="bg-gradient-to-r from-brand-dark to-brand-light text-white px-8 py-4 rounded-2xl font-medium shadow-xl hover:shadow-2xl hover:scale-[1.02] transition text-center">Book a Consultation</a>
+                <a href="#contact" class="glass text-slate-800 dark:text-white px-8 py-4 rounded-2xl font-medium hover:bg-white/80 dark:hover:bg-slate-900/80 transition text-center">Let's Work Together</a>
+            </div>
+            
+            <!-- Hero Social Bar -->
+            <div class="mt-12 flex gap-5 text-xl text-slate-400 dark:text-slate-500">
+                <a href="mailto:christianbabida13@outlook.com" class="hover:text-brand-light transition"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/christian-paul-babida-2017b9321" target="_blank" class="hover:text-brand-light transition"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://www.upwork.com/freelancers/~013aa34959cfaa9d45" target="_blank" class="hover:text-brand-light transition"><i class="fa-brands fa-upwork"></i></a>
+                <a href="https://wa.me/639617445321" target="_blank" class="hover:text-emerald-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. About Me Section -->
+    <section id="about" class="py-24 px-4 max-w-7xl mx-auto reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5 relative">
+                <div class="absolute inset-0 bg-gradient-to-tr from-brand-light to-transparent rounded-3xl filter blur-2xl opacity-20"></div>
+                <img src="office.jpg" alt="Office Infrastructure" class="rounded-3xl shadow-xl w-full object-cover h-[450px] relative z-10 border border-white/20">
+            </div>
+            <div class="lg:col-span-7 space-y-6">
+                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Meet Your Operations Backbone</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold tracking-tight">Are you tired of drowning in paperwork while your next big lead waits?</h3>
+                <p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
+                    I’m Christian, a California-focused Transaction Coordinator with a mission: To handle the administrative heavy lifting so you can get back to what you do best—closing deals and wowing your clients.
+                </p>
+                <p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
+                    With 2 years of hands-on experience in the complex CA market, I don’t just manage files—I clear the path for your success. From the second a contract is signed until the final keys are handed over, I’m your remote engine for absolute compliance, total timeline monitoring, and stress-free closings.
+                </p>
+                <div class="grid grid-cols-2 gap-4 pt-4">
+                    <div class="glass p-4 rounded-2xl shadow-sm">
+                        <div class="text-2xl font-bold text-brand-dark dark:text-brand-light">2+ Years</div>
+                        <div class="text-xs text-slate-500">CA Market Expertise</div>
+                    </div>
+                    <div class="glass p-4 rounded-2xl shadow-sm">
+                        <div class="text-2xl font-bold text-brand-dark dark:text-brand-light">100%</div>
+                        <div class="text-xs text-slate-500">Audit & DA Compliance</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Services Section -->
+    <section id="services" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 backdrop-blur-sm reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">What I Bring to Your Team</h2>
+                <p class="text-3xl font-bold mt-2 tracking-tight">Comprehensive Contract-to-Close Infrastructure</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Service Cards -->
+                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-file-signature"></i></div>
+                        <h4 class="text-lg font-semibold mb-2">Contract-to-Close Management</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Full management of paperwork, signatures, and document processing from initial purchase agreement to escrow closing.</p>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-list-check"></i></div>
+                        <h4 class="text-lg font-semibold mb-2">MLS Listing Management</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Accurate listing data input, property profile compilation, media upload adjustments, and active listing status audit updates.</p>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-calendar-days"></i></div>
+                        <h4 class="text-lg font-semibold mb-2">Calendar & Deadline Tracking</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Automated triggers tracking active inspection timelines, clear title review cutoffs, and contingency tracking alerts.</p>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h4 class="text-lg font-semibold mb-2">Compliance & Documentation</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Meticulous organization of internal folders to ensure seamless broker file approval to isolate disbursement hold-ups.</p>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-house-chimney-crack"></i></div>
+                        <h4 class="text-lg font-semibold mb-2">Inspection Coordination</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Timely alignment of structural, pest, natural hazard, and appraisal walkthroughs between sellers and respective buying teams.</p>
+                    </div>
+                </div>
+                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-handshake"></i></div>
+                        <h4 class="text-lg font-semibold mb-2">Concierge Client Communication</h4>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Serving as the polite point of contact handling coordination between buyers, escrow partners, lending teams, and agents.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Transaction Workflow Section -->
+    <section id="workflow" class="py-24 px-4 max-w-7xl mx-auto reveal">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">The Visual Roadmap</h2>
+            <p class="text-3xl font-bold mt-2 tracking-tight">Zero-Miss Deadline Tracking System</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-4">
+                <!-- Interactive Steps -->
+                <div class="flex gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm transition group">
+                    <span class="w-8 h-8 rounded-full bg-brand-light text-white font-bold text-sm flex items-center justify-center shrink-0">1</span>
+                    <div>
+                        <h5 class="font-semibold text-md">Contract Received & Review</h5>
+                        <p class="text-sm text-slate-500 font-light">Immediate breakdown of critical dates and system onboarding from the second your contract is executed.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm transition group">
+                    <span class="w-8 h-8 rounded-full bg-brand-light text-white font-bold text-sm flex items-center justify-center shrink-0">2</span>
+                    <div>
+                        <h5 class="font-semibold text-md">File Setup & Automated Reminders</h5>
+                        <p class="text-sm text-slate-500 font-light">Inputting critical dates into localized tech stacks to map milestone dependencies smoothly.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm transition group">
+                    <span class="w-8 h-8 rounded-full bg-brand-light text-white font-bold text-sm flex items-center justify-center shrink-0">3</span>
+                    <div>
+                        <h5 class="font-semibold text-md">Continuous Document Compliance Audit</h5>
+                        <p class="text-sm text-slate-500 font-light">Pre-auditing disclosure structures and documentation loops to completely eliminate missing signature stress lines.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm transition group">
+                    <span class="w-8 h-8 rounded-full bg-brand-light text-white font-bold text-sm flex items-center justify-center shrink-0">4</span>
+                    <div>
+                        <h5 class="font-semibold text-md">Closing Coordination & DA Finalization</h5>
+                        <p class="text-sm text-slate-500 font-light">Ensuring accurate Disbursement Authorizations arrive well ahead of funding to secure your hard-earned payouts fast.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-5">
+                <div class="glass p-4 rounded-3xl shadow-lg border border-white/40">
+                    <p class="text-xs font-semibold text-slate-400 mb-2 text-center"><i class="fa-regular fa-calendar-check mr-1"></i> Reference Workflow Calendar Snapshot</p>
+                    <img src="calendar-sample.jpg" alt="Calendar Tracking Reference Layout" class="rounded-2xl w-full object-cover h-[380px] shadow-sm">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Why Partner With Me Section -->
+    <section id="why-me" class="py-24 px-4 max-w-7xl mx-auto reveal">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">The ROI Transformation</h2>
+            <p class="text-3xl font-bold mt-2 tracking-tight">In This Business, Time Is Literally Money</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 hover:scale-[1.01] transition">
+                <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-hourglass-half"></i></div>
+                <h4 class="text-lg font-bold mb-2">More Freedom</h4>
+                <p class="text-sm font-light text-slate-500 leading-relaxed">Reclaim 10–15 hours per file transaction. Shift away from manual administrative paperwork patterns and focus completely on active field production.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 hover:scale-[1.01] transition">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-brain"></i></div>
+                <h4 class="text-lg font-bold mb-2">Absolute Peace of Mind</h4>
+                <p class="text-sm font-light text-slate-500 leading-relaxed">Never worry about a missed disclosure file, omitted compliance line, or delayed escrow milestone signature update parameters again.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 hover:scale-[1.01] transition">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-star"></i></div>
+                <h4 class="text-lg font-bold mb-2">Better Professional Reputation</h4>
+                <p class="text-sm font-light text-slate-500 leading-relaxed">Your professional clients deserve a completely modern closing experience, and my white-glove support updates ensure they receive it every single step.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Testimonials Section -->
+    <section id="testimonials" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Real Agent Experiences</h2>
+                <p class="text-3xl font-bold mt-2 tracking-tight">Trusted By Real Estate Producers</p>
+            </div>
+            
+            <!-- Horizontal Sliding Framework Simulation -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+                    <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"Christian completely turned my transaction tracking operations around. I saved over 14 hours on my last residential property closing process alone!"</p>
+                    <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">SM</div>
+                        <span class="text-xs font-semibold tracking-tight">Sarah Mitchell</span>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+                    <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"File audits used to give me headaches every single month. With Christian tracking compliance logs, my DAs release seamlessly without delays."</p>
+                    <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">JC</div>
+                        <span class="text-xs font-semibold tracking-tight">James Carter</span>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+                    <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"The absolute highest standard of transaction communication support. He monitors escrow, text lines, and lending operations with elite professionalism."</p>
+                    <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">AR</div>
+                        <span class="text-xs font-semibold tracking-tight">Amanda Reyes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Tools & Platforms Section -->
+    <section id="tools" class="py-24 px-4 max-w-7xl mx-auto reveal">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">High-Performance Tech Stack</h2>
+            <p class="text-2xl font-bold mt-2 tracking-tight">Fully Integrated With the Tools You Already Use</p>
+        </div>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <!-- Simulated Tech Badges with Icons -->
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-sky-500/10 text-brand-light flex items-center justify-center text-md"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <span class="text-xs font-medium tracking-tight">SkySlope</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 flex items-center justify-center text-md"><i class="fa-solid fa-circle-nodes"></i></div>
+                <span class="text-xs font-medium tracking-tight">Dotloop</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center text-md"><i class="fa-solid fa-bolt"></i></div>
+                <span class="text-xs font-medium tracking-tight">OpenToClose</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-600 flex items-center justify-center text-md"><i class="fa-solid fa-file-signature"></i></div>
+                <span class="text-xs font-medium tracking-tight">DocuSign</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center text-md"><i class="fa-solid fa-database"></i></div>
+                <span class="text-xs font-medium tracking-tight">kvCORE</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-md"><i class="fa-brands fa-hubspot"></i></div>
+                <span class="text-xs font-medium tracking-tight">HubSpot</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-md"><i class="fa-solid fa-palette"></i></div>
+                <span class="text-xs font-medium tracking-tight">Canva</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 flex items-center justify-center text-md"><i class="fa-solid fa-trello"></i></div>
+                <span class="text-xs font-medium tracking-tight">Trello</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-slate-500/10 text-slate-600 flex items-center justify-center text-md"><i class="fa-brands fa-google"></i></div>
+                <span class="text-xs font-medium tracking-tight">Workspace</span>
+            </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+                <div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-600 flex items-center justify-center text-md"><i class="fa-solid fa-key"></i></div>
+                <span class="text-xs font-medium tracking-tight">LastPass</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Availability Calendar Section -->
+    <section id="calendar" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 reveal">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Secure Your Competitive Engine</h2>
+            <p class="text-3xl font-bold mt-2 tracking-tight mb-8">Let’s Scale Your Real Estate Business</p>
+            
+            <!-- Calendar Onboarding Interface Component Wrapper -->
+            <div class="glass p-6 sm:p-8 rounded-3xl shadow-xl border border-white/40 text-left space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-slate-200/60 dark:border-white/5">
+                    <div>
+                        <h4 class="text-lg font-bold">15-Minute TC Workflow Strategy Audit</h4>
+                        <p class="text-xs text-slate-400 font-light">Select an available operations consultation window below.</p>
+                    </div>
+                    <span class="bg-brand-light/10 text-brand-dark dark:text-brand-light text-xs font-semibold px-3 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i> 15 Mins</span>
+                </div>
+                
+                <!-- Mockup Calendar Grid UI upgraded to fully operational states -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                        <label class="text-xs font-medium text-slate-400 block">Select Strategy Date</label>
+                        <div id="dateGrid" class="grid grid-cols-4 gap-2 text-center text-xs">
+                            <button class="date-btn p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:bg-brand-light hover:text-white transition font-medium" data-day="Monday">Mon</button>
+                            <button class="date-btn p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:bg-brand-light hover:text-white transition font-medium" data-day="Tuesday">Tue</button>
+                            <button class="date-btn p-2 rounded-xl bg-brand-dark text-white shadow-sm font-medium" data-day="Wednesday">Wed</button>
+                            <button class="date-btn p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:bg-brand-light hover:text-white transition font-medium" data-day="Thursday">Thu</button>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="text-xs font-medium text-slate-400 block">Available Meeting Slots (PST)</label>
+                        <div id="timeGrid" class="grid grid-cols-2 gap-2 text-center text-xs">
+                            <button class="time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition" data-time="09:00 AM">09:00 AM</button>
+                            <button class="time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition" data-time="11:30 AM">11:30 AM</button>
+                            <button class="time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition" data-time="02:00 PM">02:00 PM</button>
+                            <button class="time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition" data-time="04:15 PM">04:15 PM</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-2">
+                    <a id="lockSlotBtn" href="mailto:christianbabida13@outlook.com?subject=TC%20Strategy%20Session%20Booking" class="block text-center w-full bg-gradient-to-r from-brand-dark to-brand-light text-white font-semibold py-3.5 rounded-2xl shadow-md hover:opacity-95 transition text-sm">Lock In My Selected Slot</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Contact Integration Section -->
+    <section id="contact" class="py-24 px-4 max-w-7xl mx-auto reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-5 space-y-6">
+                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Direct Communication Matrix</h2>
+                <h3 class="text-3xl font-bold tracking-tight">Let's Establish Your Operations Pipeline</h3>
+                <p class="text-slate-500 font-light text-sm leading-relaxed">Ready to stop chasing administrative paperwork and start scaling your active local real estate commissions? Send an inquiry or call directly across any verified active channel line below.</p>
+                
+                <div class="space-y-4 text-xs font-medium">
+                    <div class="flex items-center gap-3 p-4 glass rounded-2xl">
+                        <div class="text-lg text-brand-light"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-wider">Email Response Desk</p>
+                            <a href="mailto:christianbabida13@outlook.com" class="hover:underline">christianbabida13@outlook.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 glass rounded-2xl">
+                        <div class="text-lg text-emerald-500"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-wider">WhatsApp Operational Line</p>
+                            <a href="https://wa.me/639617445321" target="_blank" class="hover:underline">+63 961 744 5321</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-7">
+                <!-- Working Email Client Onboarding Form -->
+                <form action="https://formspree.io/f/placeholder" method="POST" class="glass p-8 rounded-3xl shadow-sm border border-white/20 space-y-4 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="font-semibold text-slate-400">Full Name</label>
+                            <input type="text" name="name" required class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="font-semibold text-slate-400">Brokerage / Team Email</label>
+                            <input type="email" name="email" required class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm">
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="font-semibold text-slate-400">Subject / Active Escrow Volume</label>
+                        <input type="text" name="subject" placeholder="e.g., File Management Support Query" class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="font-semibold text-slate-400">Pipeline Operational Requirements</label>
+                        <textarea name="message" rows="4" required placeholder="Describe your current transaction coordination roadblocks..." class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 py-3.5 rounded-xl font-bold tracking-tight shadow-md hover:opacity-90 transition text-sm">Initialize Onboarding Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200/60 dark:border-white/5 py-12 px-4 text-center text-xs text-slate-400 space-y-4">
+        <div class="flex justify-center items-center gap-3">
+            <img src="logo.png" alt="Logo" class="h-6 w-auto opacity-70">
+            <span class="font-semibold text-slate-500">Christian Paul Babida</span>
+        </div>
+        <p class="font-light">&copy; 2026. All Rights Reserved. Transaction Coordination Ecosystem Architecture.</p>
+    </footer>
+
+    <!-- Fixed Floating Quick-Action Communications Core Hub -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <a href="https://wa.me/639617445321" target="_blank" class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-xl hover:scale-110 transition text-xl" aria-label="Quick WhatsApp Line">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Scroll Reveal JavaScript Functionality -->
+    <script>
+        // Light / Dark Mode Core Switch Logic
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Intersection Observer for iOS Smooth Fade Animations
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(reveal => observer.observe(reveal));
+        
+        // Auto-trigger layout reveal on initial header loads
+        window.addEventListener('load', () => {
+            const firstReveal = document.querySelector('.reveal');
+            if(firstReveal) firstReveal.classList.add('active');
+        });
+
+        // --- CALENDAR LOGIC CORE ---
+        let selectedDay = "Wednesday"; // Holds default state match for graphic consistency
+        let selectedTime = "";
+
+        const dateButtons = document.querySelectorAll('.date-btn');
+        const timeButtons = document.querySelectorAll('.time-btn');
+        const lockSlotBtn = document.getElementById('lockSlotBtn');
+
+        // Reset day selection styling structure
+        function updateDaySelection(clickedButton) {
+            dateButtons.forEach(btn => {
+                btn.className = "date-btn p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:bg-brand-light hover:text-white transition font-medium";
+            });
+            clickedButton.className = "date-btn p-2 rounded-xl bg-brand-dark text-white shadow-sm font-medium";
+            selectedDay = clickedButton.getAttribute('data-day');
+            buildMailtoLink();
+        }
+
+        // Reset time selection styling structure
+        function updateTimeSelection(clickedButton) {
+            timeButtons.forEach(btn => {
+                btn.className = "time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition";
+            });
+            clickedButton.className = "time-btn p-2 rounded-xl bg-gradient-to-r from-brand-dark to-brand-light text-white shadow-sm font-medium border-transparent";
+            selectedTime = clickedButton.getAttribute('data-time');
+            buildMailtoLink();
+        }
+
+        // Generate dynamic customized email client mailto URL structures
+        function buildMailtoLink() {
+            const email = "christianbabida13@outlook.com";
+            const subject = encodeURIComponent(`TC Strategy Session Booking Request`);
+            let bodyText = `Hi Christian,\n\nI would like to lock in a 15-Minute TC Workflow Strategy Audit for next week.\n\nRequested Window: ${selectedDay}`;
+            if (selectedTime) {
+                bodyText += ` at ${selectedTime} PST`;
+            } else {
+                bodyText += ` (Please confirm an open time slot)`;
+            }
+            bodyText += `.\n\nPlease let me know if this works!\n\nBest resources,`;
+            
+            lockSlotBtn.href = `mailto:${email}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+        }
+
+        // Wire listener metrics
+        dateButtons.forEach(btn => {
+            btn.addEventListener('click', () => updateDaySelection(btn));
+        });
+
+        timeButtons.forEach(btn => {
+            timeButtons.forEach(btn => {
+                btn.addEventListener('click', () => updateTimeSelection(btn));
+            });
+        });
+
+        // Pre-run setup strings
+        buildMailtoLink();
+    </script>
+</body>
+</html>
