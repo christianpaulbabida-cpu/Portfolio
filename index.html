@@ -40,33 +40,12 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         
-        /* Ambient Floating Bubbles CSS */
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(37, 99, 219, 0.05) 100%);
-            backdrop-filter: blur(4px);
-            animation: float 25s infinite ease-in-out;
-            pointer-events: none;
-            z-index: 1;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
-            50% { transform: translateY(-60px) translateX(40px) scale(1.1); }
-        }
-        
         /* Custom Scrolling Hide Effects */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
-
-    <!-- Ambient iOS Decorative Floating Bubbles -->
-    <div class="absolute top-20 left-10 w-72 h-72 bubble" style="animation-delay: 0s;"></div>
-    <div class="absolute top-[1200px] right-20 w-96 h-96 bubble" style="animation-delay: 3s; background: linear-gradient(135deg, rgba(37,99,219,0.1) 0%, rgba(168,85,247,0.05) 100%);"></div>
-    <div class="absolute top-[2600px] left-5 w-80 h-80 bubble" style="animation-delay: 6s;"></div>
-    <div class="absolute top-[4200px] right-12 w-64 h-64 bubble" style="animation-delay: 2s;"></div>
 
     <!-- Sticky Glassmorphism Navbar -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass shadow-sm mx-4 my-3 rounded-2xl max-w-7xl lg:mx-auto transition-all duration-300">
@@ -78,6 +57,7 @@
             
             <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700 dark:text-slate-300">
                 <a href="#about" class="hover:text-brand-light transition">About</a>
+                <a href="#portfolio" class="hover:text-brand-light transition">Portfolio Work</a>
                 <a href="#services" class="hover:text-brand-light transition">Services</a>
                 <a href="#workflow" class="hover:text-brand-light transition">Workflow</a>
                 <a href="#why-me" class="hover:text-brand-light transition">Benefits</a>
@@ -117,7 +97,9 @@
             </p>
             <div class="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
                 <a href="#calendar" class="bg-gradient-to-r from-brand-dark to-brand-light text-white px-8 py-4 rounded-2xl font-medium shadow-xl hover:shadow-2xl hover:scale-[1.02] transition text-center">Book a Consultation</a>
-                <a href="#contact" class="glass text-slate-800 dark:text-white px-8 py-4 rounded-2xl font-medium hover:bg-white/80 dark:hover:bg-slate-900/80 transition text-center">Let's Work Together</a>
+                <a href="resume.pdf" download class="glass text-slate-800 dark:text-white px-8 py-4 rounded-2xl font-medium hover:bg-white/80 dark:hover:bg-slate-900/80 transition text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-arrow-down text-brand-dark dark:text-brand-light"></i> Download PDF Resume
+                </a>
             </div>
             
             <!-- Hero Social Bar -->
@@ -160,8 +142,84 @@
         </div>
     </section>
 
+    <!-- NEW: Portfolio & Deliverables Section -->
+    <section id="portfolio" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/40 reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Operations & Marketing Sandbox</h2>
+                <p class="text-3xl font-bold mt-2 tracking-tight">Real-World Work Samples & Dashboards</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">Explore accurate snapshots of my active management portals, client trackers, and creative property assets.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Canva Listing Flyers Card -->
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 hover:scale-[1.01] transition duration-300">
+                    <div class="p-6 pb-0">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-lg"><i class="fa-solid fa-palette"></i></div>
+                            <div>
+                                <h4 class="font-bold text-base">Canva Marketing Layouts</h4>
+                                <p class="text-[11px] text-slate-400">Property Listing & Open House Assets</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-light mb-4 leading-relaxed">
+                            I design high-conversion marketing layouts and digital open-house flyers in Canva to maximize structural market appeal, promote local inventory, and boost buyer acquisition strategies.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5">
+                            <img src="listing-sample.jpg" alt="Canva Property Listing Flyer Sample" class="w-full h-56 object-cover object-top hover:scale-105 transition duration-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trello Pipeline Card -->
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 hover:scale-[1.01] transition duration-300">
+                    <div class="p-6 pb-0">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-600 flex items-center justify-center text-lg"><i class="fa-solid fa-trello"></i></div>
+                            <div>
+                                <h4 class="font-bold text-base">Trello Transaction Pipeline</h4>
+                                <p class="text-[11px] text-slate-400">Milestone & Deadline Tracker</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-light mb-4 leading-relaxed">
+                            An end-to-end operational snapshot organizing escrow deadlines, contingencies, appraisal statuses, and communication timelines to secure contract compliance seamlessly.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5">
+                            <img src="trello-screenshot.jpg" alt="Trello Work Sample Dashboard" class="w-full h-56 object-cover object-top hover:scale-105 transition duration-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Asana Sample Card -->
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 hover:scale-[1.01] transition duration-300">
+                    <div class="p-6 pb-0">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center text-lg"><i class="fa-solid fa-list-check"></i></div>
+                            <div>
+                                <h4 class="font-bold text-base">Asana Task Management</h4>
+                                <p class="text-[11px] text-slate-400">Active Escrow Infrastructure Dashboard</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-light mb-4 leading-relaxed">
+                            My centralized hub for everyday broker checklists, compliance validation tracks, document reviews, and private notepad directories engineered to isolate administrative bottlenecks.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5">
+                            <img src="asana-sample.jpg" alt="Asana Sample Work Dashboard" class="w-full h-56 object-cover object-top hover:scale-105 transition duration-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 3. Services Section -->
-    <section id="services" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 backdrop-blur-sm reveal">
+    <section id="services" class="py-24 px-4 bg-slate-100/30 dark:bg-slate-900/10 backdrop-blur-sm reveal">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">What I Bring to Your Team</h2>
@@ -535,12 +593,12 @@
         // Chatbot Logic
         const chatWindow = document.getElementById('chat-window');
         const faqResponses = {
-            experience: "I have over 2 years of dedicated hands-on experience in the California real estate market, managing complex end-to-end file processes[cite: 2].",
-            markets: "My primary expertise is in the California market, ensuring all local compliance and documentation standards are met[cite: 2].",
-            tools: "I am fully integrated with industry-standard tools including SkySlope, Dotloop, OpenToClose, DocuSign, kvCORE, and HubSpot[cite: 2].",
-            communication: "Yes, I provide white-glove support, acting as a professional point of contact between your buyers, sellers, lenders, and escrow teams[cite: 2].",
-            compliance: "I perform continuous audits on all documentation and disclosure loops, ensuring everything is organized for seamless broker file approval[cite: 2].",
-            time: "My clients typically reclaim 10–15 hours per file transaction, allowing them to focus entirely on active field production[cite: 2]."
+            experience: "I have over 2 years of dedicated hands-on experience in the California real estate market, managing complex end-to-end file processes.",
+            markets: "My primary expertise is in the California market, ensuring all local compliance and documentation standards are met.",
+            tools: "I am fully integrated with industry-standard tools including SkySlope, Dotloop, OpenToClose, DocuSign, kvCORE, and HubSpot.",
+            communication: "Yes, I provide white-glove support, acting as a professional point of contact between your buyers, sellers, lenders, and escrow teams.",
+            compliance: "I perform continuous audits on all documentation and disclosure loops, ensuring everything is organized for seamless broker file approval.",
+            time: "My clients typically reclaim 10–15 hours per file transaction, allowing them to focus entirely on active field production."
         };
 
         function botReply(key) {
