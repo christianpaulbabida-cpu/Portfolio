@@ -43,9 +43,108 @@
         /* Custom Scrolling Hide Effects */
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Premium Premium Micro-Interactions */
+        .premium-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+            will-change: transform, box-shadow;
+        }
+        .premium-card:hover {
+            transform: translateY(-6px) scale(1.01) perspective(1000px) rotateX(1deg);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+        }
+        .dark .premium-card:hover {
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+        .premium-img-container img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+        }
+        .premium-img-container:hover img {
+            transform: scale(1.04);
+            filter: brightness(1.05);
+        }
+
+        /* Subtle Glow Effects */
+        .glow-card {
+            box-shadow: 0 0 15px -3px rgba(14, 165, 233, 0.05);
+        }
+        .glow-card:hover {
+            box-shadow: 0 0 25px -2px rgba(14, 165, 233, 0.15);
+        }
+
+        /* Pulse Animation for Booking Button */
+        @keyframes customPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.6); }
+        }
+        .pulse-btn {
+            animation: customPulse 3s infinite ease-in-out;
+        }
+        .pulse-btn:hover {
+            animation-play-state: paused;
+            transform: scale(1.08);
+        }
+
+        /* Typing Indicator Styles */
+        .dot-flashing {
+            position: relative;
+            width: 6px;
+            height: 6px;
+            border-radius: 5px;
+            background-color: #0ea5e9;
+            color: #0ea5e9;
+            animation: dotFlashing 1s infinite linear;
+        }
+        .dot-flashing::before, .dot-flashing::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+        }
+        .dot-flashing::before {
+            left: -12px;
+            width: 6px;
+            height: 6px;
+            border-radius: 5px;
+            background-color: #0ea5e9;
+            color: #0ea5e9;
+            animation: dotFlashing 1s infinite linear;
+            animation-delay: 0s;
+        }
+        .dot-flashing::after {
+            left: 12px;
+            width: 6px;
+            height: 6px;
+            border-radius: 5px;
+            background-color: #0ea5e9;
+            color: #0ea5e9;
+            animation: dotFlashing 1s infinite linear;
+            animation-delay: 0.4s;
+        }
+        @keyframes dotFlashing {
+            0% { background-color: #0ea5e9; }
+            50%, 100% { background-color: rgba(14, 165, 233, 0.2); }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
+
+    <!-- 9. Premium Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950 text-white transition-opacity duration-500">
+        <div class="flex flex-col items-center space-y-4">
+            <div class="text-4xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-dark to-brand-light">CP</div>
+            <p class="text-sm font-light text-slate-400">Preparing your transaction...</p>
+            <div class="w-48 h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div id="loading-bar" class="h-full bg-gradient-to-r from-brand-dark to-brand-light w-0 transition-all ease-out duration-1000"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. Scroll Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 z-[60] pointer-events-none">
+        <div id="scroll-progress" class="h-full bg-gradient-to-r from-brand-dark to-brand-light w-0"></div>
+    </div>
 
     <!-- Sticky Glassmorphism Navbar -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass shadow-sm mx-4 my-3 rounded-2xl max-w-7xl lg:mx-auto transition-all duration-300">
@@ -58,8 +157,9 @@
             <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700 dark:text-slate-300">
                 <a href="#about" class="hover:text-brand-light transition">About</a>
                 <a href="#portfolio" class="hover:text-brand-light transition">Portfolio Work</a>
+                <a href="#dashboard" class="hover:text-brand-light transition">Live Metrics</a>
                 <a href="#services" class="hover:text-brand-light transition">Services</a>
-                <a href="#workflow" class="hover:text-brand-light transition">Workflow</a>
+                <a href="#timeline" class="hover:text-brand-light transition">Workflow</a>
                 <a href="#why-me" class="hover:text-brand-light transition">Benefits</a>
                 <a href="#tools" class="hover:text-brand-light transition">Tech Stack</a>
                 <a href="#faq" class="hover:text-brand-light transition">FAQ</a>
@@ -112,12 +212,37 @@
         </div>
     </header>
 
+    <!-- 1. Animated Statistics Section -->
+    <section class="py-12 px-4 max-w-7xl mx-auto border-y border-slate-200/60 dark:border-white/5 bg-white/30 dark:bg-slate-900/10 backdrop-blur-sm">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center" id="stats-container">
+            <div class="space-y-2">
+                <div class="text-4xl font-extrabold text-brand-dark dark:text-brand-light"><span class="counter" data-target="120">0</span>+</div>
+                <div class="text-xs tracking-wide text-slate-500 uppercase font-medium">Transactions Managed</div>
+            </div>
+            <div class="space-y-2">
+                <div class="text-4xl font-extrabold text-brand-dark dark:text-brand-light"><span class="counter" data-target="98.9" data-decimals="1">0</span>%</div>
+                <div class="text-xs tracking-wide text-slate-500 uppercase font-medium">Deadline Accuracy</div>
+            </div>
+            <div class="space-y-2">
+                <div class="text-4xl font-extrabold text-brand-dark dark:text-brand-light"><span class="counter" data-target="15">0</span>+</div>
+                <div class="text-xs tracking-wide text-slate-500 uppercase font-medium">Hours Saved Per Deal</div>
+            </div>
+            <div class="space-y-2">
+                <div class="text-4xl font-extrabold text-brand-dark dark:text-brand-light flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-map-location-dot text-2xl"></i>
+                    <span class="text-2xl sm:text-3xl font-bold">CA</span>
+                </div>
+                <div class="text-xs tracking-wide text-slate-500 uppercase font-medium">Market Specialist</div>
+            </div>
+        </div>
+    </section>
+
     <!-- 2. About Me Section -->
     <section id="about" class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-5 relative">
-                <div class="absolute inset-0 bg-gradient-to-tr from-brand-light to-transparent rounded-3xl filter blur-2xl opacity-20"></div>
-                <img src="office.jpg" alt="Office Infrastructure" class="rounded-3xl shadow-xl w-full object-cover h-[450px] relative z-10 border border-white/20">
+            <div class="lg:col-span-5 relative premium-img-container rounded-3xl overflow-hidden shadow-xl">
+                <div class="absolute inset-0 bg-gradient-to-tr from-brand-light to-transparent filter blur-2xl opacity-20"></div>
+                <img src="office.jpg" alt="Office Infrastructure" class="w-full object-cover h-[450px] relative z-10 border border-white/20">
             </div>
             <div class="lg:col-span-7 space-y-6">
                 <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Meet Your Operations Backbone</h2>
@@ -129,11 +254,11 @@
                     With 2 years of hands-on experience in the complex CA market, I don’t just manage files—I clear the path for your success. From the second a contract is signed until the final keys are handed over, I’m your remote engine for absolute compliance, total timeline monitoring, and stress-free closings.
                 </p>
                 <div class="grid grid-cols-2 gap-4 pt-4">
-                    <div class="glass p-4 rounded-2xl shadow-sm">
+                    <div class="glass p-4 rounded-2xl shadow-sm premium-card">
                         <div class="text-2xl font-bold text-brand-dark dark:text-brand-light">2+ Years</div>
                         <div class="text-xs text-slate-500">CA Market Expertise</div>
                     </div>
-                    <div class="glass p-4 rounded-2xl shadow-sm">
+                    <div class="glass p-4 rounded-2xl shadow-sm premium-card">
                         <div class="text-2xl font-bold text-brand-dark dark:text-brand-light">100%</div>
                         <div class="text-xs text-slate-500">Audit & DA Compliance</div>
                     </div>
@@ -142,7 +267,90 @@
         </div>
     </section>
 
-    <!-- NEW: Portfolio & Deliverables Section -->
+    <!-- 2. Interactive Operations Dashboard Section -->
+    <section id="dashboard" class="py-24 px-4 max-w-7xl mx-auto reveal">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Real-Time Efficiency</h2>
+            <p class="text-3xl font-bold mt-2 tracking-tight">Interactive Operations Dashboard</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">A modern live snapshot showcasing simulated baseline operations tracking metrics.</p>
+        </div>
+
+        <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/30 glow-card">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-4 border-b border-slate-200/60 dark:border-white/5">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <h3 class="font-bold text-lg tracking-tight">Today's Operations Pipeline</h3>
+                </div>
+                <div class="text-xs text-slate-400 font-mono bg-slate-900/5 dark:bg-white/5 px-3 py-1.5 rounded-lg">
+                    System Refresh Status: <span class="text-emerald-500 font-semibold animate-pulse">Live</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Stat Card 1 -->
+                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                        </span>
+                        <i class="fa-solid fa-folder-open text-slate-400 text-sm"></i>
+                    </div>
+                    <div class="text-3xl font-bold tracking-tight mb-1" id="dash-val-1">14</div>
+                    <div class="text-xs text-slate-500 font-medium">Active Escrows</div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
+                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <!-- Stat Card 2 -->
+                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Pending
+                        </span>
+                        <i class="fa-solid fa-magnifying-glass-chart text-slate-400 text-sm"></i>
+                    </div>
+                    <div class="text-3xl font-bold tracking-tight mb-1" id="dash-val-2">3</div>
+                    <div class="text-xs text-slate-500 font-medium">Waiting on Inspection</div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
+                        <div class="bg-amber-500 h-full rounded-full transition-all duration-1000" style="width: 40%"></div>
+                    </div>
+                </div>
+
+                <!-- Stat Card 3 -->
+                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Scheduled
+                        </span>
+                        <i class="fa-solid fa-calendar-check text-slate-400 text-sm"></i>
+                    </div>
+                    <div class="text-3xl font-bold tracking-tight mb-1" id="dash-val-3">4</div>
+                    <div class="text-xs text-slate-500 font-medium">Appraisal Scheduled</div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
+                        <div class="bg-blue-500 h-full rounded-full transition-all duration-1000" style="width: 60%"></div>
+                    </div>
+                </div>
+
+                <!-- Stat Card 4 -->
+                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Closing
+                        </span>
+                        <i class="fa-solid fa-handshake-closing text-slate-400 text-sm"></i>
+                    </div>
+                    <div class="text-3xl font-bold tracking-tight mb-1" id="dash-val-4">5</div>
+                    <div class="text-xs text-slate-500 font-medium">Closing This Week</div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
+                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 95%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio & Deliverables Section -->
     <section id="portfolio" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/40 reveal">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16">
@@ -153,7 +361,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Canva Listing Flyers Card -->
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 hover:scale-[1.01] transition duration-300">
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 premium-card">
                     <div class="p-6 pb-0">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-lg"><i class="fa-solid fa-palette"></i></div>
@@ -167,14 +375,14 @@
                         </p>
                     </div>
                     <div class="px-6 pb-6 mt-auto">
-                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5">
-                            <img src="listing-sample.jpg" alt="Canva Property Listing Flyer Sample" class="w-full h-56 object-cover object-top hover:scale-105 transition duration-500">
+                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
+                            <img src="listing-sample.jpg" alt="Canva Property Listing Flyer Sample" class="w-full h-56 object-cover object-top">
                         </div>
                     </div>
                 </div>
 
                 <!-- Trello Pipeline Card -->
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 hover:scale-[1.01] transition duration-300">
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 premium-card">
                     <div class="p-6 pb-0">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-600 flex items-center justify-center text-lg"><i class="fa-solid fa-trello"></i></div>
@@ -188,14 +396,14 @@
                         </p>
                     </div>
                     <div class="px-6 pb-6 mt-auto">
-                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5">
-                            <img src="trello-screenshot.jpg" alt="Trello Work Sample Dashboard" class="w-full h-56 object-cover object-top hover:scale-105 transition duration-500">
+                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
+                            <img src="trello-screenshot.jpg" alt="Trello Work Sample Dashboard" class="w-full h-56 object-cover object-top">
                         </div>
                     </div>
                 </div>
 
                 <!-- Asana Sample Card -->
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 hover:scale-[1.01] transition duration-300">
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 premium-card">
                     <div class="p-6 pb-0">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center text-lg"><i class="fa-solid fa-list-check"></i></div>
@@ -209,11 +417,108 @@
                         </p>
                     </div>
                     <div class="px-6 pb-6 mt-auto">
-                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5">
-                            <img src="asana-sample.jpg" alt="Asana Sample Work Dashboard" class="w-full h-56 object-cover object-top hover:scale-105 transition duration-500">
+                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
+                            <img src="asana-sample.jpg" alt="Asana Sample Work Dashboard" class="w-full h-56 object-cover object-top">
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Before vs After Section -->
+    <section class="py-24 px-4 max-w-7xl mx-auto reveal">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Workflow Comparison</h2>
+            <p class="text-3xl font-bold mt-2 tracking-tight">The Tactical Real Estate Evolution</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-11 gap-6 items-center">
+            <!-- Without TC Card -->
+            <div class="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-red-500/20 bg-red-500/5 premium-card shadow-sm space-y-4">
+                <h4 class="text-lg font-bold text-red-600 dark:text-red-400 flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation"></i> WITHOUT A TC
+                </h4>
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-red-500/10 transition hover:translate-x-1 duration-200"><span class="text-red-500 font-bold">❌</span> Missed deadlines</div>
+                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-red-500/10 transition hover:translate-x-1 duration-200"><span class="text-red-500 font-bold">❌</span> Endless emails</div>
+                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-red-500/10 transition hover:translate-x-1 duration-200"><span class="text-red-500 font-bold">❌</span> Paperwork overload</div>
+                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-red-500/10 transition hover:translate-x-1 duration-200"><span class="text-red-500 font-bold">❌</span> Compliance stress</div>
+                </div>
+            </div>
+
+            <!-- Transition Arrow -->
+            <div class="lg:col-span-1 text-center flex items-center justify-center">
+                <div class="w-12 h-12 rounded-full bg-brand-light/10 text-brand-dark dark:text-brand-light flex items-center justify-center rotate-90 lg:rotate-0 text-xl font-bold shadow-sm">
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+            </div>
+
+            <!-- With Me Card -->
+            <div class="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-emerald-500/20 bg-emerald-500/5 premium-card shadow-sm space-y-4">
+                <h4 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check"></i> WITH ME
+                </h4>
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-emerald-500/10 transition hover:translate-x-1 duration-200"><span class="text-emerald-500 font-bold">✅</span> Timeline fully managed</div>
+                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-emerald-500/10 transition hover:translate-x-1 duration-200"><span class="text-emerald-500 font-bold">✅</span> Client communication handled</div>
+                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-emerald-500/10 transition hover:translate-x-1 duration-200"><span class="text-emerald-500 font-bold">✅</span> Compliance monitored</div>
+                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-emerald-500/10 transition hover:translate-x-1 duration-200"><span class="text-emerald-500 font-bold">✅</span> More time selling</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Why Hire Me Instead of Another TC (Comparison Table) -->
+    <section id="why-table" class="py-24 px-4 max-w-7xl mx-auto reveal">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Operational Advantages</h2>
+            <p class="text-3xl font-bold mt-2 tracking-tight">Why Agents Choose Me</p>
+        </div>
+
+        <div class="glass rounded-3xl overflow-hidden shadow-xl border border-white/20 glow-card">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-900/5 dark:bg-white/5 border-b border-slate-200/60 dark:border-white/5 text-xs font-bold tracking-wider text-slate-500 uppercase">
+                            <th class="p-4 sm:p-5">Service Pillars</th>
+                            <th class="p-4 sm:p-5">Typical Transaction Coordinator</th>
+                            <th class="p-4 sm:p-5 text-brand-dark dark:text-brand-light bg-brand-light/5"><i class="fa-solid fa-star mr-1"></i> Working With Me</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-xs sm:text-sm font-light divide-y divide-slate-200/60 dark:divide-white/5">
+                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
+                            <td class="p-4 font-medium">Task Scope</td>
+                            <td class="p-4 text-slate-400">Basic admin processing</td>
+                            <td class="p-4 font-medium bg-brand-light/5">Strategic transaction management</td>
+                        </tr>
+                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
+                            <td class="p-4 font-medium">Task Inception</td>
+                            <td class="p-4 text-slate-400">Waits for instructions</td>
+                            <td class="p-4 font-medium bg-brand-light/5">Proactively tracks and secures deadlines</td>
+                        </tr>
+                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
+                            <td class="p-4 font-medium">Communication Cadence</td>
+                            <td class="p-4 text-slate-400">Slow reactive answers</td>
+                            <td class="p-4 font-medium bg-brand-light/5">Fast proactive milestone updates</td>
+                        </tr>
+                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
+                            <td class="p-4 font-medium">Market Familiarity</td>
+                            <td class="p-4 text-slate-400">Generic standard support</td>
+                            <td class="p-4 font-medium bg-brand-light/5">California-focused compliance expertise</td>
+                        </tr>
+                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
+                            <td class="p-4 font-medium">Client Interface</td>
+                            <td class="p-4 text-slate-400">Minimal client processing contact</td>
+                            <td class="p-4 font-medium bg-brand-light/5">White-glove interactive client experience</td>
+                        </tr>
+                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
+                            <td class="p-4 font-medium">Technical Engine</td>
+                            <td class="p-4 text-slate-400">Static paper workflow setups</td>
+                            <td class="p-4 font-medium bg-brand-light/5">Modern ecosystems and process automation</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -228,42 +533,42 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Service Cards -->
-                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-sky-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-file-signature"></i></div>
                         <h4 class="text-lg font-semibold mb-2">Contract-to-Close Management</h4>
                         <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Full management of paperwork, signatures, and document processing from initial purchase agreement to escrow closing.</p>
                     </div>
                 </div>
-                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-list-check"></i></div>
                         <h4 class="text-lg font-semibold mb-2">MLS Listing Management</h4>
                         <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Accurate listing data input, property profile compilation, media upload adjustments, and active listing status audit updates.</p>
                     </div>
                 </div>
-                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-calendar-days"></i></div>
                         <h4 class="text-lg font-semibold mb-2">Calendar & Deadline Tracking</h4>
                         <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Automated triggers tracking active inspection timelines, clear title review cutoffs, and contingency tracking alerts.</p>
                     </div>
                 </div>
-                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
                         <h4 class="text-lg font-semibold mb-2">Compliance & Documentation</h4>
                         <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Meticulous organization of internal folders to ensure seamless broker file approval to isolate disbursement hold-ups.</p>
                     </div>
                 </div>
-                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-house-chimney-crack"></i></div>
                         <h4 class="text-lg font-semibold mb-2">Inspection Coordination</h4>
                         <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Timely alignment of structural, pest, natural hazard, and appraisal walkthroughs between sellers and respective buying teams.</p>
                     </div>
                 </div>
-                <div class="glass p-8 rounded-3xl transition hover:-translate-y-2 duration-300 flex flex-col justify-between shadow-sm">
+                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-handshake"></i></div>
                         <h4 class="text-lg font-semibold mb-2">Concierge Client Communication</h4>
@@ -274,50 +579,86 @@
         </div>
     </section>
 
-    <!-- 4. Transaction Workflow Section -->
-    <section id="workflow" class="py-24 px-4 max-w-7xl mx-auto reveal">
+    <!-- 4. Interactive Transaction Timeline Section -->
+    <section id="timeline" class="py-24 px-4 max-w-5xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">The Visual Roadmap</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">Zero-Miss Deadline Tracking System</p>
+            <p class="text-3xl font-bold mt-2 tracking-tight">Interactive Transaction Timeline</p>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-7 space-y-4">
-                <!-- Interactive Steps -->
-                <div class="flex gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm transition group">
-                    <span class="w-8 h-8 rounded-full bg-brand-light text-white font-bold text-sm flex items-center justify-center shrink-0">1</span>
-                    <div>
-                        <h5 class="font-semibold text-md">Contract Received & Review</h5>
-                        <p class="text-sm text-slate-500 font-light">Immediate breakdown of critical dates and system onboarding from the second your contract is executed.</p>
+        <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-4 md:ml-32 space-y-12 py-4" id="timeline-container">
+            <!-- Line Tracking Progress Filler Element via CSS Overlay -->
+            <div id="timeline-progress-bar" class="absolute top-0 left-[-2px] w-[2px] bg-gradient-to-b from-brand-dark to-brand-light transition-all ease-out duration-500" style="height: 0%;"></div>
+
+            <!-- Step 1 -->
+            <div class="relative pl-8 md:pl-12 timeline-item group">
+                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
+                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-lg text-brand-light"><i class="fa-solid fa-file-contract"></i></span>
+                        <h4 class="font-bold text-base">Offer Accepted</h4>
                     </div>
-                </div>
-                <div class="flex gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm transition group">
-                    <span class="w-8 h-8 rounded-full bg-brand-light text-white font-bold text-sm flex items-center justify-center shrink-0">2</span>
-                    <div>
-                        <h5 class="font-semibold text-md">File Setup & Automated Reminders</h5>
-                        <p class="text-sm text-slate-500 font-light">Inputting critical dates into localized tech stacks to map milestone dependencies smoothly.</p>
-                    </div>
-                </div>
-                <div class="flex gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm transition group">
-                    <span class="w-8 h-8 rounded-full bg-brand-light text-white font-bold text-sm flex items-center justify-center shrink-0">3</span>
-                    <div>
-                        <h5 class="font-semibold text-md">Continuous Document Compliance Audit</h5>
-                        <p class="text-sm text-slate-500 font-light">Pre-auditing disclosure structures and documentation loops to completely eliminate missing signature stress lines.</p>
-                    </div>
-                </div>
-                <div class="flex gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm transition group">
-                    <span class="w-8 h-8 rounded-full bg-brand-light text-white font-bold text-sm flex items-center justify-center shrink-0">4</span>
-                    <div>
-                        <h5 class="font-semibold text-md">Closing Coordination & DA Finalization</h5>
-                        <p class="text-sm text-slate-500 font-light">Ensuring accurate Disbursement Authorizations arrive well ahead of funding to secure your hard-earned payouts fast.</p>
-                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Immediate documentation auditing and parameter baseline intake mapping checks are finalized.</p>
                 </div>
             </div>
-            
-            <div class="lg:col-span-5">
-                <div class="glass p-4 rounded-3xl shadow-lg border border-white/40">
-                    <p class="text-xs font-semibold text-slate-400 mb-2 text-center"><i class="fa-regular fa-calendar-check mr-1"></i> Reference Workflow Calendar Snapshot</p>
-                    <img src="calendar-sample.jpg" alt="Calendar Tracking Reference Layout" class="rounded-2xl w-full object-cover h-[380px] shadow-sm">
+
+            <!-- Step 2 -->
+            <div class="relative pl-8 md:pl-12 timeline-item group">
+                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
+                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-lg text-brand-light"><i class="fa-solid fa-key"></i></span>
+                        <h4 class="font-bold text-base">Escrow Opened</h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Opening structural alignment tracking records with escrow agents and coordinating earnest money verification tasks.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative pl-8 md:pl-12 timeline-item group">
+                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
+                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-lg text-brand-light"><i class="fa-solid fa-house-shield"></i></span>
+                        <h4 class="font-bold text-base">Inspection</h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Organizing vendor walkthrough workflows and tracking disclosure signature return loops proactively.</p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative pl-8 md:pl-12 timeline-item group">
+                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
+                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-lg text-brand-light"><i class="fa-solid fa-calculator"></i></span>
+                        <h4 class="font-bold text-base">Appraisal</h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Securing formal evaluation timeline check-ins to safeguard transaction framework completion tracking paths.</p>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="relative pl-8 md:pl-12 timeline-item group">
+                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
+                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-lg text-brand-light"><i class="fa-solid fa-building-columns"></i></span>
+                        <h4 class="font-bold text-base">Loan Approval</h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Aligning direct outreach pipelines to secure rapid sign-offs across all open contingencies.</p>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="relative pl-8 md:pl-12 timeline-item group">
+                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
+                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-lg text-brand-light"><i class="fa-solid fa-handshake-angle"></i></span>
+                        <h4 class="font-bold text-base">Closing</h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Disbursement authorizations are completed, and keys are officially authorized for transfer cleanly.</p>
                 </div>
             </div>
         </div>
@@ -331,17 +672,17 @@
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 hover:scale-[1.01] transition">
+            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 premium-card">
                 <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-hourglass-half"></i></div>
                 <h4 class="text-lg font-bold mb-2">More Freedom</h4>
                 <p class="text-sm font-light text-slate-500 leading-relaxed">Reclaim 10–15 hours per file transaction. Shift away from manual administrative paperwork patterns and focus completely on active field production.</p>
             </div>
-            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 hover:scale-[1.01] transition">
+            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 premium-card">
                 <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-brain"></i></div>
                 <h4 class="text-lg font-bold mb-2">Absolute Peace of Mind</h4>
                 <p class="text-sm font-light text-slate-500 leading-relaxed">Never worry about a missed disclosure file, omitted compliance line, or delayed escrow milestone signature update parameters again.</p>
             </div>
-            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 hover:scale-[1.01] transition">
+            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 premium-card">
                 <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-star"></i></div>
                 <h4 class="text-lg font-bold mb-2">Better Professional Reputation</h4>
                 <p class="text-sm font-light text-slate-500 leading-relaxed">Your professional clients deserve a completely modern closing experience, and my white-glove support updates ensure they receive it every single step.</p>
@@ -358,21 +699,21 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between premium-card">
                     <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"Christian completely turned my transaction tracking operations around. I saved over 14 hours on my last residential property closing process alone!"</p>
                     <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
                         <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">SM</div>
                         <span class="text-xs font-semibold tracking-tight">Sarah Mitchell</span>
                     </div>
                 </div>
-                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between premium-card">
                     <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"File audits used to give me headaches every single month. With Christian tracking compliance logs, my DAs release seamlessly without delays."</p>
                     <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
                         <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">JC</div>
                         <span class="text-xs font-semibold tracking-tight">James Carter</span>
                     </div>
                 </div>
-                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between premium-card">
                     <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"The absolute highest standard of transaction communication support. He monitors escrow, text lines, and lending operations with elite professionalism."</p>
                     <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
                         <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">AR</div>
@@ -391,118 +732,118 @@
         </div>
         
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-sky-500/10 text-brand-light flex items-center justify-center text-md"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                 <span class="text-xs font-medium tracking-tight">SkySlope</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 flex items-center justify-center text-md"><i class="fa-solid fa-circle-nodes"></i></div>
                 <span class="text-xs font-medium tracking-tight">Dotloop</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center text-md"><i class="fa-solid fa-bolt"></i></div>
                 <span class="text-xs font-medium tracking-tight">OpenToClose</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-600 flex items-center justify-center text-md"><i class="fa-solid fa-file-signature"></i></div>
                 <span class="text-xs font-medium tracking-tight">DocuSign</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center text-md"><i class="fa-solid fa-database"></i></div>
                 <span class="text-xs font-medium tracking-tight">kvCORE</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-md"><i class="fa-brands fa-hubspot"></i></div>
                 <span class="text-xs font-medium tracking-tight">HubSpot</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-md"><i class="fa-solid fa-palette"></i></div>
                 <span class="text-xs font-medium tracking-tight">Canva</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 flex items-center justify-center text-md"><i class="fa-solid fa-trello"></i></div>
                 <span class="text-xs font-medium tracking-tight">Trello</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-slate-500/10 text-slate-600 flex items-center justify-center text-md"><i class="fa-brands fa-google"></i></div>
                 <span class="text-xs font-medium tracking-tight">Workspace</span>
             </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition">
+            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
                 <div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-600 flex items-center justify-center text-md"><i class="fa-solid fa-key"></i></div>
                 <span class="text-xs font-medium tracking-tight">LastPass</span>
             </div>
         </div>
     </section>
 
-    <!-- 10. Interactive FAQ Chatbot Section -->
+    <!-- 5. Replace the FAQ Bot Section -->
     <section id="faq" class="py-24 px-4 max-w-4xl mx-auto reveal">
         <div class="text-center mb-12">
             <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Operations Assistant</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">Ask Me Anything</p>
+            <p class="text-3xl font-bold mt-2 tracking-tight">AI Operations Assistant Interface</p>
         </div>
 
-        <div class="glass p-6 rounded-3xl shadow-xl border border-white/40">
-            <!-- Chat Window -->
-            <div id="chat-window" class="h-80 overflow-y-auto space-y-4 mb-6 pr-2">
+        <div class="glass rounded-3xl shadow-xl border border-white/40 overflow-hidden flex flex-col h-[500px] glow-card">
+            <!-- Chat Header -->
+            <div class="bg-slate-900/5 dark:bg-white/5 px-6 py-4 border-b border-slate-200/60 dark:border-white/5 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-brand-light flex items-center justify-center text-white shadow-sm"><i class="fa-solid fa-robot"></i></div>
+                <div>
+                    <h4 class="text-sm font-bold tracking-tight">Ecosystem Support Bot</h4>
+                    <p class="text-[10px] text-emerald-500 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Online Desk</p>
+                </div>
+            </div>
+
+            <!-- Chat Window Container -->
+            <div id="chat-window" class="flex-1 overflow-y-auto p-6 space-y-4 bg-white/10 dark:bg-slate-950/10">
                 <!-- Bot Welcome Message -->
-                <div class="flex gap-3">
-                    <div class="w-8 h-8 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0"><i class="fa-solid fa-robot"></i></div>
-                    <div class="bg-slate-200 dark:bg-slate-800 p-4 rounded-2xl rounded-tl-none text-sm font-light">
-                        Hello! I'm your virtual operations assistant. Click an option below to learn more about my services.
+                <div class="flex gap-3 items-start max-w-[85%]">
+                    <div class="w-7 h-7 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0 text-xs shadow-sm"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bg-slate-200/80 dark:bg-slate-900/80 p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm">
+                        Hello! I am your virtual operations engine assistant. Type a question or select a quick option below to audit capabilities instantly.
                     </div>
                 </div>
             </div>
 
-            <!-- Selection Buttons (Chat Options) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <button onclick="botReply('experience')" class="text-left p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 hover:bg-brand-light hover:text-white transition text-xs border border-slate-200 dark:border-white/10">How long have you been a TC?</button>
-                <button onclick="botReply('markets')" class="text-left p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 hover:bg-brand-light hover:text-white transition text-xs border border-slate-200 dark:border-white/10">What markets do you cover?</button>
-                <button onclick="botReply('tools')" class="text-left p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 hover:bg-brand-light hover:text-white transition text-xs border border-slate-200 dark:border-white/10">Which platforms do you use?</button>
-                <button onclick="botReply('communication')" class="text-left p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 hover:bg-brand-light hover:text-white transition text-xs border border-slate-200 dark:border-white/10">Do you talk to my clients?</button>
-                <button onclick="botReply('compliance')" class="text-left p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 hover:bg-brand-light hover:text-white transition text-xs border border-slate-200 dark:border-white/10">How do you ensure compliance?</button>
-                <button onclick="botReply('time')" class="text-left p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 hover:bg-brand-light hover:text-white transition text-xs border border-slate-200 dark:border-white/10">How much time will I save?</button>
+            <!-- Typing Indicator Bubble Container -->
+            <div id="typing-indicator" class="px-6 py-2 hidden">
+                <div class="flex gap-3 items-center">
+                    <div class="w-7 h-7 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0 text-xs"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bg-slate-200/50 dark:bg-slate-900/50 px-5 py-3.5 rounded-2xl rounded-tl-none flex items-center justify-center min-w-[50px]">
+                        <div class="dot-flashing"></div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Quick Suggestions Interface -->
+            <div class="px-4 py-2 bg-slate-900/5 dark:bg-white/5 border-t border-slate-200/60 dark:border-white/5 flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
+                <button onclick="sendQuickQuestion('Can you work weekends?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Weekends?</button>
+                <button onclick="sendQuickQuestion('How many transactions can you manage?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Volume Limit?</button>
+                <button onclick="sendQuickQuestion('Do you know SkySlope?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">SkySlope?</button>
+                <button onclick="sendQuickQuestion('What platforms do you use?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Tech Stack?</button>
+                <button onclick="sendQuickQuestion('How fast do you respond?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Response Speed?</button>
+                <button onclick="sendQuickQuestion('Do you communicate with clients?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Client Updates?</button>
+            </div>
+
+            <!-- Custom Message Inputs Layout -->
+            <form id="chat-input-form" class="p-3 bg-white/40 dark:bg-slate-900/40 border-t border-slate-200/60 dark:border-white/5 flex gap-2">
+                <input id="chat-user-input" type="text" placeholder="Ask about platforms, response speed, or client management..." class="flex-1 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs sm:text-sm focus:outline-none focus:border-brand-light transition">
+                <button type="submit" class="bg-brand-dark text-white px-4 rounded-xl text-sm font-medium hover:bg-brand-light transition flex items-center justify-center"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
         </div>
     </section>
 
-    <!-- 9. Availability Calendar Section -->
+    <!-- 7. Calendly Integration Section -->
     <section id="calendar" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 reveal">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Secure Your Competitive Engine</h2>
             <p class="text-3xl font-bold mt-2 tracking-tight mb-8">Let’s Scale Your Real Estate Business</p>
             
-            <div class="glass p-6 sm:p-8 rounded-3xl shadow-xl border border-white/40 text-left space-y-6">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-slate-200/60 dark:border-white/5">
-                    <div>
-                        <h4 class="text-lg font-bold">15-Minute TC Workflow Strategy Audit</h4>
-                        <p class="text-xs text-slate-400 font-light">Select an available operations consultation window below.</p>
-                    </div>
-                    <span class="bg-brand-light/10 text-brand-dark dark:text-brand-light text-xs font-semibold px-3 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i> 15 Mins</span>
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="space-y-3">
-                        <label class="text-xs font-medium text-slate-400 block">Select Strategy Date</label>
-                        <div id="dateGrid" class="grid grid-cols-4 gap-2 text-center text-xs">
-                            <button class="date-btn p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:bg-brand-light hover:text-white transition font-medium" data-day="Monday">Mon</button>
-                            <button class="date-btn p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:bg-brand-light hover:text-white transition font-medium" data-day="Tuesday">Tue</button>
-                            <button class="date-btn p-2 rounded-xl bg-brand-dark text-white shadow-sm font-medium" data-day="Wednesday">Wed</button>
-                            <button class="date-btn p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:bg-brand-light hover:text-white transition font-medium" data-day="Thursday">Thu</button>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <label class="text-xs font-medium text-slate-400 block">Available Meeting Slots (PST)</label>
-                        <div id="timeGrid" class="grid grid-cols-2 gap-2 text-center text-xs">
-                            <button class="time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition" data-time="09:00 AM">09:00 AM</button>
-                            <button class="time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition" data-time="11:30 AM">11:30 AM</button>
-                            <button class="time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition" data-time="02:00 PM">02:00 PM</button>
-                            <button class="time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition" data-time="04:15 PM">04:15 PM</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="pt-2">
-                    <a id="lockSlotBtn" href="mailto:christianbabida13@outlook.com?subject=TC%20Strategy%20Session%20Booking" class="block text-center w-full bg-gradient-to-r from-brand-dark to-brand-light text-white font-semibold py-3.5 rounded-2xl shadow-md hover:opacity-95 transition text-sm">Lock In My Selected Slot</a>
+            <div class="glass p-4 sm:p-6 rounded-3xl shadow-xl border border-white/40 text-left glow-card overflow-hidden">
+                <!-- Embedded native Calendly widget -->
+                <div class="w-full">
+                    <!-- Calendly inline widget begin -->
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/christianpaulbabida" style="min-width:320px;height:700px;"></div>
+                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                    <!-- Calendly inline widget end -->
                 </div>
             </div>
         </div>
@@ -517,14 +858,14 @@
                 <p class="text-slate-500 font-light text-sm leading-relaxed">Ready to stop chasing administrative paperwork and start scaling your active local real estate commissions? Send an inquiry or call directly across any verified active channel line below.</p>
                 
                 <div class="space-y-4 text-xs font-medium">
-                    <div class="flex items-center gap-3 p-4 glass rounded-2xl">
+                    <div class="flex items-center gap-3 p-4 glass rounded-2xl premium-card">
                         <div class="text-lg text-brand-light"><i class="fa-solid fa-envelope"></i></div>
                         <div>
                             <p class="text-[10px] text-slate-400 uppercase tracking-wider">Email Response Desk</p>
                             <a href="mailto:christianbabida13@outlook.com" class="hover:underline">christianbabida13@outlook.com</a>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3 p-4 glass rounded-2xl">
+                    <div class="flex items-center gap-3 p-4 glass rounded-2xl premium-card">
                         <div class="text-lg text-emerald-500"><i class="fa-brands fa-whatsapp"></i></div>
                         <div>
                             <p class="text-[10px] text-slate-400 uppercase tracking-wider">WhatsApp Operational Line</p>
@@ -535,7 +876,7 @@
             </div>
             
             <div class="lg:col-span-7">
-                <form action="https://formspree.io/f/placeholder" method="POST" class="glass p-8 rounded-3xl shadow-sm border border-white/20 space-y-4 text-xs">
+                <form action="https://formspree.io/f/placeholder" method="POST" class="glass p-8 rounded-3xl shadow-sm border border-white/20 space-y-4 text-xs glow-card">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="space-y-1.5">
                             <label class="font-semibold text-slate-400">Full Name</label>
@@ -554,7 +895,7 @@
                         <label class="font-semibold text-slate-400">Pipeline Operational Requirements</label>
                         <textarea name="message" rows="4" required placeholder="Describe your current transaction coordination roadblocks..." class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 py-3.5 rounded-xl font-bold tracking-tight shadow-md hover:opacity-90 transition text-sm">Initialize Onboarding Inquiry</button>
+                    <button type="submit" class="w-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 py-3.5 rounded-xl font-bold tracking-tight shadow-md hover:opacity-90 transition text-sm premium-card">Initialize Onboarding Inquiry</button>
                 </form>
             </div>
         </div>
@@ -569,8 +910,16 @@
         <p class="font-light">&copy; 2026. All Rights Reserved. Transaction Coordination Ecosystem Architecture.</p>
     </footer>
 
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        <a href="https://wa.me/639617445321" target="_blank" class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-xl hover:scale-110 transition text-xl" aria-label="Quick WhatsApp Line">
+    <!-- Fixed Buttons Layout Container -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+        <!-- 6. Floating Booking Button -->
+        <a href="#calendar" class="pulse-btn flex items-center gap-2 bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-3 rounded-full shadow-2xl transition-transform duration-300 font-semibold text-xs tracking-wide group" aria-label="Book Free Consultation Container">
+            <span class="text-base group-hover:rotate-12 transition-transform duration-200">📅</span>
+            <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-out font-medium">Book Free Consultation</span>
+        </a>
+
+        <!-- Original WhatsApp Floating Button coexisting cleanly -->
+        <a href="https://wa.me/639617445321" target="_blank" class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-2xl hover:scale-110 transition text-xl border border-white/10" aria-label="Quick WhatsApp Line">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
     </div>
@@ -582,66 +931,206 @@
             document.documentElement.classList.toggle('dark');
         });
 
-        // Intersection Observer for Scroll Animations
-        const observer = new IntersectionObserver((entries) => {
+        // 9. Premium Loading Screen Implementation
+        window.addEventListener('DOMContentLoaded', () => {
+            const bar = document.getElementById('loading-bar');
+            const screen = document.getElementById('loading-screen');
+            
+            // Progress bar step logic animation
+            setTimeout(() => { bar.style.width = '100%'; }, 100);
+            
+            // Graceful screen dismissal fading
+            setTimeout(() => {
+                screen.style.opacity = '0';
+                setTimeout(() => {
+                    screen.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // 8. Scroll Progress Bar Tracking Setup
+        window.addEventListener('scroll', () => {
+            const progress = document.getElementById('scroll-progress');
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (totalHeight > 0) {
+                const percentage = (window.pageYOffset / totalHeight) * 100;
+                progress.style.width = percentage + '%';
+            }
+        });
+
+        // Intersection Observer Configuration for Reveal items, Statistics, and Timelines
+        const activeObservers = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) entry.target.classList.add('active');
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger number counters if intersecting
+                    if(entry.target.id === 'stats-container') {
+                        triggerCounters();
+                    }
+                    
+                    // Trigger transaction timeline processing line animation
+                    if(entry.target.id === 'timeline-container') {
+                        animateTimelineProgress();
+                    }
+                }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         
-        // Chatbot Logic
+        document.querySelectorAll('.reveal').forEach(el => activeObservers.observe(el));
+        
+        const statsSection = document.getElementById('stats-container');
+        if(statsSection) activeObservers.observe(statsSection);
+        
+        const timelineSection = document.getElementById('timeline-container');
+        if(timelineSection) activeObservers.observe(timelineSection);
+
+        // 1. Animated Statistics Execution Engine (plays once cleanly via requestAnimationFrame)
+        let countersFired = false;
+        function triggerCounters() {
+            if (countersFired) return;
+            countersFired = true;
+
+            const counters = document.querySelectorAll('.counter');
+            const baseDuration = 1800; // Total counting time duration window in milliseconds
+
+            counters.forEach(counter => {
+                const targetValue = parseFloat(counter.getAttribute('data-target'));
+                const decimalPoints = parseInt(counter.getAttribute('data-decimals')) || 0;
+                let startTime = null;
+
+                function stepAnimation(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    const elapsed = timestamp - startTime;
+                    const progressRate = Math.min(elapsed / baseDuration, 1);
+                    
+                    // Smooth easing profile out function calculation
+                    const easedProgress = 1 - Math.pow(1 - progressRate, 3);
+                    const currentVal = easedProgress * targetValue;
+                    
+                    counter.innerText = currentVal.toFixed(decimalPoints);
+
+                    if (progressRate < 1) {
+                        window.requestAnimationFrame(stepAnimation);
+                    } else {
+                        counter.innerText = targetValue.toFixed(decimalPoints);
+                    }
+                }
+                window.requestAnimationFrame(stepAnimation);
+            });
+        }
+
+        // 4. Interactive Transaction Timeline Dynamic Lighting & Calculation Engine
+        function animateTimelineProgress() {
+            const lineProgress = document.getElementById('timeline-progress-bar');
+            const items = document.querySelectorAll('.timeline-item');
+            let itemIndex = 0;
+
+            function processNextStep() {
+                if (itemIndex >= items.length) return;
+                
+                const item = items[itemIndex];
+                const dotElement = item.querySelector('.timeline-dot');
+                
+                // Light up components systematically
+                dotElement.style.backgroundColor = '#0ea5e9';
+                dotElement.style.boxShadow = '0 0 12px 2px rgba(14, 165, 233, 0.6)';
+                item.classList.add('active');
+
+                itemIndex++;
+                
+                // Advance line layout width height percentage ratios dynamically
+                const completePercent = (itemIndex / items.length) * 100;
+                lineProgress.style.height = completePercent + '%';
+
+                setTimeout(processNextStep, 400); // Step delay sequencing speed interval
+            }
+            processNextStep();
+        }
+
+        // 5. Advanced Internal FAQ Automated Interactivity Chatbot Engine
+        const textForm = document.getElementById('chat-input-form');
+        const textInput = document.getElementById('chat-user-input');
         const chatWindow = document.getElementById('chat-window');
-        const faqResponses = {
-            experience: "I have over 2 years of dedicated hands-on experience in the California real estate market, managing complex end-to-end file processes.",
-            markets: "My primary expertise is in the California market, ensuring all local compliance and documentation standards are met.",
-            tools: "I am fully integrated with industry-standard tools including SkySlope, Dotloop, OpenToClose, DocuSign, kvCORE, and HubSpot.",
-            communication: "Yes, I provide white-glove support, acting as a professional point of contact between your buyers, sellers, lenders, and escrow teams.",
-            compliance: "I perform continuous audits on all documentation and disclosure loops, ensuring everything is organized for seamless broker file approval.",
-            time: "My clients typically reclaim 10–15 hours per file transaction, allowing them to focus entirely on active field production."
+        const typeLoader = document.getElementById('typing-indicator');
+
+        const faqData = {
+            "can you work weekends?": "I monitor active escrow situations proactively over weekends to guarantee emergency real estate transactions move forward seamlessly.",
+            "how many transactions can you manage?": "Leveraging automated task orchestration, I systematically support 25+ concurrent transaction tracks cleanly without performance drops.",
+            "do you know skyslope?": "Yes, I possess complete file lifecycle auditing management familiarity across the entire SkySlope enterprise architecture platform.",
+            "what platforms do you use?": "My tech stack is fully integrated with SkySlope, Dotloop, OpenToClose, DocuSign, kvCORE, HubSpot, Trello, and Google Workspace.",
+            "how fast do you respond?": "All standard communications received within business windows process instantly, with full baseline answers completed inside 30-60 minutes.",
+            "do you communicate with clients?": "Yes, I offer high-end concierge support, managing milestones systematically between clients, escrow teams, lenders, and agents."
         };
 
-        function botReply(key) {
-            const userMsg = document.createElement('div');
-            userMsg.className = 'flex justify-end';
-            userMsg.innerHTML = `<div class="bg-brand-light text-white p-4 rounded-2xl rounded-tr-none text-sm font-light">${event.target.innerText}</div>`;
-            chatWindow.appendChild(userMsg);
+        textForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userMsg = textInput.value.trim();
+            if(!userMsg) return;
+            
+            processChatSubmission(userMsg);
+            textInput.value = '';
+        });
+
+        function sendQuickQuestion(questionText) {
+            processChatSubmission(questionText);
+        }
+
+        function processChatSubmission(messageText) {
+            // Append User dialog bubble element layout structure
+            const userBubble = document.createElement('div');
+            userBubble.className = 'flex justify-end w-full';
+            userBubble.innerHTML = `
+                <div class="bg-brand-dark text-white p-3.5 rounded-2xl rounded-tr-none text-xs sm:text-sm font-light max-w-[85%] shadow-sm">
+                    ${messageText}
+                </div>`;
+            chatWindow.appendChild(userBubble);
+            scrollChatWindow();
+
+            // Intercept lookup processing patterns matching normalization filters
+            const normalizedQuery = messageText.toLowerCase().replace(/[?.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").trim();
+            let botReplyStr = "Thank you for reaching out! I am a simulated portfolio assistant. For custom programmatic structures, please leverage my Calendly links to finalize our live onboarding consultation!";
+            
+            if(faqData[normalizedQuery]) {
+                botReplyStr = faqData[normalizedQuery];
+            }
+
+            // Expose indicator loops dynamically
+            typeLoader.classList.remove('hidden');
+            scrollChatWindow();
 
             setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = 'flex gap-3';
-                botMsg.innerHTML = `<div class="w-8 h-8 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0"><i class="fa-solid fa-robot"></i></div>
-                                    <div class="bg-slate-200 dark:bg-slate-800 p-4 rounded-2xl rounded-tl-none text-sm font-light">${faqResponses[key]}</div>`;
-                chatWindow.appendChild(botMsg);
-                chatWindow.scrollTop = chatWindow.scrollHeight;
-            }, 500);
+                typeLoader.classList.add('hidden');
+                
+                // Append Empty AI Bot Wrapper Structure element container bounds
+                const botBubble = document.createElement('div');
+                botBubble.className = 'flex gap-3 items-start max-w-[85%]';
+                botBubble.innerHTML = `
+                    <div class="w-7 h-7 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0 text-xs shadow-sm"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bot-text-container bg-slate-200/80 dark:bg-slate-900/80 p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm"></div>`;
+                
+                chatWindow.appendChild(botBubble);
+                const printContainer = botBubble.querySelector('.bot-text-container');
+                scrollChatWindow();
+
+                // 5. Core letter-by-letter printing animation engine script implementation
+                let charIndex = 0;
+                function typeLetter() {
+                    if (charIndex < botReplyStr.length) {
+                        printContainer.innerHTML += botReplyStr.charAt(charIndex);
+                        charIndex++;
+                        scrollChatWindow();
+                        setTimeout(typeLetter, 15); // Eased lettering frame latency interval multiplier
+                    }
+                }
+                typeLetter();
+
+            }, 1000); // Simulated delay configuration window logic threshold parameter
         }
 
-        // Calendar Logic
-        let selectedDay = "Wednesday";
-        let selectedTime = "";
-        const lockSlotBtn = document.getElementById('lockSlotBtn');
-
-        function buildMailtoLink() {
-            const email = "christianbabida13@outlook.com";
-            const subject = encodeURIComponent(`TC Strategy Session Booking Request`);
-            let bodyText = `Hi Christian,\n\nI would like to lock in a 15-Minute TC Workflow Strategy Audit for next week.\n\nRequested Window: ${selectedDay} ${selectedTime ? 'at ' + selectedTime + ' PST' : ''}.\n\nPlease let me know if this works!\n\nBest,`;
-            lockSlotBtn.href = `mailto:${email}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+        function scrollChatWindow() {
+            chatWindow.scrollTop = chatWindow.scrollHeight;
         }
-
-        document.querySelectorAll('.date-btn').forEach(btn => btn.addEventListener('click', (e) => {
-            document.querySelectorAll('.date-btn').forEach(b => b.className = "date-btn p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:bg-brand-light hover:text-white transition font-medium");
-            e.target.className = "date-btn p-2 rounded-xl bg-brand-dark text-white shadow-sm font-medium";
-            selectedDay = e.target.getAttribute('data-day');
-            buildMailtoLink();
-        }));
-
-        document.querySelectorAll('.time-btn').forEach(btn => btn.addEventListener('click', (e) => {
-            document.querySelectorAll('.time-btn').forEach(b => b.className = "time-btn p-2 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-brand-light/10 transition");
-            e.target.className = "time-btn p-2 rounded-xl bg-gradient-to-r from-brand-dark to-brand-light text-white shadow-sm font-medium border-transparent";
-            selectedTime = e.target.getAttribute('data-time');
-            buildMailtoLink();
-        }));
     </script>
 </body>
 </html>
