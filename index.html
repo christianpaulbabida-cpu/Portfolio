@@ -126,16 +126,69 @@
             0% { background-color: #0ea5e9; }
             50%, 100% { background-color: rgba(14, 165, 233, 0.2); }
         }
+
+        /* Loading Screen — Logo Fade / Scale / Float */
+        @keyframes logoFadeScale {
+            0% { opacity: 0; transform: scale(0.75); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        #loading-logo {
+            animation: logoFadeScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, logoFloat 2.4s ease-in-out 0.6s infinite;
+        }
+        #loading-msg {
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        #loading-screen {
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+        }
+
+        /* Chatbot bubble entrance */
+        @keyframes bubbleIn {
+            0% { opacity: 0; transform: translateY(10px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .chat-bubble-in { animation: bubbleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Chatbot glass bubbles */
+        .bot-bubble {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark .bot-bubble {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .user-bubble {
+            background: linear-gradient(135deg, #2563eb, #0ea5e9);
+        }
+        #chat-window::-webkit-scrollbar { width: 5px; }
+        #chat-window::-webkit-scrollbar-thumb { background: rgba(14,165,233,0.35); border-radius: 10px; }
+
+        .quick-chip {
+            transition: all 0.25s ease;
+        }
+        .quick-chip:hover {
+            transform: translateY(-2px);
+            border-color: #0ea5e9;
+            box-shadow: 0 6px 14px -6px rgba(14,165,233,0.5);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
 
     <!-- 9. Premium Loading Screen -->
-    <div id="loading-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950 text-white transition-opacity duration-500">
-        <div class="flex flex-col items-center space-y-4">
-            <div class="text-4xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-dark to-brand-light">CP</div>
-            <p class="text-sm font-light text-slate-400">Preparing your transaction...</p>
-            <div class="w-48 h-1 bg-slate-800 rounded-full overflow-hidden">
+    <div id="loading-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center text-white transition-opacity duration-500">
+        <div class="flex flex-col items-center space-y-5">
+            <img id="loading-logo" src="logo.png" alt="Christian Paul Babida Logo" class="h-16 w-auto object-contain drop-shadow-[0_0_20px_rgba(14,165,233,0.35)]">
+            <p class="text-sm font-light text-slate-400 tracking-wide">Preparing your experience...</p>
+            <p id="loading-msg" class="text-xs font-medium text-brand-light tracking-wide h-4">✔ Loading Portfolio...</p>
+            <div class="w-56 h-1 bg-slate-800 rounded-full overflow-hidden">
                 <div id="loading-bar" class="h-full bg-gradient-to-r from-brand-dark to-brand-light w-0 transition-all ease-out duration-1000"></div>
             </div>
         </div>
@@ -782,23 +835,36 @@
             <p class="text-3xl font-bold mt-2 tracking-tight">AI Operations Assistant Interface</p>
         </div>
 
-        <div class="glass rounded-3xl shadow-xl border border-white/40 overflow-hidden flex flex-col h-[500px] glow-card">
+        <div class="glass rounded-3xl shadow-xl border border-white/40 overflow-hidden flex flex-col h-[560px] glow-card">
             <!-- Chat Header -->
             <div class="bg-slate-900/5 dark:bg-white/5 px-6 py-4 border-b border-slate-200/60 dark:border-white/5 flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-brand-light flex items-center justify-center text-white shadow-sm"><i class="fa-solid fa-robot"></i></div>
+                <img src="bot.jpg" alt="ChristianIO" class="w-10 h-10 rounded-full object-cover shadow-sm border-2 border-white/50 dark:border-white/10">
                 <div>
-                    <h4 class="text-sm font-bold tracking-tight">Ecosystem Support Bot</h4>
-                    <p class="text-[10px] text-emerald-500 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Online Desk</p>
+                    <h4 class="text-sm font-bold tracking-tight">ChristianIO</h4>
+                    <p class="text-[10px] text-slate-400 font-medium">AI Portfolio Assistant</p>
+                </div>
+                <div class="ml-auto text-[10px] text-emerald-500 font-medium flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 🟢 Online
                 </div>
             </div>
 
             <!-- Chat Window Container -->
             <div id="chat-window" class="flex-1 overflow-y-auto p-6 space-y-4 bg-white/10 dark:bg-slate-950/10">
                 <!-- Bot Welcome Message -->
-                <div class="flex gap-3 items-start max-w-[85%]">
-                    <div class="w-7 h-7 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0 text-xs shadow-sm"><i class="fa-solid fa-robot"></i></div>
-                    <div class="bg-slate-200/80 dark:bg-slate-900/80 p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm">
-                        Hello! I am your virtual operations engine assistant. Type a question or select a quick option below to audit capabilities instantly.
+                <div class="flex gap-3 items-start max-w-[90%] chat-bubble-in">
+                    <img src="bot.jpg" alt="ChristianIO" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
+                    <div class="bot-bubble p-4 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm leading-relaxed space-y-2">
+                        <p>Hello! 👋 I'm <strong>ChristianIO</strong>.</p>
+                        <p>I'm here to answer anything about Christian Paul Babida, including:</p>
+                        <ul class="list-disc list-inside space-y-0.5 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300">
+                            <li>Experience &amp; Resume</li>
+                            <li>Skills &amp; Certifications</li>
+                            <li>Real Estate &amp; Transaction Coordination</li>
+                            <li>MLS Listings &amp; Customer Service</li>
+                            <li>Software &amp; Availability</li>
+                            <li>Contact Information</li>
+                        </ul>
+                        <p>Ask me anything! ✨</p>
                     </div>
                 </div>
             </div>
@@ -815,12 +881,21 @@
 
             <!-- Quick Suggestions Interface -->
             <div class="px-4 py-2 bg-slate-900/5 dark:bg-white/5 border-t border-slate-200/60 dark:border-white/5 flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
-                <button onclick="sendQuickQuestion('Can you work weekends?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Weekends?</button>
-                <button onclick="sendQuickQuestion('How many transactions can you manage?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Volume Limit?</button>
-                <button onclick="sendQuickQuestion('Do you know SkySlope?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">SkySlope?</button>
-                <button onclick="sendQuickQuestion('What platforms do you use?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Tech Stack?</button>
-                <button onclick="sendQuickQuestion('How fast do you respond?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Response Speed?</button>
-                <button onclick="sendQuickQuestion('Do you communicate with clients?')" class="text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 hover:border-brand-light transition">Client Updates?</button>
+                <button onclick="sendQuickQuestion('Tell me about Christian')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">About Christian</button>
+                <button onclick="sendQuickQuestion('What is your experience?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Experience</button>
+                <button onclick="sendQuickQuestion('Can I see your resume?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Resume</button>
+                <button onclick="sendQuickQuestion('What is transaction coordination?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Transaction Coordinator</button>
+                <button onclick="sendQuickQuestion('Can you create MLS listings?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">MLS Listing</button>
+                <button onclick="sendQuickQuestion('What customer service experience do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Customer Service</button>
+                <button onclick="sendQuickQuestion('Tell me about your healthcare experience')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Healthcare</button>
+                <button onclick="sendQuickQuestion('What real estate work have you done?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Real Estate</button>
+                <button onclick="sendQuickQuestion('What software do you use?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Software</button>
+                <button onclick="sendQuickQuestion('What certifications do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Certifications</button>
+                <button onclick="sendQuickQuestion('What are your skills?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Skills</button>
+                <button onclick="sendQuickQuestion('Can I see your portfolio?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Portfolio</button>
+                <button onclick="sendQuickQuestion('How can I contact you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Contact</button>
+                <button onclick="sendQuickQuestion('Are you available for work?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Availability</button>
+                <button onclick="sendQuickQuestion('Why should I hire you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Why Hire You?</button>
             </div>
 
             <!-- Custom Message Inputs Layout -->
@@ -935,17 +1010,40 @@
         window.addEventListener('DOMContentLoaded', () => {
             const bar = document.getElementById('loading-bar');
             const screen = document.getElementById('loading-screen');
-            
-            // Progress bar step logic animation
-            setTimeout(() => { bar.style.width = '100%'; }, 100);
-            
-            // Graceful screen dismissal fading
+            const msgEl = document.getElementById('loading-msg');
+
+            const loadingMessages = [
+                '✔ Loading Portfolio...',
+                '✔ Initializing Dashboard...',
+                '✔ Loading Experience...',
+                '✔ Preparing AI Assistant...',
+                '✔ Almost Ready...'
+            ];
+
+            // Progress bar animates smoothly across the full loading window
+            setTimeout(() => { bar.style.transitionDuration = '2200ms'; bar.style.width = '100%'; }, 80);
+
+            // Cycle loading messages every 0.8s with a subtle fade
+            let msgIndex = 0;
+            const cycleMessages = setInterval(() => {
+                msgIndex = (msgIndex + 1) % loadingMessages.length;
+                msgEl.style.opacity = '0';
+                msgEl.style.transform = 'translateY(4px)';
+                setTimeout(() => {
+                    msgEl.textContent = loadingMessages[msgIndex];
+                    msgEl.style.opacity = '1';
+                    msgEl.style.transform = 'translateY(0)';
+                }, 150);
+            }, 800);
+
+            // Graceful screen dismissal fading (2.5s total load time)
             setTimeout(() => {
+                clearInterval(cycleMessages);
                 screen.style.opacity = '0';
                 setTimeout(() => {
                     screen.style.display = 'none';
                 }, 500);
-            }, 1500);
+            }, 2500);
         });
 
         // 8. Scroll Progress Bar Tracking Setup
@@ -1048,84 +1146,278 @@
             processNextStep();
         }
 
-        // 5. Advanced Internal FAQ Automated Interactivity Chatbot Engine
+        // ==========================================================
+        // ChristianIO — AI Portfolio Assistant Knowledge Engine
+        // 100% local keyword-matching FAQ engine. No external API.
+        // ==========================================================
         const textForm = document.getElementById('chat-input-form');
         const textInput = document.getElementById('chat-user-input');
         const chatWindow = document.getElementById('chat-window');
         const typeLoader = document.getElementById('typing-indicator');
 
-        const faqData = {
-            "can you work weekends?": "I monitor active escrow situations proactively over weekends to guarantee emergency real estate transactions move forward seamlessly.",
-            "how many transactions can you manage?": "Leveraging automated task orchestration, I systematically support 25+ concurrent transaction tracks cleanly without performance drops.",
-            "do you know skyslope?": "Yes, I possess complete file lifecycle auditing management familiarity across the entire SkySlope enterprise architecture platform.",
-            "what platforms do you use?": "My tech stack is fully integrated with SkySlope, Dotloop, OpenToClose, DocuSign, kvCORE, HubSpot, Trello, and Google Workspace.",
-            "how fast do you respond?": "All standard communications received within business windows process instantly, with full baseline answers completed inside 30-60 minutes.",
-            "do you communicate with clients?": "Yes, I offer high-end concierge support, managing milestones systematically between clients, escrow teams, lenders, and agents."
-        };
+        // Master lists reused across multiple "combined" answers
+        const SOFTWARE_LIST = "SkySlope, Dotloop, OpenToClose, DocuSign, kvCORE, HubSpot, Trello, Google Workspace, Canva, and LastPass";
+        const CERT_LIST = "Harvard Business School Online certificates in Leadership, Dynamic Teaming, Strategy, Finance, and Leading in the Digital World, a Personal Branding certificate, and a Certificate of Language Ability (Writing C1 / Speaking C2)";
+        const COMPANY_LIST = "Real Estate Transaction Coordination (independent/remote), Customer Service Representative at Alorica Philippines (healthcare support), and Quality Control Specialist at J&T Express";
+
+        // Each entry: keywords (substrings to match against the normalized query) + answer.
+        // The matcher scores every entry by how many/how long its keywords appear in the query.
+        const knowledgeBase = [
+            // ---------- ABOUT / SUMMARY ----------
+            { keywords: ["who is christian","tell me about christian","about christian","who are you","introduce yourself","about you"],
+              answer: "I'm Christian Paul Babida, a California-focused Transaction Coordinator with 2+ years of real estate operations experience. I manage transactions from contract to close — handling compliance, documentation, and communication — so agents can focus on selling." },
+            { keywords: ["professional summary","summary","elevator pitch","what do you do","your job","your role","what are your services"],
+              answer: "I help real estate agents and brokerages by managing the full transaction lifecycle: coordinating buyers, sellers, escrow, lenders, inspectors, and title companies, while keeping every file 100% compliant and on schedule." },
+            { keywords: ["years of experience","how long have you been doing this","how experienced are you","experience level"],
+              answer: "I have 2+ years of specialized experience in California real estate transaction coordination, plus prior experience in healthcare customer service (Alorica) and logistics quality control (J&T Express)." },
+            { keywords: ["what is your experience","what does your experience include","overall experience","background"],
+              answer: "My experience spans Transaction Coordination (contract-to-close, MLS listings, compliance, escrow, disclosures), Customer Service in healthcare (Alorica, HIPAA-compliant member support), and Quality Control in logistics (J&T Express). Together this gives me strong process discipline, communication skills, and attention to detail." },
+            { keywords: ["strengths","why hire you","why should i hire you","what makes you different","soft skills","what are you good at","your specialty","specialize in"],
+              answer: "I'm proactive, detail-oriented, and highly organized — I track deadlines before they become problems, communicate clearly with every party in a deal, and I'm fluent in the tools California TCs actually use (SkySlope, Dotloop, DocuSign and more). I combine real estate operations, customer service, and compliance discipline into one dependable service." },
+
+            // ---------- TRANSACTION COORDINATION ----------
+            { keywords: ["transaction coordination","transaction coordinator","tc services","what is a transaction coordinator","contract to close","contract-to-close"],
+              answer: "As a Transaction Coordinator, I manage the full deal lifecycle from executed contract to closing — tracking contingencies, compiling disclosures, coordinating escrow/title/lender communication, and ensuring every document is compliant and submitted on time." },
+            { keywords: ["california market","ca market","california transactions","state you work in","which state"],
+              answer: "I specialize in the California real estate market and understand California-specific disclosures, compliance requirements, escrow timelines, inspection periods, and closing procedures." },
+            { keywords: ["mls listing","mls","listing management","create listings","upload listings"],
+              answer: "Yes — I create and manage MLS listings: entering accurate property details, uploading photos/documents, verifying compliance, and keeping listing status updated throughout the transaction." },
+            { keywords: ["compliance","audit","da compliance","disclosure agreement"],
+              answer: "Compliance is core to my process — I maintain 100% audit and disclosure-agreement (DA) compliance by reviewing every file against brokerage and state requirements before submission." },
+            { keywords: ["escrow"],
+              answer: "I coordinate closely with escrow officers throughout a transaction — tracking earnest money deposits, contingency removals, and closing documentation to keep escrow moving smoothly to a clean close." },
+            { keywords: ["appraisal"],
+              answer: "I monitor appraisal timelines and coordinate with lenders and appraisers to ensure appraisal contingencies are tracked and resolved on schedule." },
+            { keywords: ["inspection","inspections"],
+              answer: "I coordinate inspections end-to-end — scheduling with inspectors, communicating findings to buyers/sellers/agents, and tracking inspection contingency deadlines." },
+            { keywords: ["earnest money","emd"],
+              answer: "I track earnest money deposit deadlines and confirm funds are properly submitted and receipted with escrow to keep the transaction in compliance." },
+            { keywords: ["disclosures","disclosure"],
+              answer: "I compile and manage all required California disclosures, making sure they're accurate, complete, and delivered to the right parties within statutory timelines." },
+            { keywords: ["timeline management","manage deadlines","track deadlines","how do you stay organized","manage multiple transactions"],
+              answer: "I proactively track every milestone — inspection contingencies, appraisal deadlines, financing conditions, earnest money, and closing dates — using transaction management platforms, checklists, and calendars, and I can manage multiple transactions simultaneously without losing accuracy." },
+            { keywords: ["buyers"],
+              answer: "I support buyers throughout the transaction by keeping them informed on contingency deadlines, required documents, and next steps toward closing." },
+            { keywords: ["sellers"],
+              answer: "I support sellers by managing disclosure paperwork, coordinating inspections/repairs communication, and keeping the timeline to closing on track." },
+            { keywords: ["agents"],
+              answer: "I act as the operational backbone for agents — handling the administrative and compliance workload of a deal so they can stay focused on clients and closing new business." },
+            { keywords: ["brokers"],
+              answer: "I work directly with brokers to ensure every file meets brokerage compliance standards and is ready for audit at any point in the transaction." },
+            { keywords: ["lenders"],
+              answer: "I coordinate regularly with lenders regarding loan conditions, approval status, and funding timelines to keep financing contingencies on schedule." },
+            { keywords: ["escrow officers"],
+              answer: "I work closely with escrow officers to monitor document requests, signing schedules, and disbursement steps so closings happen without delay." },
+            { keywords: ["title companies","title company"],
+              answer: "I coordinate with title companies on title reports, document requests, and closing requirements to keep the transaction compliant and on time." },
+            { keywords: ["vendor coordination","vendor management"],
+              answer: "I coordinate closely with title companies, inspectors, appraisers, escrow officers, and lenders — keeping every vendor aligned on deadlines for a smooth closing." },
+            { keywords: ["transaction volume","how many transactions"],
+              answer: "I'm equipped to manage 25+ concurrent transaction files using organized tracking systems, without sacrificing accuracy or missing deadlines." },
+            { keywords: ["urgent transactions","emergency","rush closing"],
+              answer: "For time-sensitive or urgent transactions, I prioritize immediate communication and same-day action on critical deadlines to keep the deal from falling through." },
+
+            // ---------- CUSTOMER SERVICE / HEALTHCARE ----------
+            { keywords: ["customer service","client communication","communicate with clients"],
+              answer: "I provide professional, responsive communication with buyers, sellers, lenders, escrow officers, title companies, and agents — and I bring additional customer service depth from my time supporting healthcare members at Alorica." },
+            { keywords: ["healthcare support","healthcare experience","healthcare"],
+              answer: "I worked in healthcare customer support at Alorica, assisting members across 48 U.S. states with Ambetter and Medicaid insurance inquiries, benefits, and eligibility — all while maintaining strict HIPAA compliance." },
+            { keywords: ["alorica"],
+              answer: "At Alorica Philippines, I worked as a Customer Service Representative supporting healthcare members nationwide (Ambetter and Medicaid) with insurance benefits and eligibility questions, maintaining HIPAA compliance throughout." },
+            { keywords: ["hipaa"],
+              answer: "Yes — through my role at Alorica I have direct experience handling sensitive healthcare information while maintaining strict HIPAA compliance standards." },
+            { keywords: ["j&t express","jt express","logistics","quality control"],
+              answer: "At J&T Express, I worked as a Quality Control Specialist — monitoring logistics quality, resolving operational issues, maintaining documentation, and coordinating across departments." },
+            { keywords: ["attention to detail"],
+              answer: "Attention to detail is central to my work — from auditing disclosure compliance to proofing MLS listings, I catch discrepancies before they become costly delays." },
+            { keywords: ["communication skills","communication"],
+              answer: "Clear, proactive communication is one of my core strengths — I keep every party (clients, agents, lenders, escrow, title) updated at each milestone so nothing falls through the cracks." },
+
+            // ---------- SOFTWARE / TOOLS ----------
+            { keywords: ["what software","software do you know","software do you use","which platforms","tech stack","transaction software","crm","platforms have you worked"],
+              answer: `I'm proficient with ${SOFTWARE_LIST}. This full stack lets me manage documents, compliance, CRM, and marketing without leaving my established workflow.` },
+            { keywords: ["skyslope"],
+              answer: "Yes — I use SkySlope for document management, compliance review, transaction tracking, and broker file submissions." },
+            { keywords: ["dotloop"],
+              answer: "Yes — I use Dotloop for transaction management, e-signatures, document organization, and collaboration between all transaction parties." },
+            { keywords: ["opentoclose"],
+              answer: "Yes — I use OpenToClose for transaction tracking, deadline management, milestone tracking, and workflow automation." },
+            { keywords: ["docusign"],
+              answer: "Yes — I use DocuSign to prepare, send, and manage secure electronic signatures on contracts and disclosures." },
+            { keywords: ["kvcore"],
+              answer: "Yes — I'm familiar with kvCORE for CRM management, lead organization, and client relationship tracking." },
+            { keywords: ["hubspot"],
+              answer: "Yes — I have experience using HubSpot CRM for customer management, pipelines, and communication tracking." },
+            { keywords: ["trello"],
+              answer: "Yes — I use Trello to organize transaction timelines, task assignments, and project boards for active files." },
+            { keywords: ["google workspace","gmail","google drive","google sheets","google docs"],
+              answer: "I use Google Workspace daily — Gmail, Google Drive, Sheets, Docs, and Calendar — for document storage, reporting, and scheduling." },
+            { keywords: ["canva","open house flyer","marketing flyer","listing flyer"],
+              answer: "Yes — I design professional property marketing materials and open-house flyers in Canva to help listings stand out and attract buyer interest." },
+            { keywords: ["lastpass"],
+              answer: "I use LastPass to securely manage and share credentials across the many real estate platforms and tools I work in." },
+            { keywords: ["calendar management","scheduling"],
+              answer: "I manage calendars for deadlines, showings, inspections, and closing appointments — keeping every date visible and on track." },
+            { keywords: ["email management","inbox management"],
+              answer: "I handle email management and triage as part of transaction coordination — responding promptly and keeping communication threads organized by file." },
+
+            // ---------- EDUCATION / CERTIFICATIONS / LEADERSHIP ----------
+            { keywords: ["certifications","certificates","what certifications"],
+              answer: `I hold ${CERT_LIST}.` },
+            { keywords: ["harvard","harvard business school"],
+              answer: "I completed Harvard Business School Online certificate programs in Leadership, Dynamic Teaming, Strategy, Finance, and Leading in the Digital World, along with a Personal Branding certificate." },
+            { keywords: ["education","university","college","studied"],
+              answer: "I studied Hospitality Management at Taguig City University." },
+            { keywords: ["leadership"],
+              answer: "My Harvard Business School coursework strengthened my leadership, strategy, finance, digital transformation, and teamwork skills, which I apply to coordinating multi-party real estate transactions." },
+            { keywords: ["languages","speak","language ability"],
+              answer: "I communicate professionally in English and hold a Certificate of Language Ability with Writing C1 and Speaking C2 proficiency." },
+            { keywords: ["achievements","accomplishments"],
+              answer: "Key achievements include developing standardized transaction checklists that reduced turnaround time by about 15%, and maintaining 98.9%+ deadline accuracy across 120+ managed transactions." },
+            { keywords: ["workflow optimization","process improvement"],
+              answer: "I developed standardized transaction checklists that reduced turnaround time by approximately 15%, streamlining the contract-to-close process." },
+            { keywords: ["skills","technical skills"],
+              answer: "My core skills include transaction coordination, MLS listing management, compliance auditing, disclosure management, CRM/document platforms (SkySlope, Dotloop, DocuSign, kvCORE, HubSpot), Canva marketing design, and client communication." },
+
+            // ---------- AVAILABILITY / LOGISTICS ----------
+            { keywords: ["remote work","work remotely","can you work remotely"],
+              answer: "Yes — I work fully remotely and collaborate efficiently with agents, brokers, escrow officers, title companies, lenders, buyers, and sellers regardless of location." },
+            { keywords: ["time zone","timezone"],
+              answer: "I'm based in the Philippines and structure my schedule to align with U.S. (including California/Pacific) business hours for real-time collaboration." },
+            { keywords: ["work hours","working hours"],
+              answer: "I maintain flexible working hours aligned to U.S. business needs, with availability extending for time-sensitive transaction tasks." },
+            { keywords: ["weekend availability","work weekends","weekends"],
+              answer: "Yes — I monitor active files and stay available over weekends when needed to keep urgent transactions moving without delay." },
+            { keywords: ["availability","available for work","hiring","are you available"],
+              answer: "Yes, I'm currently available for remote transaction coordination work with a flexible schedule based on your transaction volume and needs." },
+            { keywords: ["rates","pricing","cost","how much do you charge"],
+              answer: "Rates depend on transaction volume and scope of work — the best next step is booking a quick strategy session so we can discuss your specific needs." },
+            { keywords: ["interview","hiring process"],
+              answer: "I'd love to chat! The fastest way to get started is booking a strategy session through the Calendly link on this site, or reaching out directly via email or WhatsApp." },
+
+            // ---------- CONTACT / PORTFOLIO ----------
+            { keywords: ["contact information","contact you","how can i contact","get in touch","reach you"],
+              answer: "You can reach me by email at christianbabida13@outlook.com, via WhatsApp, or through the contact form and LinkedIn link on this site." },
+            { keywords: ["linkedin"],
+              answer: "You can find my professional background on LinkedIn — the link is available in the hero section and contact area of this site." },
+            { keywords: ["portfolio website","this website","this site"],
+              answer: "This portfolio showcases my transaction coordination workflow, live metrics dashboard, work samples (Canva flyers, Trello and Asana boards), tools I use, and client testimonials." },
+            { keywords: ["portfolio","work samples","dashboards"],
+              answer: "My portfolio includes real work samples: Canva marketing flyers, a Trello transaction pipeline tracker, and an Asana task management dashboard — all shown in the Portfolio section above." },
+            { keywords: ["resume download","download resume","see your resume","can i see your resume","resume"],
+              answer: "You can download my full resume using the 'Download PDF Resume' button in the hero section at the top of this page." },
+            { keywords: ["companies","employers","work history","previous companies","worked for"],
+              answer: `I've worked at: ${COMPANY_LIST}.` },
+
+            // ---------- GREETINGS / MISC ----------
+            { keywords: ["hello","hi","hey","good morning","good afternoon"],
+              answer: "Hello! 👋 Great to meet you. Ask me anything about Christian's experience, skills, software, or availability — or tap one of the quick questions below." },
+            { keywords: ["thank you","thanks"],
+              answer: "You're very welcome! Let me know if there's anything else you'd like to know about Christian's background or experience." }
+        ];
+
+        // Normalize text for matching: lowercase, strip punctuation, collapse whitespace
+        function normalize(str) {
+            return str.toLowerCase().replace(/[?.,\/#!$%\^&\*;:{}=\-_`~()]/g, " ").replace(/\s+/g, " ").trim();
+        }
+
+        // Score-based local matcher — no external API, instant lookup
+        function findBestAnswer(userText) {
+            const query = normalize(userText);
+            let bestEntry = null;
+            let bestScore = 0;
+
+            knowledgeBase.forEach(entry => {
+                let score = 0;
+                entry.keywords.forEach(kw => {
+                    if (query.includes(kw)) {
+                        // Longer/more specific keyword matches score higher to avoid false positives
+                        score += kw.split(" ").length + (kw.length / 20);
+                    }
+                });
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestEntry = entry;
+                }
+            });
+
+            if (bestEntry && bestScore > 0) return bestEntry.answer;
+            return "I specialize in answering questions about Christian Paul Babida, his experience, skills, portfolio, and professional background. Feel free to ask me anything related to his work.";
+        }
 
         textForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const userMsg = textInput.value.trim();
             if(!userMsg) return;
-            
+
             processChatSubmission(userMsg);
             textInput.value = '';
+        });
+        // Enter key submits (native form behavior on a text input already handles this,
+        // this listener guarantees it even if the input is inside nested containers)
+        textInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                textForm.requestSubmit();
+            }
         });
 
         function sendQuickQuestion(questionText) {
             processChatSubmission(questionText);
         }
 
+        function currentTimestamp() {
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
         function processChatSubmission(messageText) {
-            // Append User dialog bubble element layout structure
+            // Append User dialog bubble
             const userBubble = document.createElement('div');
-            userBubble.className = 'flex justify-end w-full';
+            userBubble.className = 'flex flex-col items-end w-full chat-bubble-in';
             userBubble.innerHTML = `
-                <div class="bg-brand-dark text-white p-3.5 rounded-2xl rounded-tr-none text-xs sm:text-sm font-light max-w-[85%] shadow-sm">
+                <div class="user-bubble text-white p-3.5 rounded-2xl rounded-tr-none text-xs sm:text-sm font-light max-w-[85%] shadow-sm">
                     ${messageText}
-                </div>`;
+                </div>
+                <span class="text-[9px] text-slate-400 mt-1 mr-1">${currentTimestamp()}</span>`;
             chatWindow.appendChild(userBubble);
             scrollChatWindow();
 
-            // Intercept lookup processing patterns matching normalization filters
-            const normalizedQuery = messageText.toLowerCase().replace(/[?.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").trim();
-            let botReplyStr = "Thank you for reaching out! I am a simulated portfolio assistant. For custom programmatic structures, please leverage my Calendly links to finalize our live onboarding consultation!";
-            
-            if(faqData[normalizedQuery]) {
-                botReplyStr = faqData[normalizedQuery];
-            }
+            // Local knowledge-base lookup (instant, no external API)
+            const botReplyStr = findBestAnswer(messageText);
 
-            // Expose indicator loops dynamically
+            // Typing indicator
             typeLoader.classList.remove('hidden');
             scrollChatWindow();
 
             setTimeout(() => {
                 typeLoader.classList.add('hidden');
-                
-                // Append Empty AI Bot Wrapper Structure element container bounds
+
                 const botBubble = document.createElement('div');
-                botBubble.className = 'flex gap-3 items-start max-w-[85%]';
+                botBubble.className = 'flex flex-col items-start max-w-[90%] chat-bubble-in';
                 botBubble.innerHTML = `
-                    <div class="w-7 h-7 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0 text-xs shadow-sm"><i class="fa-solid fa-robot"></i></div>
-                    <div class="bot-text-container bg-slate-200/80 dark:bg-slate-900/80 p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm"></div>`;
-                
+                    <div class="flex gap-3 items-start">
+                        <img src="bot.jpg" alt="ChristianIO" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
+                        <div class="bot-text-container bot-bubble p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm"></div>
+                    </div>
+                    <span class="text-[9px] text-slate-400 mt-1 ml-10">${currentTimestamp()}</span>`;
+
                 chatWindow.appendChild(botBubble);
                 const printContainer = botBubble.querySelector('.bot-text-container');
                 scrollChatWindow();
 
-                // 5. Core letter-by-letter printing animation engine script implementation
+                // Letter-by-letter typing animation
                 let charIndex = 0;
                 function typeLetter() {
                     if (charIndex < botReplyStr.length) {
                         printContainer.innerHTML += botReplyStr.charAt(charIndex);
                         charIndex++;
                         scrollChatWindow();
-                        setTimeout(typeLetter, 15); // Eased lettering frame latency interval multiplier
+                        setTimeout(typeLetter, 12);
                     }
                 }
                 typeLetter();
 
-            }, 1000); // Simulated delay configuration window logic threshold parameter
+            }, 900);
         }
 
         function scrollChatWindow() {
