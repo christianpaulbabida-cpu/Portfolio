@@ -17,7 +17,11 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        brand: { light: '#0ea5e9', dark: '#2563eb' }
+                        brand: { light: '#3b82f6', dark: '#2563eb' },
+                        ink: '#0F172A',
+                        accent: '#10B981',
+                        surface: '#F8FAFC',
+                        surfaceDark: '#020617'
                     }
                 }
             }
@@ -178,6 +182,20 @@
             border-color: #0ea5e9;
             box-shadow: 0 6px 14px -6px rgba(14,165,233,0.5);
         }
+
+        /* Floating Chat Widget Open/Close Animation */
+        .chat-widget-anim {
+            opacity: 0;
+            transform: translateY(24px) scale(0.96);
+            transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1);
+            pointer-events: none;
+        }
+        .chat-widget-anim.open {
+            display: flex !important;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
@@ -234,24 +252,34 @@
         <video autoplay loop muted playsinline class="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover opacity-35 dark:opacity-20 pointer-events-none">
             <source src="background.mp4" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/50 to-slate-50 dark:via-slate-950/50 dark:to-slate-950 z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-50/60 to-slate-50 dark:from-slate-950/70 dark:via-slate-950/60 dark:to-slate-950 z-10"></div>
         
         <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center">
-            <img src="profile.jpg" alt="Christian Paul Babida" class="w-32 h-32 rounded-full object-cover border-4 border-white dark:border-slate-900 shadow-2xl mb-6 hover:scale-105 transition duration-300">
-            <div class="inline-flex items-center gap-2 bg-white/60 dark:bg-slate-900/60 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide border border-white/40 dark:border-white/10 mb-4 shadow-sm">
-                <span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span> 
-                California Market Specialist
+            <img src="profile.jpg" alt="Christian Paul Babida" class="w-28 h-28 rounded-full object-cover border-4 border-white dark:border-slate-900 shadow-2xl mb-6 hover:scale-105 transition duration-300">
+            <div class="inline-flex items-center gap-2 bg-white/60 dark:bg-slate-900/60 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide border border-white/40 dark:border-white/10 mb-5 shadow-sm">
+                <span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
+                Currently Accepting New Agent Partners
             </div>
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-brand-dark to-slate-950 dark:from-white dark:via-brand-light dark:to-slate-200 max-w-4xl leading-tight">
-                Reliable Transaction Coordination for Real Estate Professionals
+            <h1 class="text-4xl sm:text-5xl md:text-[3.4rem] font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-brand-dark to-slate-950 dark:from-white dark:via-brand-light dark:to-slate-200 max-w-4xl leading-[1.1]">
+                California Transaction Coordinator Helping Agents Close More Deals With Less Stress
             </h1>
-            <p class="mt-4 text-md sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl font-light">
-                Scaling Your Business, One Deal at a Time. I handle the operational heavy lifting, complex administrative compliance, and timelines so you can confidently focus on closing commissions.
+            <p class="mt-5 text-md sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl font-light leading-relaxed">
+                I manage your transactions from Contract-to-Close, ensuring every deadline, document, and communication is handled professionally so you can focus on selling.
             </p>
+
+            <!-- Trust Badges -->
+            <div class="mt-7 flex flex-wrap justify-center gap-2.5 max-w-2xl">
+                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> California Market Specialist</span>
+                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Contract-to-Close Management</span>
+                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> MLS Listing Management</span>
+                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Compliance &amp; Documentation</span>
+                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Full-Time &amp; Part-Time Availability</span>
+            </div>
+
             <div class="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
-                <a href="#calendar" class="bg-gradient-to-r from-brand-dark to-brand-light text-white px-8 py-4 rounded-2xl font-medium shadow-xl hover:shadow-2xl hover:scale-[1.02] transition text-center">Book a Consultation</a>
+                <a href="#calendar" class="bg-gradient-to-r from-brand-dark to-brand-light text-white px-8 py-4 rounded-2xl font-medium shadow-xl hover:shadow-2xl hover:scale-[1.02] transition text-center">Book a Discovery Call</a>
                 <a href="resume.pdf" download class="glass text-slate-800 dark:text-white px-8 py-4 rounded-2xl font-medium hover:bg-white/80 dark:hover:bg-slate-900/80 transition text-center flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-file-arrow-down text-brand-dark dark:text-brand-light"></i> Download PDF Resume
+                    <i class="fa-solid fa-file-arrow-down text-brand-dark dark:text-brand-light"></i> Download Resume
                 </a>
             </div>
             
@@ -320,83 +348,83 @@
         </div>
     </section>
 
-    <!-- 2. Interactive Operations Dashboard Section -->
+    <!-- 2. Track Record / Achievement Dashboard Section -->
     <section id="dashboard" class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Real-Time Efficiency</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">Interactive Operations Dashboard</p>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">A modern live snapshot showcasing simulated baseline operations tracking metrics.</p>
+            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Proven Track Record</h2>
+            <p class="text-3xl font-bold mt-2 tracking-tight">Results That Speak for Themselves</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">Real performance metrics from managed transactions across the California market.</p>
         </div>
 
         <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/30 glow-card">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-4 border-b border-slate-200/60 dark:border-white/5">
                 <div class="flex items-center gap-3">
                     <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <h3 class="font-bold text-lg tracking-tight">Today's Operations Pipeline</h3>
+                    <h3 class="font-bold text-lg tracking-tight">Career Highlights</h3>
                 </div>
                 <div class="text-xs text-slate-400 font-mono bg-slate-900/5 dark:bg-white/5 px-3 py-1.5 rounded-lg">
-                    System Refresh Status: <span class="text-emerald-500 font-semibold animate-pulse">Live</span>
+                    Status: <span class="text-emerald-500 font-semibold">Accepting New Files</span>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Stat Card 1 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="dash-stats-container">
+                <!-- Achievement Card 1 -->
                 <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
                     <div class="flex justify-between items-start mb-3">
                         <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Career Total
                         </span>
                         <i class="fa-solid fa-folder-open text-slate-400 text-sm"></i>
                     </div>
-                    <div class="text-3xl font-bold tracking-tight mb-1" id="dash-val-1">14</div>
-                    <div class="text-xs text-slate-500 font-medium">Active Escrows</div>
+                    <div class="text-3xl font-bold tracking-tight mb-1"><span class="counter" data-target="120">0</span>+</div>
+                    <div class="text-xs text-slate-500 font-medium">Transactions Managed</div>
                     <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 85%"></div>
+                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 92%"></div>
                     </div>
                 </div>
 
-                <!-- Stat Card 2 -->
-                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Pending
-                        </span>
-                        <i class="fa-solid fa-magnifying-glass-chart text-slate-400 text-sm"></i>
-                    </div>
-                    <div class="text-3xl font-bold tracking-tight mb-1" id="dash-val-2">3</div>
-                    <div class="text-xs text-slate-500 font-medium">Waiting on Inspection</div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-amber-500 h-full rounded-full transition-all duration-1000" style="width: 40%"></div>
-                    </div>
-                </div>
-
-                <!-- Stat Card 3 -->
+                <!-- Achievement Card 2 -->
                 <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
                     <div class="flex justify-between items-start mb-3">
                         <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Scheduled
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Precision
                         </span>
-                        <i class="fa-solid fa-calendar-check text-slate-400 text-sm"></i>
+                        <i class="fa-solid fa-bullseye text-slate-400 text-sm"></i>
                     </div>
-                    <div class="text-3xl font-bold tracking-tight mb-1" id="dash-val-3">4</div>
-                    <div class="text-xs text-slate-500 font-medium">Appraisal Scheduled</div>
+                    <div class="text-3xl font-bold tracking-tight mb-1"><span class="counter" data-target="98.9" data-decimals="1">0</span>%</div>
+                    <div class="text-xs text-slate-500 font-medium">Deadline Accuracy</div>
                     <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-blue-500 h-full rounded-full transition-all duration-1000" style="width: 60%"></div>
+                        <div class="bg-blue-500 h-full rounded-full transition-all duration-1000" style="width: 98%"></div>
                     </div>
                 </div>
 
-                <!-- Stat Card 4 -->
+                <!-- Achievement Card 3 -->
+                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Tenure
+                        </span>
+                        <i class="fa-solid fa-calendar-check text-slate-400 text-sm"></i>
+                    </div>
+                    <div class="text-3xl font-bold tracking-tight mb-1"><span class="counter" data-target="2">0</span>+</div>
+                    <div class="text-xs text-slate-500 font-medium">Years Experience</div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
+                        <div class="bg-amber-500 h-full rounded-full transition-all duration-1000" style="width: 70%"></div>
+                    </div>
+                </div>
+
+                <!-- Achievement Card 4 -->
                 <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
                     <div class="flex justify-between items-start mb-3">
                         <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Closing
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Focus
                         </span>
-                        <i class="fa-solid fa-handshake-closing text-slate-400 text-sm"></i>
+                        <i class="fa-solid fa-map-location-dot text-slate-400 text-sm"></i>
                     </div>
-                    <div class="text-3xl font-bold tracking-tight mb-1" id="dash-val-4">5</div>
-                    <div class="text-xs text-slate-500 font-medium">Closing This Week</div>
+                    <div class="text-3xl font-bold tracking-tight mb-1">California</div>
+                    <div class="text-xs text-slate-500 font-medium">Market Specialist</div>
                     <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 95%"></div>
+                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 100%"></div>
                     </div>
                 </div>
             </div>
@@ -413,67 +441,130 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Canva Listing Flyers Card -->
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 premium-card">
+                <!-- Canva Listing Flyers Case Study -->
+                <div class="relative rounded-3xl p-[1px] bg-gradient-to-br from-brand-light/40 via-transparent to-accent/30 premium-card">
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between h-full">
                     <div class="p-6 pb-0">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-lg"><i class="fa-solid fa-palette"></i></div>
                             <div>
                                 <h4 class="font-bold text-base">Canva Marketing Layouts</h4>
-                                <p class="text-[11px] text-slate-400">Property Listing & Open House Assets</p>
+                                <p class="text-[11px] text-slate-400">Property Listing &amp; Open House Assets</p>
                             </div>
                         </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 font-light mb-4 leading-relaxed">
-                            I design high-conversion marketing layouts and digital open-house flyers in Canva to maximize structural market appeal, promote local inventory, and boost buyer acquisition strategies.
-                        </p>
+                        <div class="space-y-3 mb-4">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Challenge</p>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Agents needed polished listing flyers fast, without hiring a separate designer for every property.</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">My Solution</p>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Built a repeatable Canva template system for open-house flyers and digital listing assets, on-brand for each agent.</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Software Used</p>
+                                <div class="flex flex-wrap gap-1.5 mt-1">
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Canva</span>
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">MLS</span>
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Google Workspace</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Result</p>
+                                <p class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Faster turnaround on listing marketing with a consistent, professional look.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="px-6 pb-6 mt-auto">
                         <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
-                            <img src="listing-sample.jpg" alt="Canva Property Listing Flyer Sample" class="w-full h-56 object-cover object-top">
+                            <img src="listing-sample.jpg" alt="Canva Property Listing Flyer Sample" class="w-full h-48 object-cover object-top">
                         </div>
                     </div>
                 </div>
+                </div>
 
-                <!-- Trello Pipeline Card -->
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 premium-card">
+                <!-- Trello Pipeline Case Study -->
+                <div class="relative rounded-3xl p-[1px] bg-gradient-to-br from-brand-light/40 via-transparent to-accent/30 premium-card">
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between h-full">
                     <div class="p-6 pb-0">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-600 flex items-center justify-center text-lg"><i class="fa-solid fa-trello"></i></div>
                             <div>
                                 <h4 class="font-bold text-base">Trello Transaction Pipeline</h4>
-                                <p class="text-[11px] text-slate-400">Milestone & Deadline Tracker</p>
+                                <p class="text-[11px] text-slate-400">Milestone &amp; Deadline Tracker</p>
                             </div>
                         </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 font-light mb-4 leading-relaxed">
-                            An end-to-end operational snapshot organizing escrow deadlines, contingencies, appraisal statuses, and communication timelines to secure contract compliance seamlessly.
-                        </p>
+                        <div class="space-y-3 mb-4">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Challenge</p>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Escrow deadlines, contingencies, and appraisal statuses were scattered across emails and calls.</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">My Solution</p>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Built a visual Trello pipeline tracking every file stage, contingency, and communication touchpoint in one place.</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Software Used</p>
+                                <div class="flex flex-wrap gap-1.5 mt-1">
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Trello</span>
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">DocuSign</span>
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">SkySlope</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Result</p>
+                                <p class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Zero missed deadlines across tracked files, with full contract compliance.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="px-6 pb-6 mt-auto">
                         <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
-                            <img src="trello-screenshot.jpg" alt="Trello Work Sample Dashboard" class="w-full h-56 object-cover object-top">
+                            <img src="trello-screenshot.jpg" alt="Trello Work Sample Dashboard" class="w-full h-48 object-cover object-top">
                         </div>
                     </div>
                 </div>
+                </div>
 
-                <!-- Asana Sample Card -->
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between border border-white/20 premium-card">
+                <!-- Asana / MLS Case Study -->
+                <div class="relative rounded-3xl p-[1px] bg-gradient-to-br from-brand-light/40 via-transparent to-accent/30 premium-card">
+                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between h-full">
                     <div class="p-6 pb-0">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center text-lg"><i class="fa-solid fa-list-check"></i></div>
                             <div>
-                                <h4 class="font-bold text-base">Asana Task Management</h4>
-                                <p class="text-[11px] text-slate-400">Active Escrow Infrastructure Dashboard</p>
+                                <h4 class="font-bold text-base">MLS Listing Management</h4>
+                                <p class="text-[11px] text-slate-400">Asana Task &amp; Compliance Dashboard</p>
                             </div>
                         </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 font-light mb-4 leading-relaxed">
-                            My centralized hub for everyday broker checklists, compliance validation tracks, document reviews, and private notepad directories engineered to isolate administrative bottlenecks.
-                        </p>
+                        <div class="space-y-3 mb-4">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Challenge</p>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Needed accurate, compliant MLS listing setup with no room for data entry errors.</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">My Solution</p>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Created the MLS listing, uploaded media, and verified compliance using a centralized Asana checklist hub.</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Software Used</p>
+                                <div class="flex flex-wrap gap-1.5 mt-1">
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">MLS</span>
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Asana</span>
+                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Canva</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Result</p>
+                                <p class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Fast listing turnaround with complete accuracy and full audit trail.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="px-6 pb-6 mt-auto">
                         <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
-                            <img src="asana-sample.jpg" alt="Asana Sample Work Dashboard" class="w-full h-56 object-cover object-top">
+                            <img src="asana-sample.jpg" alt="Asana Sample Work Dashboard" class="w-full h-48 object-cover object-top">
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -486,17 +577,29 @@
             <p class="text-3xl font-bold mt-2 tracking-tight">The Tactical Real Estate Evolution</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-11 gap-6 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-11 gap-6 items-center" id="comparison-container">
             <!-- Without TC Card -->
-            <div class="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-red-500/20 bg-red-500/5 premium-card shadow-sm space-y-4">
+            <div class="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-red-500/20 bg-red-500/5 premium-card shadow-sm space-y-5">
                 <h4 class="text-lg font-bold text-red-600 dark:text-red-400 flex items-center gap-2">
                     <i class="fa-solid fa-triangle-exclamation"></i> WITHOUT A TC
                 </h4>
-                <div class="space-y-3 text-sm">
-                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-red-500/10 transition hover:translate-x-1 duration-200"><span class="text-red-500 font-bold">❌</span> Missed deadlines</div>
-                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-red-500/10 transition hover:translate-x-1 duration-200"><span class="text-red-500 font-bold">❌</span> Endless emails</div>
-                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-red-500/10 transition hover:translate-x-1 duration-200"><span class="text-red-500 font-bold">❌</span> Paperwork overload</div>
-                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-red-500/10 transition hover:translate-x-1 duration-200"><span class="text-red-500 font-bold">❌</span> Compliance stress</div>
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Stress Level</span><span class="text-red-500">High</span></div>
+                        <div class="w-full bg-red-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-red-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="92"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Emails &amp; Follow-ups</span><span class="text-red-500">High</span></div>
+                        <div class="w-full bg-red-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-red-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="88"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Paperwork Burden</span><span class="text-red-500">High</span></div>
+                        <div class="w-full bg-red-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-red-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="90"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Missed Deadlines</span><span class="text-red-500">Frequent</span></div>
+                        <div class="w-full bg-red-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-red-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="70"></div></div>
+                    </div>
                 </div>
             </div>
 
@@ -508,15 +611,27 @@
             </div>
 
             <!-- With Me Card -->
-            <div class="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-emerald-500/20 bg-emerald-500/5 premium-card shadow-sm space-y-4">
+            <div class="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-emerald-500/20 bg-emerald-500/5 premium-card shadow-sm space-y-5">
                 <h4 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
                     <i class="fa-solid fa-circle-check"></i> WITH ME
                 </h4>
-                <div class="space-y-3 text-sm">
-                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-emerald-500/10 transition hover:translate-x-1 duration-200"><span class="text-emerald-500 font-bold">✅</span> Timeline fully managed</div>
-                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-emerald-500/10 transition hover:translate-x-1 duration-200"><span class="text-emerald-500 font-bold">✅</span> Client communication handled</div>
-                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-emerald-500/10 transition hover:translate-x-1 duration-200"><span class="text-emerald-500 font-bold">✅</span> Compliance monitored</div>
-                    <div class="flex items-center gap-3 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-emerald-500/10 transition hover:translate-x-1 duration-200"><span class="text-emerald-500 font-bold">✅</span> More time selling</div>
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Stress Level</span><span class="text-emerald-500">Low</span></div>
+                        <div class="w-full bg-emerald-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-emerald-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="15"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Emails &amp; Follow-ups</span><span class="text-emerald-500">Handled</span></div>
+                        <div class="w-full bg-emerald-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-emerald-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="12"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Paperwork Burden</span><span class="text-emerald-500">Minimal</span></div>
+                        <div class="w-full bg-emerald-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-emerald-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="10"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Closed Transactions</span><span class="text-emerald-500">On Track</span></div>
+                        <div class="w-full bg-emerald-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-emerald-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="96"></div></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -828,82 +943,14 @@
         </div>
     </section>
 
-    <!-- 5. Replace the FAQ Bot Section -->
-    <section id="faq" class="py-24 px-4 max-w-4xl mx-auto reveal">
-        <div class="text-center mb-12">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Operations Assistant</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">AI Operations Assistant Interface</p>
-        </div>
-
-        <div class="glass rounded-3xl shadow-xl border border-white/40 overflow-hidden flex flex-col h-[560px] glow-card">
-            <!-- Chat Header -->
-            <div class="bg-slate-900/5 dark:bg-white/5 px-6 py-4 border-b border-slate-200/60 dark:border-white/5 flex items-center gap-3">
-                <img src="bot.jpg" alt="Arthur" class="w-10 h-10 rounded-full object-cover shadow-sm border-2 border-white/50 dark:border-white/10">
-                <div>
-                    <h4 class="text-sm font-bold tracking-tight">Arthur</h4>
-                    <p class="text-[10px] text-slate-400 font-medium">AI Portfolio Assistant</p>
-                </div>
-                <div class="ml-auto text-[10px] text-emerald-500 font-medium flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 🟢 Online
-                </div>
-            </div>
-
-            <!-- Chat Window Container -->
-            <div id="chat-window" class="flex-1 overflow-y-auto p-6 space-y-4 bg-white/10 dark:bg-slate-950/10">
-                <!-- Bot Welcome Message -->
-                <div class="flex gap-3 items-start max-w-[90%] chat-bubble-in">
-                    <img src="bot.jpg" alt="Arthur" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
-                    <div class="bot-bubble p-4 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm leading-relaxed space-y-2">
-                        <p>Hello! 👋 I'm <strong>Arthur</strong>.</p>
-                        <p>I'm here to answer anything about Christian Paul Babida, including:</p>
-                        <ul class="list-disc list-inside space-y-0.5 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300">
-                            <li>Experience &amp; Resume</li>
-                            <li>Skills &amp; Certifications</li>
-                            <li>Real Estate &amp; Transaction Coordination</li>
-                            <li>MLS Listings &amp; Customer Service</li>
-                            <li>Software &amp; Availability</li>
-                            <li>Contact Information</li>
-                        </ul>
-                        <p>Ask me anything! ✨</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Typing Indicator Bubble Container -->
-            <div id="typing-indicator" class="px-6 py-2 hidden">
-                <div class="flex gap-3 items-center">
-                    <div class="w-7 h-7 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0 text-xs"><i class="fa-solid fa-robot"></i></div>
-                    <div class="bg-slate-200/50 dark:bg-slate-900/50 px-5 py-3.5 rounded-2xl rounded-tl-none flex items-center justify-center min-w-[50px]">
-                        <div class="dot-flashing"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Suggestions Interface -->
-            <div class="px-4 py-2 bg-slate-900/5 dark:bg-white/5 border-t border-slate-200/60 dark:border-white/5 flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
-                <button onclick="sendQuickQuestion('Tell me about Christian')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">About Christian</button>
-                <button onclick="sendQuickQuestion('What is your experience?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Experience</button>
-                <button onclick="sendQuickQuestion('Can I see your resume?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Resume</button>
-                <button onclick="sendQuickQuestion('What is transaction coordination?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Transaction Coordinator</button>
-                <button onclick="sendQuickQuestion('Can you create MLS listings?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">MLS Listing</button>
-                <button onclick="sendQuickQuestion('What customer service experience do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Customer Service</button>
-                <button onclick="sendQuickQuestion('Tell me about your healthcare experience')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Healthcare</button>
-                <button onclick="sendQuickQuestion('What real estate work have you done?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Real Estate</button>
-                <button onclick="sendQuickQuestion('What software do you use?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Software</button>
-                <button onclick="sendQuickQuestion('What certifications do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Certifications</button>
-                <button onclick="sendQuickQuestion('What are your skills?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Skills</button>
-                <button onclick="sendQuickQuestion('Can I see your portfolio?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Portfolio</button>
-                <button onclick="sendQuickQuestion('How can I contact you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Contact</button>
-                <button onclick="sendQuickQuestion('Are you available for work?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Availability</button>
-                <button onclick="sendQuickQuestion('Why should I hire you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Why Hire You?</button>
-            </div>
-
-            <!-- Custom Message Inputs Layout -->
-            <form id="chat-input-form" class="p-3 bg-white/40 dark:bg-slate-900/40 border-t border-slate-200/60 dark:border-white/5 flex gap-2">
-                <input id="chat-user-input" type="text" placeholder="Ask about platforms, response speed, or client management..." class="flex-1 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs sm:text-sm focus:outline-none focus:border-brand-light transition">
-                <button type="submit" class="bg-brand-dark text-white px-4 rounded-xl text-sm font-medium hover:bg-brand-light transition flex items-center justify-center"><i class="fa-solid fa-paper-plane"></i></button>
-            </form>
-        </div>
+    <!-- 5. FAQ / AI Assistant Teaser Section -->
+    <section id="faq" class="py-24 px-4 max-w-3xl mx-auto reveal text-center">
+        <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Operations Assistant</h2>
+        <p class="text-3xl font-bold mt-2 tracking-tight">Have a Question? Ask ChristianIO.</p>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-3 font-light max-w-xl mx-auto">My AI portfolio assistant can answer questions about experience, skills, software, availability, and more — instantly, 24/7.</p>
+        <button onclick="openChatWidget()" class="mt-8 inline-flex items-center gap-2 bg-gradient-to-r from-brand-dark to-brand-light text-white px-6 py-3.5 rounded-2xl font-medium shadow-xl hover:shadow-2xl hover:scale-[1.02] transition">
+            <i class="fa-solid fa-comment-dots"></i> Chat with ChristianIO
+        </button>
     </section>
 
     <!-- 7. Calendly Integration Section -->
@@ -924,29 +971,74 @@
         </div>
     </section>
 
+    <!-- Premium CTA Banner -->
+    <section class="px-4 py-16 reveal">
+        <div class="max-w-6xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brand-dark via-blue-600 to-brand-light p-10 sm:p-16 text-center shadow-2xl">
+            <div class="absolute -top-24 -right-24 w-72 h-72 bg-white/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-accent/30 rounded-full blur-3xl"></div>
+            <div class="relative z-10">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white max-w-2xl mx-auto leading-tight">Ready to Close More Deals Without Administrative Stress?</h2>
+                <p class="mt-4 text-sm sm:text-base text-blue-50/90 max-w-xl mx-auto font-light">Let me manage your paperwork while you focus on serving clients and closing more transactions.</p>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#calendar" class="bg-white text-brand-dark px-8 py-4 rounded-2xl font-semibold shadow-xl hover:scale-[1.02] transition text-center">Book Discovery Call</a>
+                    <a href="resume.pdf" download class="bg-white/10 border border-white/40 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/20 transition text-center flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-arrow-down"></i> Download Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 10. Contact Integration Section -->
     <section id="contact" class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div class="lg:col-span-5 space-y-6">
                 <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Direct Communication Matrix</h2>
                 <h3 class="text-3xl font-bold tracking-tight">Let's Establish Your Operations Pipeline</h3>
-                <p class="text-slate-500 font-light text-sm leading-relaxed">Ready to stop chasing administrative paperwork and start scaling your active local real estate commissions? Send an inquiry or call directly across any verified active channel line below.</p>
-                
-                <div class="space-y-4 text-xs font-medium">
-                    <div class="flex items-center gap-3 p-4 glass rounded-2xl premium-card">
-                        <div class="text-lg text-brand-light"><i class="fa-solid fa-envelope"></i></div>
-                        <div>
-                            <p class="text-[10px] text-slate-400 uppercase tracking-wider">Email Response Desk</p>
-                            <a href="mailto:christianbabida13@outlook.com" class="hover:underline">christianbabida13@outlook.com</a>
+                <p class="text-slate-500 font-light text-sm leading-relaxed">Ready to stop chasing administrative paperwork and start scaling your active local real estate commissions? Reach out on any channel below.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-medium">
+                    <a href="mailto:christianbabida13@outlook.com" class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-brand-light/40 to-transparent premium-card">
+                        <div class="glass rounded-2xl p-4 h-full flex flex-col gap-2">
+                            <div class="w-9 h-9 rounded-xl bg-brand-light/10 text-brand-dark dark:text-brand-light flex items-center justify-center text-base"><i class="fa-solid fa-envelope"></i></div>
+                            <p class="font-bold text-sm">Email</p>
+                            <p class="text-[10px] text-slate-400 leading-relaxed">Best for detailed inquiries</p>
+                            <span class="text-[11px] text-brand-light group-hover:underline break-all">christianbabida13@outlook.com</span>
                         </div>
-                    </div>
-                    <div class="flex items-center gap-3 p-4 glass rounded-2xl premium-card">
-                        <div class="text-lg text-emerald-500"><i class="fa-brands fa-whatsapp"></i></div>
-                        <div>
-                            <p class="text-[10px] text-slate-400 uppercase tracking-wider">WhatsApp Operational Line</p>
-                            <a href="https://wa.me/639617445321" target="_blank" class="hover:underline">+63 961 744 5321</a>
+                    </a>
+                    <a href="https://wa.me/639617445321" target="_blank" class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-emerald-500/40 to-transparent premium-card">
+                        <div class="glass rounded-2xl p-4 h-full flex flex-col gap-2">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-base"><i class="fa-brands fa-whatsapp"></i></div>
+                            <p class="font-bold text-sm">WhatsApp</p>
+                            <p class="text-[10px] text-slate-400 leading-relaxed">Fastest response time</p>
+                            <span class="text-[11px] text-emerald-500 group-hover:underline">+63 961 744 5321</span>
                         </div>
-                    </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/christian-paul-babida-2017b9321" target="_blank" class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-blue-500/40 to-transparent premium-card">
+                        <div class="glass rounded-2xl p-4 h-full flex flex-col gap-2">
+                            <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center text-base"><i class="fa-brands fa-linkedin"></i></div>
+                            <p class="font-bold text-sm">LinkedIn</p>
+                            <p class="text-[10px] text-slate-400 leading-relaxed">Professional background</p>
+                            <span class="text-[11px] text-blue-600 group-hover:underline">View Profile</span>
+                        </div>
+                    </a>
+                    <a href="resume.pdf" download class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-amber-500/40 to-transparent premium-card">
+                        <div class="glass rounded-2xl p-4 h-full flex flex-col gap-2">
+                            <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-base"><i class="fa-solid fa-file-arrow-down"></i></div>
+                            <p class="font-bold text-sm">Resume</p>
+                            <p class="text-[10px] text-slate-400 leading-relaxed">Full experience &amp; skills</p>
+                            <span class="text-[11px] text-amber-600 group-hover:underline">Download PDF</span>
+                        </div>
+                    </a>
+                    <a href="#calendar" class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-brand-dark/40 to-transparent premium-card sm:col-span-2">
+                        <div class="glass rounded-2xl p-4 h-full flex items-center gap-4">
+                            <div class="w-9 h-9 rounded-xl bg-brand-dark/10 text-brand-dark dark:text-brand-light flex items-center justify-center text-base shrink-0"><i class="fa-solid fa-calendar-check"></i></div>
+                            <div>
+                                <p class="font-bold text-sm">Calendly</p>
+                                <p class="text-[10px] text-slate-400 leading-relaxed">Book a discovery call directly on my calendar</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
             
@@ -985,12 +1077,95 @@
         <p class="font-light">&copy; 2026. All Rights Reserved. Transaction Coordination Ecosystem Architecture.</p>
     </footer>
 
+    <!-- Floating ChristianIO Chatbot Panel -->
+    <div id="chat-widget-panel" class="fixed bottom-24 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] max-w-[380px] h-[70vh] sm:h-[560px] max-h-[560px] hidden flex-col chat-widget-anim">
+        <div class="glass rounded-3xl shadow-2xl border border-white/40 overflow-hidden flex flex-col h-full glow-card">
+            <!-- Chat Header -->
+            <div class="bg-slate-900/5 dark:bg-white/5 px-5 py-4 border-b border-slate-200/60 dark:border-white/5 flex items-center gap-3">
+                <img src="bot.jpg" alt="ChristianIO" class="w-10 h-10 rounded-full object-cover shadow-sm border-2 border-white/50 dark:border-white/10">
+                <div>
+                    <h4 class="text-sm font-bold tracking-tight">ChristianIO</h4>
+                    <p class="text-[10px] text-slate-400 font-medium">AI Portfolio Assistant</p>
+                </div>
+                <div class="ml-auto flex items-center gap-3">
+                    <span class="text-[10px] text-emerald-500 font-medium flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Online
+                    </span>
+                    <button onclick="closeChatWidget()" aria-label="Close chat" class="w-7 h-7 rounded-full bg-slate-900/5 dark:bg-white/10 flex items-center justify-center hover:bg-slate-900/10 dark:hover:bg-white/20 transition"><i class="fa-solid fa-xmark text-xs"></i></button>
+                </div>
+            </div>
+
+            <!-- Chat Window Container -->
+            <div id="chat-window" class="flex-1 overflow-y-auto p-5 space-y-4 bg-white/10 dark:bg-slate-950/10">
+                <!-- Bot Welcome Message -->
+                <div class="flex gap-3 items-start max-w-[90%] chat-bubble-in">
+                    <img src="bot.jpg" alt="ChristianIO" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
+                    <div class="bot-bubble p-4 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm leading-relaxed space-y-2">
+                        <p>Hello! 👋 I'm <strong>ChristianIO</strong>.</p>
+                        <p>I'm here to answer anything about Christian Paul Babida, including:</p>
+                        <ul class="list-disc list-inside space-y-0.5 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300">
+                            <li>Experience &amp; Resume</li>
+                            <li>Skills &amp; Certifications</li>
+                            <li>Real Estate &amp; Transaction Coordination</li>
+                            <li>MLS Listings &amp; Customer Service</li>
+                            <li>Software &amp; Availability</li>
+                            <li>Contact Information</li>
+                        </ul>
+                        <p>Ask me anything! ✨</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator Bubble Container -->
+            <div id="typing-indicator" class="px-5 py-2 hidden">
+                <div class="flex gap-3 items-center">
+                    <div class="w-7 h-7 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0 text-xs"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bg-slate-200/50 dark:bg-slate-900/50 px-5 py-3.5 rounded-2xl rounded-tl-none flex items-center justify-center min-w-[50px]">
+                        <div class="dot-flashing"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Suggestions Interface -->
+            <div class="px-3 py-2 bg-slate-900/5 dark:bg-white/5 border-t border-slate-200/60 dark:border-white/5 flex flex-wrap gap-1.5 max-h-20 overflow-y-auto">
+                <button onclick="sendQuickQuestion('Tell me about Christian')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">About Christian</button>
+                <button onclick="sendQuickQuestion('What is your experience?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Experience</button>
+                <button onclick="sendQuickQuestion('Can I see your resume?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Resume</button>
+                <button onclick="sendQuickQuestion('What is transaction coordination?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Transaction Coordinator</button>
+                <button onclick="sendQuickQuestion('Can you create MLS listings?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">MLS Listing</button>
+                <button onclick="sendQuickQuestion('What customer service experience do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Customer Service</button>
+                <button onclick="sendQuickQuestion('Tell me about your healthcare experience')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Healthcare</button>
+                <button onclick="sendQuickQuestion('What real estate work have you done?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Real Estate</button>
+                <button onclick="sendQuickQuestion('What software do you use?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Software</button>
+                <button onclick="sendQuickQuestion('What certifications do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Certifications</button>
+                <button onclick="sendQuickQuestion('What are your skills?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Skills</button>
+                <button onclick="sendQuickQuestion('Can I see your portfolio?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Portfolio</button>
+                <button onclick="sendQuickQuestion('How can I contact you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Contact</button>
+                <button onclick="sendQuickQuestion('Are you available for work?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Availability</button>
+                <button onclick="sendQuickQuestion('Why should I hire you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Why Hire You?</button>
+            </div>
+
+            <!-- Custom Message Inputs Layout -->
+            <form id="chat-input-form" class="p-3 bg-white/40 dark:bg-slate-900/40 border-t border-slate-200/60 dark:border-white/5 flex gap-2">
+                <input id="chat-user-input" type="text" placeholder="Ask about platforms, response speed, or client management..." class="flex-1 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs sm:text-sm focus:outline-none focus:border-brand-light transition">
+                <button type="submit" class="bg-brand-dark text-white px-4 rounded-xl text-sm font-medium hover:bg-brand-light transition flex items-center justify-center"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
     <!-- Fixed Buttons Layout Container -->
     <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+        <!-- Floating ChristianIO Chat Launcher -->
+        <button id="chat-widget-launcher" onclick="toggleChatWidget()" aria-label="Open ChristianIO chat assistant" class="relative w-14 h-14 rounded-full bg-gradient-to-br from-brand-dark to-brand-light text-white flex items-center justify-center shadow-2xl hover:scale-110 transition text-xl border border-white/10">
+            <span class="absolute top-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-white dark:border-slate-950 animate-pulse"></span>
+            <i class="fa-solid fa-comment-dots" id="chat-launcher-icon-open"></i>
+            <i class="fa-solid fa-xmark hidden" id="chat-launcher-icon-close"></i>
+        </button>
+
         <!-- 6. Floating Booking Button -->
-        <a href="#calendar" class="pulse-btn flex items-center gap-2 bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-3 rounded-full shadow-2xl transition-transform duration-300 font-semibold text-xs tracking-wide group" aria-label="Book Free Consultation Container">
+        <a href="#calendar" class="pulse-btn flex items-center gap-2 bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-3 rounded-full shadow-2xl transition-transform duration-300 font-semibold text-xs tracking-wide group" aria-label="Book Discovery Call Container">
             <span class="text-base group-hover:rotate-12 transition-transform duration-200">📅</span>
-            <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-out font-medium">Book Free Consultation</span>
+            <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-out font-medium">Book Discovery Call</span>
         </a>
 
         <!-- Original WhatsApp Floating Button coexisting cleanly -->
@@ -1005,6 +1180,43 @@
         document.getElementById('themeToggle').addEventListener('click', () => {
             document.documentElement.classList.toggle('dark');
         });
+
+        // Floating ChristianIO Chat Widget Open/Close Logic
+        function openChatWidget() {
+            const panel = document.getElementById('chat-widget-panel');
+            panel.classList.remove('hidden');
+            requestAnimationFrame(() => panel.classList.add('open'));
+            document.getElementById('chat-launcher-icon-open').classList.add('hidden');
+            document.getElementById('chat-launcher-icon-close').classList.remove('hidden');
+        }
+        function closeChatWidget() {
+            const panel = document.getElementById('chat-widget-panel');
+            panel.classList.remove('open');
+            document.getElementById('chat-launcher-icon-open').classList.remove('hidden');
+            document.getElementById('chat-launcher-icon-close').classList.add('hidden');
+            setTimeout(() => { if (!panel.classList.contains('open')) panel.classList.add('hidden'); }, 350);
+        }
+        function toggleChatWidget() {
+            const panel = document.getElementById('chat-widget-panel');
+            if (panel.classList.contains('open')) { closeChatWidget(); } else { openChatWidget(); }
+        }
+
+        // Animated Stress-Meter Comparison Bars
+        let comparisonBarsFired = false;
+        function triggerComparisonBars() {
+            if (comparisonBarsFired) return;
+            comparisonBarsFired = true;
+            document.querySelectorAll('#comparison-container .bar-fill').forEach(bar => {
+                const target = bar.getAttribute('data-target');
+                requestAnimationFrame(() => { bar.style.width = target + '%'; });
+            });
+        }
+        const comparisonSection = document.getElementById('comparison-container');
+        if (comparisonSection) {
+            new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) triggerComparisonBars(); });
+            }, { threshold: 0.2 }).observe(comparisonSection);
+        }
 
         // 9. Premium Loading Screen Implementation
         window.addEventListener('DOMContentLoaded', () => {
@@ -1147,7 +1359,7 @@
         }
 
         // ==========================================================
-        // Arthur — AI Portfolio Assistant Knowledge Engine
+        // ChristianIO — AI Portfolio Assistant Knowledge Engine
         // 100% local keyword-matching FAQ engine. No external API.
         // ==========================================================
         const textForm = document.getElementById('chat-input-form');
@@ -1396,7 +1608,7 @@
                 botBubble.className = 'flex flex-col items-start max-w-[90%] chat-bubble-in';
                 botBubble.innerHTML = `
                     <div class="flex gap-3 items-start">
-                        <img src="bot.jpg" alt="Arthur" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
+                        <img src="bot.jpg" alt="ChristianIO" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
                         <div class="bot-text-container bot-bubble p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm"></div>
                     </div>
                     <span class="text-[9px] text-slate-400 mt-1 ml-10">${currentTimestamp()}</span>`;
