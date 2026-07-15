@@ -8,20 +8,24 @@
     <!-- Tailwind CSS and FontAwesome for modern UI elements -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter for structured Apple-like layouts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter for body copy, Playfair Display for a premium real-estate editorial feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0B1220">
+    <meta name="description" content="Christian Paul Babida — California Transaction Coordinator helping real estate agents close more deals with less stress.">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Playfair Display', 'serif'] },
                     colors: {
                         brand: { light: '#3b82f6', dark: '#2563eb' },
                         ink: '#0F172A',
                         accent: '#10B981',
                         surface: '#F8FAFC',
-                        surfaceDark: '#020617'
+                        surfaceDark: '#020617',
+                        gold: { DEFAULT: '#C9A24B', light: '#E4C57A', dark: '#9C7A2F' }
                     }
                 }
             }
@@ -196,6 +200,32 @@
             transform: translateY(0) scale(1);
             pointer-events: auto;
         }
+
+        /* ===== Premium editorial typography ===== */
+        .font-display { font-family: 'Playfair Display', serif; }
+        .eyebrow {
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.18em;
+        }
+
+        /* ===== Mobile nav menu ===== */
+        #mobile-nav-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        #mobile-nav-panel.open { max-height: 480px; }
+
+        /* ===== Small-screen refinements ===== */
+        @media (max-width: 480px) {
+            .pulse-btn span.max-w-0 { display: none; }
+        }
+
+        /* Respect reduced-motion preference for pulse/ping animations */
+        @media (prefers-reduced-motion: reduce) {
+            .pulse-btn, #loading-logo, .animate-ping, .animate-pulse { animation: none !important; }
+            .reveal { transition: opacity 0.3s ease; }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
@@ -238,33 +268,54 @@
                 <a href="#contact" class="hover:text-brand-light transition">Contact</a>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 sm:gap-4">
                 <button id="themeToggle" class="p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:scale-105 transition" aria-label="Toggle Dark Mode">
                     <i class="fa-solid fa-moon dark:hidden"></i>
                     <i class="fa-solid fa-sun hidden dark:block"></i>
                 </button>
                 <a href="#calendar" class="bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md hover:opacity-95 transition hidden sm:block">Book Strategy Session</a>
+                <button id="mobileNavToggle" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:scale-105 transition" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <i class="fa-solid fa-bars" id="mobileNavIconOpen"></i>
+                    <i class="fa-solid fa-xmark hidden" id="mobileNavIconClose"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Panel -->
+        <div id="mobile-nav-panel" class="md:hidden px-4">
+            <div class="flex flex-col gap-1 pb-4 pt-1 text-sm font-medium text-slate-700 dark:text-slate-300 border-t border-slate-200/60 dark:border-white/10">
+                <a href="#about" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">About</a>
+                <a href="#intro-video" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Video</a>
+                <a href="#portfolio" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Portfolio Work</a>
+                <a href="#dashboard" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Live Metrics</a>
+                <a href="#services" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Services</a>
+                <a href="#timeline" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Workflow</a>
+                <a href="#why-me" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Benefits</a>
+                <a href="#tools" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Tech Stack</a>
+                <a href="#faq" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">FAQ</a>
+                <a href="#contact" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Contact</a>
+                <a href="#calendar" onclick="closeMobileNav()" class="mt-1 bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-2.5 rounded-xl text-xs font-semibold shadow-md text-center">Book Strategy Session</a>
             </div>
         </div>
     </nav>
 
     <!-- 1. Hero Section -->
-    <header class="relative h-screen flex items-center justify-center overflow-hidden pt-16">
-        <video autoplay loop muted playsinline class="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover opacity-35 dark:opacity-20 pointer-events-none">
+    <header class="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-24 pb-14 sm:pt-16 sm:pb-0">
+        <video autoplay loop muted playsinline class="absolute inset-0 z-0 w-full h-full object-cover opacity-35 dark:opacity-20 pointer-events-none">
             <source src="background.mp4" type="video/mp4">
         </video>
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-50/60 to-slate-50 dark:from-slate-950/70 dark:via-slate-950/60 dark:to-slate-950 z-10"></div>
         
         <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center">
             <img src="profile.jpg" alt="Christian Paul Babida" class="w-28 h-28 rounded-full object-cover border-4 border-white dark:border-slate-900 shadow-2xl mb-6 hover:scale-105 transition duration-300">
-            <div class="inline-flex items-center gap-2 bg-white/60 dark:bg-slate-900/60 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide border border-white/40 dark:border-white/10 mb-5 shadow-sm">
-                <span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
+            <div class="inline-flex items-center gap-2 bg-white/60 dark:bg-slate-900/60 px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide border border-gold/30 mb-5 shadow-sm eyebrow">
+                <span class="flex h-2 w-2 relative shrink-0"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
                 Currently Accepting New Agent Partners
             </div>
-            <h1 class="text-4xl sm:text-5xl md:text-[3.4rem] font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-brand-dark to-slate-950 dark:from-white dark:via-brand-light dark:to-slate-200 max-w-4xl leading-[1.1]">
+            <h1 class="font-display italic text-[2.15rem] leading-[1.18] sm:text-5xl md:text-[3.5rem] font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-brand-dark to-slate-950 dark:from-white dark:via-brand-light dark:to-slate-200 max-w-4xl sm:leading-[1.1]">
                 California Transaction Coordinator Helping Agents Close More Deals With Less Stress
             </h1>
-            <p class="mt-5 text-md sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl font-light leading-relaxed">
+            <p class="mt-5 text-sm sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl font-light leading-relaxed px-2 sm:px-0">
                 I manage your transactions from Contract-to-Close, ensuring every deadline, document, and communication is handled professionally so you can focus on selling.
             </p>
 
@@ -327,8 +378,8 @@
                 <img src="office.jpg" alt="Office Infrastructure" class="w-full object-cover h-[450px] relative z-10 border border-white/20">
             </div>
             <div class="lg:col-span-7 space-y-6">
-                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Meet Your Operations Backbone</h2>
-                <h3 class="text-3xl sm:text-4xl font-bold tracking-tight">Are you tired of drowning in paperwork while your next big lead waits?</h3>
+                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Meet Your Operations Backbone</h2>
+                <h3 class="font-display text-3xl sm:text-4xl font-bold tracking-tight leading-snug">Are you tired of drowning in paperwork while your next big lead waits?</h3>
                 <p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
                     I’m Christian, a California-focused Transaction Coordinator with a mission: To handle the administrative heavy lifting so you can get back to what you do best—closing deals and wowing your clients.
                 </p>
@@ -352,8 +403,8 @@
     <!-- 2b. Introduction Video Section -->
     <section id="intro-video" class="py-24 px-4 max-w-5xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-12">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Get To Know Me</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">A Quick Introduction</p>
+            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Get To Know Me</h2>
+            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">A Quick Introduction</p>
             <p class="mt-4 text-slate-600 dark:text-slate-400 font-light leading-relaxed">
                 Take a minute to hear directly from me about how I can help streamline your transactions.
             </p>
@@ -370,8 +421,8 @@
     <!-- 2. Track Record / Achievement Dashboard Section -->
     <section id="dashboard" class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Proven Track Record</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">Results That Speak for Themselves</p>
+            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Proven Track Record</h2>
+            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Results That Speak for Themselves</p>
             <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">Real performance metrics from managed transactions across the California market.</p>
         </div>
 
@@ -454,8 +505,8 @@
     <section id="portfolio" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/40 reveal">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Operations & Marketing Sandbox</h2>
-                <p class="text-3xl font-bold mt-2 tracking-tight">Real-World Work Samples & Dashboards</p>
+                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Operations & Marketing Sandbox</h2>
+                <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Real-World Work Samples & Dashboards</p>
                 <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">Explore accurate snapshots of my active management portals, client trackers, and creative property assets.</p>
             </div>
 
@@ -592,8 +643,8 @@
     <!-- 3. Before vs After Section -->
     <section class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Workflow Comparison</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">The Tactical Real Estate Evolution</p>
+            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Workflow Comparison</h2>
+            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">The Tactical Real Estate Evolution</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-11 gap-6 items-center" id="comparison-container">
@@ -659,8 +710,8 @@
     <!-- 11. Why Hire Me Instead of Another TC (Comparison Table) -->
     <section id="why-table" class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Operational Advantages</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">Why Agents Choose Me</p>
+            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Operational Advantages</h2>
+            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Why Agents Choose Me</p>
         </div>
 
         <div class="glass rounded-3xl overflow-hidden shadow-xl border border-white/20 glow-card">
@@ -714,8 +765,8 @@
     <section id="services" class="py-24 px-4 bg-slate-100/30 dark:bg-slate-900/10 backdrop-blur-sm reveal">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">What I Bring to Your Team</h2>
-                <p class="text-3xl font-bold mt-2 tracking-tight">Comprehensive Contract-to-Close Infrastructure</p>
+                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">What I Bring to Your Team</h2>
+                <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Comprehensive Contract-to-Close Infrastructure</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -769,8 +820,8 @@
     <!-- 4. Interactive Transaction Timeline Section -->
     <section id="timeline" class="py-24 px-4 max-w-5xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">The Visual Roadmap</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">Interactive Transaction Timeline</p>
+            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">The Visual Roadmap</h2>
+            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Interactive Transaction Timeline</p>
         </div>
         
         <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-4 md:ml-32 space-y-12 py-4" id="timeline-container">
@@ -854,8 +905,8 @@
     <!-- 6. Why Partner With Me Section -->
     <section id="why-me" class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">The ROI Transformation</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight">In This Business, Time Is Literally Money</p>
+            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">The ROI Transformation</h2>
+            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">In This Business, Time Is Literally Money</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -881,8 +932,8 @@
     <section id="testimonials" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 reveal">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Real Agent Experiences</h2>
-                <p class="text-3xl font-bold mt-2 tracking-tight">Trusted By Real Estate Producers</p>
+                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Real Agent Experiences</h2>
+                <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Trusted By Real Estate Producers</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -914,7 +965,7 @@
     <!-- 8. Tools & Platforms Section -->
     <section id="tools" class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="text-center max-w-3xl mx-auto mb-12">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">High-Performance Tech Stack</h2>
+            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">High-Performance Tech Stack</h2>
             <p class="text-2xl font-bold mt-2 tracking-tight">Fully Integrated With the Tools You Already Use</p>
         </div>
         
@@ -964,8 +1015,8 @@
 
     <!-- 5. FAQ / AI Assistant Teaser Section -->
     <section id="faq" class="py-24 px-4 max-w-3xl mx-auto reveal text-center">
-        <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Operations Assistant</h2>
-        <p class="text-3xl font-bold mt-2 tracking-tight">Have a Question? Ask ChristianIO.</p>
+        <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Operations Assistant</h2>
+        <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Have a Question? Ask ChristianIO.</p>
         <p class="text-sm text-slate-500 dark:text-slate-400 mt-3 font-light max-w-xl mx-auto">My AI portfolio assistant can answer questions about experience, skills, software, availability, and more — instantly, 24/7.</p>
         <button onclick="openChatWidget()" class="mt-8 inline-flex items-center gap-2 bg-gradient-to-r from-brand-dark to-brand-light text-white px-6 py-3.5 rounded-2xl font-medium shadow-xl hover:shadow-2xl hover:scale-[1.02] transition">
             <i class="fa-solid fa-comment-dots"></i> Chat with ChristianIO
@@ -975,8 +1026,8 @@
     <!-- 7. Calendly Integration Section -->
     <section id="calendar" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 reveal">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Secure Your Competitive Engine</h2>
-            <p class="text-3xl font-bold mt-2 tracking-tight mb-8">Let’s Scale Your Real Estate Business</p>
+            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Secure Your Competitive Engine</h2>
+            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight mb-8">Let’s Scale Your Real Estate Business</p>
             
             <div class="glass p-4 sm:p-6 rounded-3xl shadow-xl border border-white/40 text-left glow-card overflow-hidden">
                 <!-- Embedded native Calendly widget -->
@@ -996,7 +1047,7 @@
             <div class="absolute -top-24 -right-24 w-72 h-72 bg-white/20 rounded-full blur-3xl"></div>
             <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-accent/30 rounded-full blur-3xl"></div>
             <div class="relative z-10">
-                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white max-w-2xl mx-auto leading-tight">Ready to Close More Deals Without Administrative Stress?</h2>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white max-w-2xl mx-auto leading-tight">Ready to Close More Deals Without Administrative Stress?</h2>
                 <p class="mt-4 text-sm sm:text-base text-blue-50/90 max-w-xl mx-auto font-light">Let me manage your paperwork while you focus on serving clients and closing more transactions.</p>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#calendar" class="bg-white text-brand-dark px-8 py-4 rounded-2xl font-semibold shadow-xl hover:scale-[1.02] transition text-center">Book Discovery Call</a>
@@ -1012,7 +1063,7 @@
     <section id="contact" class="py-24 px-4 max-w-7xl mx-auto reveal">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div class="lg:col-span-5 space-y-6">
-                <h2 class="text-xs font-bold tracking-widest text-brand-light uppercase">Direct Communication Matrix</h2>
+                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Direct Communication Matrix</h2>
                 <h3 class="text-3xl font-bold tracking-tight">Let's Establish Your Operations Pipeline</h3>
                 <p class="text-slate-500 font-light text-sm leading-relaxed">Ready to stop chasing administrative paperwork and start scaling your active local real estate commissions? Reach out on any channel below.</p>
 
@@ -1199,6 +1250,24 @@
         document.getElementById('themeToggle').addEventListener('click', () => {
             document.documentElement.classList.toggle('dark');
         });
+
+        // Mobile Nav Menu Open/Close Logic
+        function toggleMobileNav() {
+            const panel = document.getElementById('mobile-nav-panel');
+            const btn = document.getElementById('mobileNavToggle');
+            const isOpen = panel.classList.toggle('open');
+            document.getElementById('mobileNavIconOpen').classList.toggle('hidden', isOpen);
+            document.getElementById('mobileNavIconClose').classList.toggle('hidden', !isOpen);
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+        function closeMobileNav() {
+            const panel = document.getElementById('mobile-nav-panel');
+            if (!panel.classList.contains('open')) return;
+            panel.classList.remove('open');
+            document.getElementById('mobileNavIconOpen').classList.remove('hidden');
+            document.getElementById('mobileNavIconClose').classList.add('hidden');
+            document.getElementById('mobileNavToggle').setAttribute('aria-expanded', 'false');
+        }
 
         // Floating ChristianIO Chat Widget Open/Close Logic
         function openChatWidget() {
