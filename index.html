@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christian Paul Babida | Proactive Transaction Coordinator</title>
-    <link rel="icon" type="image/jpeg" href="pavicon.jpg">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <!-- Apply saved/system theme immediately, before first paint, to avoid a flash of the wrong theme -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
     <!-- Tailwind CSS and FontAwesome for modern UI elements -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1212,9 +1222,10 @@
 
     <!-- Scripts -->
     <script>
-        // Light / Dark Mode Toggle
+        // Light / Dark Mode Toggle (persists choice across visits)
         document.getElementById('themeToggle').addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
 
         // Mobile Nav Menu Open/Close Logic
@@ -1278,6 +1289,16 @@
             const screen = document.getElementById('loading-screen');
             const msgEl = document.getElementById('loading-msg');
 
+            // Skip the full animated intro on repeat visits within the same session —
+            // just fade out quickly so it doesn't feel like a tax on returning visitors
+            if (sessionStorage.getItem('hasVisited')) {
+                screen.style.transition = 'opacity 0.2s ease';
+                screen.style.opacity = '0';
+                setTimeout(() => { screen.style.display = 'none'; }, 200);
+                return;
+            }
+            sessionStorage.setItem('hasVisited', 'true');
+
             const loadingMessages = [
                 '✔ Loading Portfolio...',
                 '✔ Initializing Dashboard...',
@@ -1329,7 +1350,7 @@
                     entry.target.classList.add('active');
                     
                     // Trigger number counters if intersecting
-                    if(entry.target.id === 'stats-container') {
+                    if(entry.target.id === 'stats-container' || entry.target.id === 'dash-stats-container') {
                         triggerCounters();
                     }
                     
@@ -1345,6 +1366,9 @@
         
         const statsSection = document.getElementById('stats-container');
         if(statsSection) activeObservers.observe(statsSection);
+
+        const dashStatsSection = document.getElementById('dash-stats-container');
+        if(dashStatsSection) activeObservers.observe(dashStatsSection);
         
         const timelineSection = document.getElementById('timeline-container');
         if(timelineSection) activeObservers.observe(timelineSection);
