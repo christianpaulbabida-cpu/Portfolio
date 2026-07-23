@@ -1,1630 +1,932 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christian Paul Babida | Proactive Transaction Coordinator</title>
-    <link rel="icon" type="image/jpeg" href="pavicon.jpg">
-    <!-- Tailwind CSS and FontAwesome for modern UI elements -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter for body copy, Playfair Display for a premium real-estate editorial feel -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#0B1220">
-    <meta name="description" content="Christian Paul Babida — California Transaction Coordinator helping real estate agents close more deals with less stress.">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Playfair Display', 'serif'] },
-                    colors: {
-                        brand: { light: '#3b82f6', dark: '#2563eb' },
-                        ink: '#0F172A',
-                        accent: '#10B981',
-                        surface: '#F8FAFC',
-                        surfaceDark: '#020617',
-                        gold: { DEFAULT: '#C9A24B', light: '#E4C57A', dark: '#9C7A2F' }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
-        
-        /* Glassmorphism Classes */
-        .glass {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-        .dark .glass {
-            background: rgba(15, 23, 42, 0.55);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        /* Custom Scrolling Hide Effects */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christian Paul Babida | California Transaction Coordinator</title>
+<link rel="icon" type="image/jpeg" href="pavicon.jpg">
+<meta name="theme-color" content="#0B1420">
+<meta name="description" content="Christian Paul Babida — California Transaction Coordinator helping real estate agents close more deals, contract-to-close, with less stress.">
+<meta name="color-scheme" content="light dark">
 
-        /* Premium Premium Micro-Interactions */
-        .premium-card {
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
-            will-change: transform, box-shadow;
-        }
-        .premium-card:hover {
-            transform: translateY(-6px) scale(1.01) perspective(1000px) rotateX(1deg);
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
-        }
-        .dark .premium-card:hover {
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
-            border-color: rgba(14, 165, 233, 0.3);
-        }
-        .premium-img-container img {
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
-        }
-        .premium-img-container:hover img {
-            transform: scale(1.04);
-            filter: brightness(1.05);
-        }
+<!-- Open Graph -->
+<meta property="og:title" content="Christian Paul Babida | California Transaction Coordinator">
+<meta property="og:description" content="Contract-to-close management, MLS listings, and compliance — handled, so you can focus on selling.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="profile.jpg">
 
-        /* Subtle Glow Effects */
-        .glow-card {
-            box-shadow: 0 0 15px -3px rgba(14, 165, 233, 0.05);
-        }
-        .glow-card:hover {
-            box-shadow: 0 0 25px -2px rgba(14, 165, 233, 0.15);
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-        /* Pulse Animation for Booking Button */
-        @keyframes customPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4); }
-            50% { transform: scale(1.05); box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.6); }
-        }
-        .pulse-btn {
-            animation: customPulse 3s infinite ease-in-out;
-        }
-        .pulse-btn:hover {
-            animation-play-state: paused;
-            transform: scale(1.08);
-        }
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-        /* Typing Indicator Styles */
-        .dot-flashing {
-            position: relative;
-            width: 6px;
-            height: 6px;
-            border-radius: 5px;
-            background-color: #0ea5e9;
-            color: #0ea5e9;
-            animation: dotFlashing 1s infinite linear;
-        }
-        .dot-flashing::before, .dot-flashing::after {
-            content: '';
-            display: inline-block;
-            position: absolute;
-            top: 0;
-        }
-        .dot-flashing::before {
-            left: -12px;
-            width: 6px;
-            height: 6px;
-            border-radius: 5px;
-            background-color: #0ea5e9;
-            color: #0ea5e9;
-            animation: dotFlashing 1s infinite linear;
-            animation-delay: 0s;
-        }
-        .dot-flashing::after {
-            left: 12px;
-            width: 6px;
-            height: 6px;
-            border-radius: 5px;
-            background-color: #0ea5e9;
-            color: #0ea5e9;
-            animation: dotFlashing 1s infinite linear;
-            animation-delay: 0.4s;
-        }
-        @keyframes dotFlashing {
-            0% { background-color: #0ea5e9; }
-            50%, 100% { background-color: rgba(14, 165, 233, 0.2); }
-        }
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+          display: ['Fraunces', 'serif'],
+          mono: ['IBM Plex Mono', 'monospace'],
+        },
+        colors: {
+          ink: { DEFAULT: '#0B1420', light: '#132234' },
+          paper: '#FAF8F3',
+          brass: { DEFAULT: '#B8874A', light: '#D7AD73', dark: '#8C6535' },
+          signal: { DEFAULT: '#2454FF', dark: '#173A9E' },
+          verified: '#12A96B',
+        },
+        boxShadow: {
+          card: '0 1px 2px rgba(11,20,32,0.04), 0 12px 32px -16px rgba(11,20,32,0.16)',
+          cardHover: '0 1px 2px rgba(11,20,32,0.06), 0 24px 48px -16px rgba(11,20,32,0.24)',
+        },
+      },
+    },
+  };
+</script>
 
-        /* Loading Screen — Logo Fade / Scale / Float */
-        @keyframes logoFadeScale {
-            0% { opacity: 0; transform: scale(0.75); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        #loading-logo {
-            animation: logoFadeScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, logoFloat 2.4s ease-in-out 0.6s infinite;
-        }
-        #loading-msg {
-            transition: opacity 0.25s ease, transform 0.25s ease;
-        }
-        #loading-screen {
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
-        }
+<style>
+  :root { color-scheme: light; }
+  html.dark { color-scheme: dark; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
 
-        /* Chatbot bubble entrance */
-        @keyframes bubbleIn {
-            0% { opacity: 0; transform: translateY(10px) scale(0.98); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .chat-bubble-in { animation: bubbleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  .eyebrow { letter-spacing: 0.14em; font-family: 'IBM Plex Mono', monospace; }
 
-        /* Chatbot glass bubbles */
-        .bot-bubble {
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        .dark .bot-bubble {
-            background: rgba(30, 41, 59, 0.55);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .user-bubble {
-            background: linear-gradient(135deg, #2563eb, #0ea5e9);
-        }
-        #chat-window::-webkit-scrollbar { width: 5px; }
-        #chat-window::-webkit-scrollbar-thumb { background: rgba(14,165,233,0.35); border-radius: 10px; }
+  /* Skip link */
+  .skip-link { position: absolute; left: -9999px; top: 0; z-index: 200; }
+  .skip-link:focus { left: 1rem; top: 1rem; background: #fff; color: #0B1420; padding: .75rem 1.25rem; border-radius: .75rem; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
 
-        .quick-chip {
-            transition: all 0.25s ease;
-        }
-        .quick-chip:hover {
-            transform: translateY(-2px);
-            border-color: #0ea5e9;
-            box-shadow: 0 6px 14px -6px rgba(14,165,233,0.5);
-        }
+  /* Visible keyboard focus everywhere */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #2454FF; outline-offset: 2px; border-radius: 6px;
+  }
 
-        /* Floating Chat Widget Open/Close Animation */
-        .chat-widget-anim {
-            opacity: 0;
-            transform: translateY(24px) scale(0.96);
-            transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1);
-            pointer-events: none;
-        }
-        .chat-widget-anim.open {
-            display: flex !important;
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
-        }
+  /* Card system — the "case file" seal motif */
+  .bento-card {
+    background: #fff;
+    border: 1px solid rgba(11,20,32,0.07);
+    border-radius: 1.5rem;
+    transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1), border-color .35s ease;
+  }
+  html.dark .bento-card { background: #101d2c; border-color: rgba(255,255,255,0.06); }
+  .bento-card:hover { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(11,20,32,0.06), 0 24px 48px -16px rgba(11,20,32,0.28); border-color: rgba(184,135,74,0.35); }
+  html.dark .bento-card:hover { box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6); }
 
-        /* ===== Premium editorial typography ===== */
-        .font-display { font-family: 'Playfair Display', serif; }
-        .eyebrow {
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.18em;
-        }
+  .seal {
+    width: 1.75rem; height: 1.75rem; border-radius: 9999px;
+    background: linear-gradient(145deg, #D7AD73, #8C6535);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: .6rem; flex-shrink: 0;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,.4), 0 2px 6px rgba(140,101,53,.4);
+  }
 
-        /* ===== Mobile nav menu ===== */
-        #mobile-nav-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
-        }
-        #mobile-nav-panel.open { max-height: 480px; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+  .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* ===== Small-screen refinements ===== */
-        @media (max-width: 480px) {
-            .pulse-btn span.max-w-0 { display: none; }
-        }
+  /* Nav */
+  #site-nav { background: rgba(250,248,243,0.75); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(11,20,32,0.06); }
+  html.dark #site-nav { background: rgba(11,20,32,0.65); border-color: rgba(255,255,255,0.06); }
 
-        /* Respect reduced-motion preference for pulse/ping animations */
-        @media (prefers-reduced-motion: reduce) {
-            .pulse-btn, #loading-logo, .animate-ping, .animate-pulse { animation: none !important; }
-            .reveal { transition: opacity 0.3s ease; }
-        }
+  #mobile-nav-panel { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.16,1,.3,1); }
+  #mobile-nav-panel.open { max-height: 560px; }
 
-        /* ===== Client Information Protection section ===== */
-        #protection {
-            background: radial-gradient(ellipse at top, rgba(37, 99, 235, 0.15) 0%, transparent 55%),
-                        radial-gradient(ellipse at bottom, rgba(16, 185, 129, 0.10) 0%, transparent 55%),
-                        linear-gradient(180deg, #0B1220 0%, #0F172A 55%, #0B1220 100%);
-        }
+  /* Scroll progress */
+  #scroll-progress { transition: width .1s linear; }
 
-        /* Rotating radial gradient halo behind the shield icon */
-        .protection-halo {
-            position: absolute;
-            inset: 0;
-            margin: auto;
-            width: 340px;
-            height: 340px;
-            background: conic-gradient(from 0deg, rgba(37,99,235,0.35), rgba(14,165,233,0.15), rgba(16,185,129,0.30), rgba(37,99,235,0.35));
-            border-radius: 9999px;
-            filter: blur(40px);
-            animation: protectionSpin 14s linear infinite;
-            opacity: 0.55;
-        }
-        @keyframes protectionSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+  /* Chat launcher pulse — single subtle cue, paused on hover, off for reduced motion */
+  @keyframes pingSlow { 0%,100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.7); opacity: 0; } }
+  .ping-slow { animation: pingSlow 2.6s cubic-bezier(.4,0,.6,1) infinite; }
 
-        /* Pulsing glow on the shield/lock icon */
-        .protection-icon-wrap {
-            animation: protectionPulseGlow 3.2s ease-in-out infinite;
-        }
-        @keyframes protectionPulseGlow {
-            0%, 100% { box-shadow: 0 0 25px 4px rgba(37, 99, 235, 0.35), 0 0 60px 10px rgba(14, 165, 233, 0.15); }
-            50% { box-shadow: 0 0 40px 10px rgba(37, 99, 235, 0.55), 0 0 90px 20px rgba(16, 185, 129, 0.25); }
-        }
+  .chat-widget-anim { opacity: 0; transform: translateY(20px) scale(.97); transition: opacity .28s cubic-bezier(.16,1,.3,1), transform .32s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+  .chat-widget-anim.open { display: flex !important; opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .chat-bubble-in { animation: bubbleIn .32s cubic-bezier(.16,1,.3,1) forwards; }
+  @keyframes bubbleIn { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+  .user-bubble { background: linear-gradient(135deg, #2454FF, #173A9E); }
+  #chat-window::-webkit-scrollbar { width: 5px; }
+  #chat-window::-webkit-scrollbar-thumb { background: rgba(184,135,74,.4); border-radius: 10px; }
+  .quick-chip { transition: all .2s ease; }
+  .quick-chip:hover { border-color: #B8874A; transform: translateY(-1px); }
 
-        /* Floating background particle dots */
-        .protection-particle {
-            position: absolute;
-            border-radius: 9999px;
-            background: rgba(96, 165, 250, 0.45);
-            animation: protectionFloat linear infinite;
-            pointer-events: none;
-        }
-        @keyframes protectionFloat {
-            0%   { transform: translateY(0) translateX(0); opacity: 0; }
-            10%  { opacity: 0.6; }
-            50%  { transform: translateY(-40px) translateX(12px); opacity: 0.9; }
-            90%  { opacity: 0.4; }
-            100% { transform: translateY(-90px) translateX(-8px); opacity: 0; }
-        }
+  .dot-flashing { position: relative; width: 6px; height: 6px; border-radius: 5px; background: #B8874A; animation: dotFlashing 1s infinite linear; }
+  .dot-flashing::before, .dot-flashing::after { content:''; position:absolute; top:0; width:6px; height:6px; border-radius:5px; background:#B8874A; animation: dotFlashing 1s infinite linear; }
+  .dot-flashing::before { left:-12px; animation-delay: 0s; }
+  .dot-flashing::after { left:12px; animation-delay: .4s; }
+  @keyframes dotFlashing { 0% { opacity:1; } 50%,100% { opacity:.25; } }
 
-        /* Security cards: staggered entrance + hover glow */
-        .protection-card {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1),
-                        box-shadow 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease;
-        }
-        .protection-card.active { opacity: 1; transform: translateY(0); }
-        .protection-card:hover {
-            transform: translateY(-6px) scale(1.03);
-            border-color: rgba(59, 130, 246, 0.55);
-            box-shadow: 0 0 0 1px rgba(59,130,246,0.25), 0 20px 40px -12px rgba(37, 99, 235, 0.35);
-        }
+  /* Security section */
+  #security { background: radial-gradient(ellipse at top, rgba(36,84,255,0.16) 0%, transparent 55%), radial-gradient(ellipse at bottom, rgba(18,169,107,0.10) 0%, transparent 55%), linear-gradient(180deg, #0B1420 0%, #101d2c 55%, #0B1420 100%); }
+  .seal-halo { position: absolute; inset: 0; margin: auto; width: 300px; height: 300px; background: conic-gradient(from 0deg, rgba(36,84,255,.3), rgba(184,135,74,.18), rgba(18,169,107,.28), rgba(36,84,255,.3)); border-radius: 9999px; filter: blur(44px); opacity: .5; animation: sealSpin 16s linear infinite; }
+  @keyframes sealSpin { to { transform: rotate(360deg); } }
 
-        /* Trust statement banner shimmer sweep */
-        .protection-banner {
-            position: relative;
-            overflow: hidden;
-        }
-        .protection-banner::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.16) 45%, rgba(255,255,255,0.28) 50%, rgba(255,255,255,0.16) 55%, transparent 100%);
-            animation: protectionShimmer 5s ease-in-out infinite;
-        }
-        @keyframes protectionShimmer {
-            0%   { left: -150%; }
-            55%  { left: 150%; }
-            100% { left: 150%; }
-        }
+  /* Table (comparison) */
+  .file-table td, .file-table th { border-color: rgba(11,20,32,0.07); }
+  html.dark .file-table td, html.dark .file-table th { border-color: rgba(255,255,255,0.07); }
 
-        @media (prefers-reduced-motion: reduce) {
-            .protection-halo, .protection-icon-wrap, .protection-particle, .protection-banner::before {
-                animation: none !important;
-            }
-            .protection-card { transition: opacity 0.3s ease; transform: none !important; }
-        }
-    </style>
+  img { max-width: 100%; height: auto; }
+</style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 transition-colors duration-300">
+<body class="bg-paper text-ink dark:bg-ink dark:text-slate-50 transition-colors duration-300">
 
-    <!-- 9. Premium Loading Screen -->
-    <div id="loading-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center text-white transition-opacity duration-500">
-        <div class="flex flex-col items-center space-y-5">
-            <img id="loading-logo" src="logo.png" alt="Christian Paul Babida Logo" class="h-16 w-auto object-contain drop-shadow-[0_0_20px_rgba(14,165,233,0.35)]">
-            <p class="text-sm font-light text-slate-400 tracking-wide">Preparing your experience...</p>
-            <p id="loading-msg" class="text-xs font-medium text-brand-light tracking-wide h-4">✔ Loading Portfolio...</p>
-            <div class="w-56 h-1 bg-slate-800 rounded-full overflow-hidden">
-                <div id="loading-bar" class="h-full bg-gradient-to-r from-brand-dark to-brand-light w-0 transition-all ease-out duration-1000"></div>
-            </div>
-        </div>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- Scroll progress -->
+<div class="fixed top-0 left-0 w-full h-[3px] z-[60] pointer-events-none bg-transparent">
+  <div id="scroll-progress" class="h-full bg-gradient-to-r from-brass to-signal w-0"></div>
+</div>
+
+<!-- Nav -->
+<nav id="site-nav" class="fixed top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-50 rounded-2xl max-w-7xl mx-auto shadow-sm">
+  <div class="px-4 sm:px-6 h-16 flex items-center justify-between">
+    <a href="#main" class="flex items-center gap-2.5 font-display font-semibold tracking-tight">
+      <span class="seal"><i class="fa-solid fa-check"></i></span>
+      <span class="hidden sm:inline text-[15px]">Christian Paul Babida</span>
+      <span class="sm:hidden text-[15px]">C. Babida</span>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-6 text-[13.5px] font-medium text-ink/70 dark:text-white/70">
+      <a href="#about" class="hover:text-brass transition">About</a>
+      <a href="#services" class="hover:text-brass transition">Services</a>
+      <a href="#workflow" class="hover:text-brass transition">Workflow</a>
+      <a href="#portfolio" class="hover:text-brass transition">Portfolio</a>
+      <a href="#security" class="hover:text-brass transition">Security</a>
+      <a href="#tools" class="hover:text-brass transition">Tools</a>
+      <a href="#contact" class="hover:text-brass transition">Contact</a>
     </div>
 
-    <!-- 8. Scroll Progress Bar -->
-    <div class="fixed top-0 left-0 w-full h-1 z-[60] pointer-events-none">
-        <div id="scroll-progress" class="h-full bg-gradient-to-r from-brand-dark to-brand-light w-0"></div>
+    <div class="flex items-center gap-2 sm:gap-3">
+      <button id="themeToggle" class="w-9 h-9 rounded-xl bg-ink/5 dark:bg-white/10 hover:scale-105 transition grid place-items-center" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon text-xs dark:hidden"></i>
+        <i class="fa-solid fa-sun text-xs hidden dark:block"></i>
+      </button>
+      <a href="#calendar" class="hidden sm:inline-flex bg-ink text-white dark:bg-white dark:text-ink px-4 py-2 rounded-xl text-xs font-semibold hover:opacity-90 transition">Book a call</a>
+      <button id="mobileNavToggle" onclick="toggleMobileNav()" class="lg:hidden w-9 h-9 rounded-xl bg-ink/5 dark:bg-white/10 grid place-items-center" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fa-solid fa-bars text-xs" id="mobileNavIconOpen"></i>
+        <i class="fa-solid fa-xmark text-xs hidden" id="mobileNavIconClose"></i>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-nav-panel" class="lg:hidden px-4">
+    <div class="flex flex-col gap-1 pb-4 pt-1 text-sm font-medium text-ink/80 dark:text-white/80 border-t border-ink/10 dark:border-white/10">
+      <a href="#about" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5">About</a>
+      <a href="#services" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5">Services</a>
+      <a href="#workflow" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5">Workflow</a>
+      <a href="#portfolio" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5">Portfolio</a>
+      <a href="#security" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5">Security</a>
+      <a href="#tools" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5">Tools</a>
+      <a href="#contact" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/5">Contact</a>
+      <a href="#calendar" onclick="closeMobileNav()" class="mt-1 bg-ink text-white dark:bg-white dark:text-ink px-4 py-2.5 rounded-xl text-xs font-semibold text-center">Book a call</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- HERO -->
+  <header class="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-28 pb-16 px-4">
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-25 dark:opacity-15 pointer-events-none" poster="profile.jpg">
+      <source src="background.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-ink/10 via-paper/70 to-paper dark:from-ink/40 dark:via-ink/70 dark:to-ink"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
+      <img src="profile.jpg" alt="Christian Paul Babida" width="112" height="112" class="w-28 h-28 rounded-full object-cover border-4 border-white dark:border-ink shadow-xl mb-6">
+
+      <div class="inline-flex items-center gap-2 bg-white/80 dark:bg-white/10 px-4 py-1.5 rounded-full text-[11px] font-medium border border-brass/30 mb-6 shadow-sm eyebrow">
+        <span class="relative flex h-2 w-2"><span class="ping-slow absolute inline-flex h-full w-full rounded-full bg-verified"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-verified"></span></span>
+        FILE STATUS — ACCEPTING NEW AGENT PARTNERS
+      </div>
+
+      <h1 class="font-display text-[2.1rem] leading-[1.15] sm:text-5xl md:text-[3.3rem] font-semibold tracking-tight max-w-3xl">
+        Close more deals. <span class="italic text-brass-dark dark:text-brass-light">Carry less paperwork.</span>
+      </h1>
+      <p class="mt-5 text-[15px] sm:text-lg text-ink/70 dark:text-white/70 max-w-xl font-light leading-relaxed">
+        I'm a California Transaction Coordinator managing every file from contract to close — deadlines, disclosures, and communication — so you can focus on selling.
+      </p>
+
+      <div class="mt-7 flex flex-wrap justify-center gap-2 max-w-xl">
+        <span class="inline-flex items-center gap-1.5 bg-white/80 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium"><i class="fa-solid fa-check text-verified text-[9px]"></i> California Market Specialist</span>
+        <span class="inline-flex items-center gap-1.5 bg-white/80 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium"><i class="fa-solid fa-check text-verified text-[9px]"></i> Contract-to-Close</span>
+        <span class="inline-flex items-center gap-1.5 bg-white/80 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium"><i class="fa-solid fa-check text-verified text-[9px]"></i> MLS Listing Management</span>
+        <span class="inline-flex items-center gap-1.5 bg-white/80 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium"><i class="fa-solid fa-check text-verified text-[9px]"></i> Compliance &amp; Documentation</span>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center">
+        <a href="#calendar" class="bg-ink text-white dark:bg-white dark:text-ink px-7 py-3.5 rounded-2xl font-medium shadow-lg hover:opacity-90 hover:-translate-y-0.5 transition text-center">Book a Discovery Call</a>
+        <a href="resume.pdf" download class="bg-white/90 dark:bg-white/5 border border-ink/10 dark:border-white/15 px-7 py-3.5 rounded-2xl font-medium hover:bg-white transition text-center flex items-center justify-center gap-2">
+          <i class="fa-solid fa-file-arrow-down text-brass-dark dark:text-brass-light"></i> Download Resume
+        </a>
+      </div>
+
+      <div class="mt-10 flex gap-5 text-lg text-ink/40 dark:text-white/40">
+        <a href="mailto:christianbabida13@outlook.com" class="hover:text-brass transition" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/christian-paul-babida-2017b9321" target="_blank" rel="noopener" class="hover:text-brass transition" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.upwork.com/freelancers/~013aa34959cfaa9d45" target="_blank" rel="noopener" class="hover:text-brass transition" aria-label="Upwork"><i class="fa-brands fa-upwork"></i></a>
+        <a href="https://wa.me/639617445321" target="_blank" rel="noopener" class="hover:text-verified transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERVIEW BENTO GRID: about + live stats + video + availability + resume -->
+  <section id="about" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
+    <div class="max-w-2xl mb-10">
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 01 — Overview</h2>
+      <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">The operations backbone behind your listings</p>
     </div>
 
-    <!-- Sticky Glassmorphism Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass shadow-sm mx-4 my-3 rounded-2xl max-w-7xl lg:mx-auto transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="logo.png" alt="Logo" class="h-10 w-auto object-contain">
-                <span class="font-semibold tracking-tight text-sm hidden sm:inline-block">Christian Paul Babida</span>
-            </div>
-            
-            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700 dark:text-slate-300">
-                <a href="#about" class="hover:text-brand-light transition">About</a>
-                <a href="#intro-video" class="hover:text-brand-light transition">Video</a>
-                <a href="#portfolio" class="hover:text-brand-light transition">Portfolio Work</a>
-                <a href="#dashboard" class="hover:text-brand-light transition">Live Metrics</a>
-                <a href="#services" class="hover:text-brand-light transition">Services</a>
-                <a href="#timeline" class="hover:text-brand-light transition">Workflow</a>
-                <a href="#why-me" class="hover:text-brand-light transition">Benefits</a>
-                <a href="#tools" class="hover:text-brand-light transition">Tech Stack</a>
-                <a href="#faq" class="hover:text-brand-light transition">FAQ</a>
-                <a href="#contact" class="hover:text-brand-light transition">Contact</a>
-            </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 auto-rows-[minmax(150px,auto)]" style="grid-auto-flow:dense;" id="stats-container">
 
-            <div class="flex items-center gap-2 sm:gap-4">
-                <button id="themeToggle" class="p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:scale-105 transition" aria-label="Toggle Dark Mode">
-                    <i class="fa-solid fa-moon dark:hidden"></i>
-                    <i class="fa-solid fa-sun hidden dark:block"></i>
-                </button>
-                <a href="#calendar" class="bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-md hover:opacity-95 transition hidden sm:block">Book Strategy Session</a>
-                <button id="mobileNavToggle" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 hover:scale-105 transition" aria-label="Toggle navigation menu" aria-expanded="false">
-                    <i class="fa-solid fa-bars" id="mobileNavIconOpen"></i>
-                    <i class="fa-solid fa-xmark hidden" id="mobileNavIconClose"></i>
-                </button>
-            </div>
+      <!-- About card: big -->
+      <div class="bento-card col-span-2 lg:col-span-2 row-span-2 p-6 sm:p-8 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="seal"><i class="fa-solid fa-house-chimney-window"></i></span>
+            <span class="text-[11px] font-semibold uppercase eyebrow text-ink/50 dark:text-white/50">Meet Christian</span>
+          </div>
+          <h3 class="font-display text-xl sm:text-2xl font-semibold leading-snug mb-3">Tired of drowning in paperwork while your next lead waits?</h3>
+          <p class="text-sm text-ink/65 dark:text-white/65 font-light leading-relaxed mb-3">I'm Christian, a California-focused Transaction Coordinator. I handle the administrative heavy lifting — from the moment a contract is signed to the day keys change hands — so you stay focused on clients and closings.</p>
+          <p class="text-sm text-ink/65 dark:text-white/65 font-light leading-relaxed">With 2+ years in the CA market, I don't just process files — I clear the path: full compliance, total timeline monitoring, and a stress-free close.</p>
         </div>
-
-        <!-- Mobile Nav Panel -->
-        <div id="mobile-nav-panel" class="md:hidden px-4">
-            <div class="flex flex-col gap-1 pb-4 pt-1 text-sm font-medium text-slate-700 dark:text-slate-300 border-t border-slate-200/60 dark:border-white/10">
-                <a href="#about" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">About</a>
-                <a href="#intro-video" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Video</a>
-                <a href="#portfolio" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Portfolio Work</a>
-                <a href="#dashboard" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Live Metrics</a>
-                <a href="#services" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Services</a>
-                <a href="#timeline" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Workflow</a>
-                <a href="#why-me" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Benefits</a>
-                <a href="#tools" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Tech Stack</a>
-                <a href="#faq" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">FAQ</a>
-                <a href="#contact" onclick="closeMobileNav()" class="py-2.5 px-2 rounded-lg hover:bg-white/50 dark:hover:bg-white/5 hover:text-brand-light transition">Contact</a>
-                <a href="#calendar" onclick="closeMobileNav()" class="mt-1 bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-2.5 rounded-xl text-xs font-semibold shadow-md text-center">Book Strategy Session</a>
-            </div>
+        <div class="grid grid-cols-2 gap-3 pt-6 mt-2 border-t border-ink/10 dark:border-white/10">
+          <div>
+            <div class="text-xl font-display font-semibold text-brass-dark dark:text-brass-light">2+ Years</div>
+            <div class="text-[11px] text-ink/50 dark:text-white/50">CA Market Expertise</div>
+          </div>
+          <div>
+            <div class="text-xl font-display font-semibold text-brass-dark dark:text-brass-light">100%</div>
+            <div class="text-[11px] text-ink/50 dark:text-white/50">Audit &amp; DA Compliance</div>
+          </div>
         </div>
-    </nav>
+      </div>
 
-    <!-- 1. Hero Section -->
-    <header class="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-24 pb-14 sm:pt-16 sm:pb-0">
-        <video autoplay loop muted playsinline class="absolute inset-0 z-0 w-full h-full object-cover opacity-35 dark:opacity-20 pointer-events-none">
-            <source src="background.mp4" type="video/mp4">
+      <!-- Stat cards -->
+      <div class="bento-card p-5 sm:p-6 flex flex-col justify-between">
+        <div class="flex justify-between items-start"><i class="fa-solid fa-folder-open text-brass text-sm"></i></div>
+        <div>
+          <div class="text-3xl font-display font-semibold"><span class="counter" data-target="120">0</span>+</div>
+          <div class="text-[11px] text-ink/50 dark:text-white/50 mt-1 uppercase tracking-wide">Transactions Managed</div>
+        </div>
+      </div>
+
+      <div class="bento-card p-5 sm:p-6 flex flex-col justify-between">
+        <div class="flex justify-between items-start"><i class="fa-solid fa-bullseye text-signal text-sm"></i></div>
+        <div>
+          <div class="text-3xl font-display font-semibold"><span class="counter" data-target="98.9" data-decimals="1">0</span>%</div>
+          <div class="text-[11px] text-ink/50 dark:text-white/50 mt-1 uppercase tracking-wide">Deadline Accuracy</div>
+        </div>
+      </div>
+
+      <div class="bento-card p-5 sm:p-6 flex flex-col justify-between">
+        <div class="flex justify-between items-start"><i class="fa-solid fa-hourglass-half text-verified text-sm"></i></div>
+        <div>
+          <div class="text-3xl font-display font-semibold"><span class="counter" data-target="15">0</span>+</div>
+          <div class="text-[11px] text-ink/50 dark:text-white/50 mt-1 uppercase tracking-wide">Hours Saved / Deal</div>
+        </div>
+      </div>
+
+      <!-- Intro video, spans 2 -->
+      <div class="bento-card col-span-2 row-span-2 overflow-hidden relative">
+        <video controls controlsList="nodownload" playsinline poster="profile.jpg" preload="none" class="w-full h-full min-h-[220px] object-cover bg-ink">
+          <source src="intro.mp4" type="video/mp4">
+          Your browser does not support the video tag.
         </video>
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-50/60 to-slate-50 dark:from-slate-950/70 dark:via-slate-950/60 dark:to-slate-950 z-10"></div>
-        
-        <div class="relative z-20 max-w-5xl mx-auto px-4 text-center flex flex-col items-center">
-            <img src="profile.jpg" alt="Christian Paul Babida" class="w-28 h-28 rounded-full object-cover border-4 border-white dark:border-slate-900 shadow-2xl mb-6 hover:scale-105 transition duration-300">
-            <div class="inline-flex items-center gap-2 bg-white/60 dark:bg-slate-900/60 px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide border border-gold/30 mb-5 shadow-sm eyebrow">
-                <span class="flex h-2 w-2 relative shrink-0"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
-                Currently Accepting New Agent Partners
-            </div>
-            <h1 class="font-display italic text-[2.15rem] leading-[1.18] sm:text-5xl md:text-[3.5rem] font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-brand-dark to-slate-950 dark:from-white dark:via-brand-light dark:to-slate-200 max-w-4xl sm:leading-[1.1]">
-                California Transaction Coordinator Helping Agents Close More Deals With Less Stress
-            </h1>
-            <p class="mt-5 text-sm sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl font-light leading-relaxed px-2 sm:px-0">
-                I manage your transactions from Contract-to-Close, ensuring every deadline, document, and communication is handled professionally so you can focus on selling.
-            </p>
+        <div class="absolute top-3 left-3 bg-ink/70 text-white text-[10px] font-medium px-2.5 py-1 rounded-full backdrop-blur-sm eyebrow">60-second intro</div>
+      </div>
 
-            <!-- Trust Badges -->
-            <div class="mt-7 flex flex-wrap justify-center gap-2.5 max-w-2xl">
-                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> California Market Specialist</span>
-                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Contract-to-Close Management</span>
-                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> MLS Listing Management</span>
-                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Compliance &amp; Documentation</span>
-                <span class="inline-flex items-center gap-1.5 bg-white/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Full-Time &amp; Part-Time Availability</span>
-            </div>
-
-            <div class="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
-                <a href="#calendar" class="bg-gradient-to-r from-brand-dark to-brand-light text-white px-8 py-4 rounded-2xl font-medium shadow-xl hover:shadow-2xl hover:scale-[1.02] transition text-center">Book a Discovery Call</a>
-                <a href="resume.pdf" download class="glass text-slate-800 dark:text-white px-8 py-4 rounded-2xl font-medium hover:bg-white/80 dark:hover:bg-slate-900/80 transition text-center flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-file-arrow-down text-brand-dark dark:text-brand-light"></i> Download Resume
-                </a>
-            </div>
-            
-            <!-- Hero Social Bar -->
-            <div class="mt-12 flex gap-5 text-xl text-slate-400 dark:text-slate-500">
-                <a href="mailto:christianbabida13@outlook.com" class="hover:text-brand-light transition"><i class="fa-solid fa-envelope"></i></a>
-                <a href="https://www.linkedin.com/in/christian-paul-babida-2017b9321" target="_blank" class="hover:text-brand-light transition"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="https://www.upwork.com/freelancers/~013aa34959cfaa9d45" target="_blank" class="hover:text-brand-light transition"><i class="fa-brands fa-upwork"></i></a>
-                <a href="https://wa.me/639617445321" target="_blank" class="hover:text-emerald-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
+      <!-- Availability -->
+      <div class="bento-card p-5 sm:p-6 flex flex-col justify-between">
+        <div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-verified"></span><span class="text-[11px] font-semibold text-verified uppercase eyebrow">Available</span></div>
+        <div>
+          <div class="text-base font-semibold">Full-time &amp; part-time</div>
+          <div class="text-[11px] text-ink/50 dark:text-white/50 mt-1">Flexible to your transaction volume</div>
         </div>
-    </header>
+      </div>
 
-    <!-- 1. Animated Statistics Section -->
-    <section class="py-12 px-4 max-w-7xl mx-auto border-y border-slate-200/60 dark:border-white/5 bg-white/30 dark:bg-slate-900/10 backdrop-blur-sm">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center" id="stats-container">
-            <div class="space-y-2">
-                <div class="text-4xl font-extrabold text-brand-dark dark:text-brand-light"><span class="counter" data-target="120">0</span>+</div>
-                <div class="text-xs tracking-wide text-slate-500 uppercase font-medium">Transactions Managed</div>
-            </div>
-            <div class="space-y-2">
-                <div class="text-4xl font-extrabold text-brand-dark dark:text-brand-light"><span class="counter" data-target="98.9" data-decimals="1">0</span>%</div>
-                <div class="text-xs tracking-wide text-slate-500 uppercase font-medium">Deadline Accuracy</div>
-            </div>
-            <div class="space-y-2">
-                <div class="text-4xl font-extrabold text-brand-dark dark:text-brand-light"><span class="counter" data-target="15">0</span>+</div>
-                <div class="text-xs tracking-wide text-slate-500 uppercase font-medium">Hours Saved Per Deal</div>
-            </div>
-            <div class="space-y-2">
-                <div class="text-4xl font-extrabold text-brand-dark dark:text-brand-light flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-map-location-dot text-2xl"></i>
-                    <span class="text-2xl sm:text-3xl font-bold">CA</span>
-                </div>
-                <div class="text-xs tracking-wide text-slate-500 uppercase font-medium">Market Specialist</div>
-            </div>
+      <!-- Resume CTA -->
+      <a href="resume.pdf" download class="bento-card p-5 sm:p-6 flex flex-col justify-between group">
+        <i class="fa-solid fa-file-arrow-down text-brass text-sm"></i>
+        <div>
+          <div class="text-base font-semibold group-hover:text-brass-dark dark:group-hover:text-brass-light transition">Download résumé</div>
+          <div class="text-[11px] text-ink/50 dark:text-white/50 mt-1">Full experience &amp; certifications</div>
         </div>
-    </section>
+      </a>
 
-    <!-- 2. About Me Section -->
-    <section id="about" class="py-24 px-4 max-w-7xl mx-auto reveal">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-5 relative premium-img-container rounded-3xl overflow-hidden shadow-xl">
-                <div class="absolute inset-0 bg-gradient-to-tr from-brand-light to-transparent filter blur-2xl opacity-20"></div>
-                <img src="office.jpg" alt="Office Infrastructure" class="w-full object-cover h-[450px] relative z-10 border border-white/20">
-            </div>
-            <div class="lg:col-span-7 space-y-6">
-                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Meet Your Operations Backbone</h2>
-                <h3 class="font-display text-3xl sm:text-4xl font-bold tracking-tight leading-snug">Are you tired of drowning in paperwork while your next big lead waits?</h3>
-                <p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-                    I’m Christian, a California-focused Transaction Coordinator with a mission: To handle the administrative heavy lifting so you can get back to what you do best—closing deals and wowing your clients.
-                </p>
-                <p class="text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-                    With 2 years of hands-on experience in the complex CA market, I don’t just manage files—I clear the path for your success. From the second a contract is signed until the final keys are handed over, I’m your remote engine for absolute compliance, total timeline monitoring, and stress-free closings.
-                </p>
-                <div class="grid grid-cols-2 gap-4 pt-4">
-                    <div class="glass p-4 rounded-2xl shadow-sm premium-card">
-                        <div class="text-2xl font-bold text-brand-dark dark:text-brand-light">2+ Years</div>
-                        <div class="text-xs text-slate-500">CA Market Expertise</div>
-                    </div>
-                    <div class="glass p-4 rounded-2xl shadow-sm premium-card">
-                        <div class="text-2xl font-bold text-brand-dark dark:text-brand-light">100%</div>
-                        <div class="text-xs text-slate-500">Audit & DA Compliance</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 2b. Introduction Video Section -->
-    <section id="intro-video" class="py-24 px-4 max-w-5xl mx-auto reveal">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Get To Know Me</h2>
-            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">A Quick Introduction</p>
-            <p class="mt-4 text-slate-600 dark:text-slate-400 font-light leading-relaxed">
-                Take a minute to hear directly from me about how I can help streamline your transactions.
-            </p>
-        </div>
-        <div class="relative rounded-3xl overflow-hidden shadow-2xl premium-card glow-card">
-            <div class="absolute inset-0 bg-gradient-to-tr from-brand-light to-transparent filter blur-2xl opacity-10 pointer-events-none"></div>
-            <video controls controlsList="nodownload" disablePictureInPicture playsinline poster="profile.jpg" class="relative z-10 w-full aspect-video object-cover bg-black">
-                <source src="intro.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </section>
-
-    <!-- 2. Track Record / Achievement Dashboard Section -->
-    <section id="dashboard" class="py-24 px-4 max-w-7xl mx-auto reveal">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Proven Track Record</h2>
-            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Results That Speak for Themselves</p>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">Real performance metrics from managed transactions across the California market.</p>
-        </div>
-
-        <div class="glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/30 glow-card">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-4 border-b border-slate-200/60 dark:border-white/5">
-                <div class="flex items-center gap-3">
-                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <h3 class="font-bold text-lg tracking-tight">Career Highlights</h3>
-                </div>
-                <div class="text-xs text-slate-400 font-mono bg-slate-900/5 dark:bg-white/5 px-3 py-1.5 rounded-lg">
-                    Status: <span class="text-emerald-500 font-semibold">Accepting New Files</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="dash-stats-container">
-                <!-- Achievement Card 1 -->
-                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Career Total
-                        </span>
-                        <i class="fa-solid fa-folder-open text-slate-400 text-sm"></i>
-                    </div>
-                    <div class="text-3xl font-bold tracking-tight mb-1"><span class="counter" data-target="120">0</span>+</div>
-                    <div class="text-xs text-slate-500 font-medium">Transactions Managed</div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 92%"></div>
-                    </div>
-                </div>
-
-                <!-- Achievement Card 2 -->
-                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Precision
-                        </span>
-                        <i class="fa-solid fa-bullseye text-slate-400 text-sm"></i>
-                    </div>
-                    <div class="text-3xl font-bold tracking-tight mb-1"><span class="counter" data-target="98.9" data-decimals="1">0</span>%</div>
-                    <div class="text-xs text-slate-500 font-medium">Deadline Accuracy</div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-blue-500 h-full rounded-full transition-all duration-1000" style="width: 98%"></div>
-                    </div>
-                </div>
-
-                <!-- Achievement Card 3 -->
-                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Tenure
-                        </span>
-                        <i class="fa-solid fa-calendar-check text-slate-400 text-sm"></i>
-                    </div>
-                    <div class="text-3xl font-bold tracking-tight mb-1"><span class="counter" data-target="2">0</span>+</div>
-                    <div class="text-xs text-slate-500 font-medium">Years Experience</div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-amber-500 h-full rounded-full transition-all duration-1000" style="width: 70%"></div>
-                    </div>
-                </div>
-
-                <!-- Achievement Card 4 -->
-                <div class="bg-white/50 dark:bg-slate-900/40 p-5 rounded-2xl border border-slate-200/60 dark:border-white/5 premium-card shadow-sm">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Focus
-                        </span>
-                        <i class="fa-solid fa-map-location-dot text-slate-400 text-sm"></i>
-                    </div>
-                    <div class="text-3xl font-bold tracking-tight mb-1">California</div>
-                    <div class="text-xs text-slate-500 font-medium">Market Specialist</div>
-                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                        <div class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 100%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio & Deliverables Section -->
-    <section id="portfolio" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/40 reveal">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Operations & Marketing Sandbox</h2>
-                <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Real-World Work Samples & Dashboards</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400 mt-2 font-light">Explore accurate snapshots of my active management portals, client trackers, and creative property assets.</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Canva Listing Flyers Case Study -->
-                <div class="relative rounded-3xl p-[1px] bg-gradient-to-br from-brand-light/40 via-transparent to-accent/30 premium-card">
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between h-full">
-                    <div class="p-6 pb-0">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-lg"><i class="fa-solid fa-palette"></i></div>
-                            <div>
-                                <h4 class="font-bold text-base">Canva Marketing Layouts</h4>
-                                <p class="text-[11px] text-slate-400">Property Listing &amp; Open House Assets</p>
-                            </div>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Challenge</p>
-                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Agents needed polished listing flyers fast, without hiring a separate designer for every property.</p>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">My Solution</p>
-                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Built a repeatable Canva template system for open-house flyers and digital listing assets, on-brand for each agent.</p>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Software Used</p>
-                                <div class="flex flex-wrap gap-1.5 mt-1">
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Canva</span>
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">MLS</span>
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Google Workspace</span>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Result</p>
-                                <p class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Faster turnaround on listing marketing with a consistent, professional look.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 mt-auto">
-                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
-                            <img src="listing-sample.jpg" alt="Canva Property Listing Flyer Sample" class="w-full h-48 object-cover object-top">
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-                <!-- Trello Pipeline Case Study -->
-                <div class="relative rounded-3xl p-[1px] bg-gradient-to-br from-brand-light/40 via-transparent to-accent/30 premium-card">
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between h-full">
-                    <div class="p-6 pb-0">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-600 flex items-center justify-center text-lg"><i class="fa-solid fa-trello"></i></div>
-                            <div>
-                                <h4 class="font-bold text-base">Trello Transaction Pipeline</h4>
-                                <p class="text-[11px] text-slate-400">Milestone &amp; Deadline Tracker</p>
-                            </div>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Challenge</p>
-                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Escrow deadlines, contingencies, and appraisal statuses were scattered across emails and calls.</p>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">My Solution</p>
-                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Built a visual Trello pipeline tracking every file stage, contingency, and communication touchpoint in one place.</p>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Software Used</p>
-                                <div class="flex flex-wrap gap-1.5 mt-1">
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Trello</span>
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">DocuSign</span>
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">SkySlope</span>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Result</p>
-                                <p class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Zero missed deadlines across tracked files, with full contract compliance.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 mt-auto">
-                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
-                            <img src="trello-screenshot.jpg" alt="Trello Work Sample Dashboard" class="w-full h-48 object-cover object-top">
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-                <!-- Asana / MLS Case Study -->
-                <div class="relative rounded-3xl p-[1px] bg-gradient-to-br from-brand-light/40 via-transparent to-accent/30 premium-card">
-                <div class="glass rounded-3xl overflow-hidden shadow-md flex flex-col justify-between h-full">
-                    <div class="p-6 pb-0">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center text-lg"><i class="fa-solid fa-list-check"></i></div>
-                            <div>
-                                <h4 class="font-bold text-base">MLS Listing Management</h4>
-                                <p class="text-[11px] text-slate-400">Asana Task &amp; Compliance Dashboard</p>
-                            </div>
-                        </div>
-                        <div class="space-y-3 mb-4">
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Challenge</p>
-                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Needed accurate, compliant MLS listing setup with no room for data entry errors.</p>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">My Solution</p>
-                                <p class="text-xs text-slate-600 dark:text-slate-300 font-light leading-relaxed">Created the MLS listing, uploaded media, and verified compliance using a centralized Asana checklist hub.</p>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Software Used</p>
-                                <div class="flex flex-wrap gap-1.5 mt-1">
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">MLS</span>
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Asana</span>
-                                    <span class="text-[10px] px-2 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 font-medium">Canva</span>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Result</p>
-                                <p class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Fast listing turnaround with complete accuracy and full audit trail.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 mt-auto">
-                        <div class="rounded-2xl overflow-hidden bg-slate-200/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/5 premium-img-container">
-                            <img src="asana-sample.jpg" alt="Asana Sample Work Dashboard" class="w-full h-48 object-cover object-top">
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Before vs After Section -->
-    <section class="py-24 px-4 max-w-7xl mx-auto reveal">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Workflow Comparison</h2>
-            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">The Tactical Real Estate Evolution</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-11 gap-6 items-center" id="comparison-container">
-            <!-- Without TC Card -->
-            <div class="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-red-500/20 bg-red-500/5 premium-card shadow-sm space-y-5">
-                <h4 class="text-lg font-bold text-red-600 dark:text-red-400 flex items-center gap-2">
-                    <i class="fa-solid fa-triangle-exclamation"></i> WITHOUT A TC
-                </h4>
-                <div class="space-y-4 text-sm">
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Stress Level</span><span class="text-red-500">High</span></div>
-                        <div class="w-full bg-red-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-red-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="92"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Emails &amp; Follow-ups</span><span class="text-red-500">High</span></div>
-                        <div class="w-full bg-red-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-red-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="88"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Paperwork Burden</span><span class="text-red-500">High</span></div>
-                        <div class="w-full bg-red-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-red-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="90"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Missed Deadlines</span><span class="text-red-500">Frequent</span></div>
-                        <div class="w-full bg-red-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-red-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="70"></div></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Transition Arrow -->
-            <div class="lg:col-span-1 text-center flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-brand-light/10 text-brand-dark dark:text-brand-light flex items-center justify-center rotate-90 lg:rotate-0 text-xl font-bold shadow-sm">
-                    <i class="fa-solid fa-arrow-right-long"></i>
-                </div>
-            </div>
-
-            <!-- With Me Card -->
-            <div class="lg:col-span-5 glass p-6 sm:p-8 rounded-3xl border border-emerald-500/20 bg-emerald-500/5 premium-card shadow-sm space-y-5">
-                <h4 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-check"></i> WITH ME
-                </h4>
-                <div class="space-y-4 text-sm">
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Stress Level</span><span class="text-emerald-500">Low</span></div>
-                        <div class="w-full bg-emerald-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-emerald-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="15"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Emails &amp; Follow-ups</span><span class="text-emerald-500">Handled</span></div>
-                        <div class="w-full bg-emerald-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-emerald-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="12"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Paperwork Burden</span><span class="text-emerald-500">Minimal</span></div>
-                        <div class="w-full bg-emerald-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-emerald-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="10"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5"><span>Closed Transactions</span><span class="text-emerald-500">On Track</span></div>
-                        <div class="w-full bg-emerald-500/10 h-2.5 rounded-full overflow-hidden"><div class="bar-fill bg-emerald-500 h-full rounded-full transition-all duration-[1200ms] ease-out" style="width:0%" data-target="96"></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 11. Why Hire Me Instead of Another TC (Comparison Table) -->
-    <section id="why-table" class="py-24 px-4 max-w-7xl mx-auto reveal">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Operational Advantages</h2>
-            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Why Agents Choose Me</p>
-        </div>
-
-        <div class="glass rounded-3xl overflow-hidden shadow-xl border border-white/20 glow-card">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-slate-900/5 dark:bg-white/5 border-b border-slate-200/60 dark:border-white/5 text-xs font-bold tracking-wider text-slate-500 uppercase">
-                            <th class="p-4 sm:p-5">Service Pillars</th>
-                            <th class="p-4 sm:p-5">Typical Transaction Coordinator</th>
-                            <th class="p-4 sm:p-5 text-brand-dark dark:text-brand-light bg-brand-light/5"><i class="fa-solid fa-star mr-1"></i> Working With Me</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-xs sm:text-sm font-light divide-y divide-slate-200/60 dark:divide-white/5">
-                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
-                            <td class="p-4 font-medium">Task Scope</td>
-                            <td class="p-4 text-slate-400">Basic admin processing</td>
-                            <td class="p-4 font-medium bg-brand-light/5">Strategic transaction management</td>
-                        </tr>
-                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
-                            <td class="p-4 font-medium">Task Inception</td>
-                            <td class="p-4 text-slate-400">Waits for instructions</td>
-                            <td class="p-4 font-medium bg-brand-light/5">Proactively tracks and secures deadlines</td>
-                        </tr>
-                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
-                            <td class="p-4 font-medium">Communication Cadence</td>
-                            <td class="p-4 text-slate-400">Slow reactive answers</td>
-                            <td class="p-4 font-medium bg-brand-light/5">Fast proactive milestone updates</td>
-                        </tr>
-                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
-                            <td class="p-4 font-medium">Market Familiarity</td>
-                            <td class="p-4 text-slate-400">Generic standard support</td>
-                            <td class="p-4 font-medium bg-brand-light/5">California-focused compliance expertise</td>
-                        </tr>
-                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
-                            <td class="p-4 font-medium">Client Interface</td>
-                            <td class="p-4 text-slate-400">Minimal client processing contact</td>
-                            <td class="p-4 font-medium bg-brand-light/5">White-glove interactive client experience</td>
-                        </tr>
-                        <tr class="hover:bg-slate-900/5 dark:hover:bg-white/5 transition duration-150">
-                            <td class="p-4 font-medium">Technical Engine</td>
-                            <td class="p-4 text-slate-400">Static paper workflow setups</td>
-                            <td class="p-4 font-medium bg-brand-light/5">Modern ecosystems and process automation</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Services Section -->
-    <section id="services" class="py-24 px-4 bg-slate-100/30 dark:bg-slate-900/10 backdrop-blur-sm reveal">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">What I Bring to Your Team</h2>
-                <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Comprehensive Contract-to-Close Infrastructure</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Service Cards -->
-                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-file-signature"></i></div>
-                        <h4 class="text-lg font-semibold mb-2">Contract-to-Close Management</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Full management of paperwork, signatures, and document processing from initial purchase agreement to escrow closing.</p>
-                    </div>
-                </div>
-                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-list-check"></i></div>
-                        <h4 class="text-lg font-semibold mb-2">MLS Listing Management</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Accurate listing data input, property profile compilation, media upload adjustments, and active listing status audit updates.</p>
-                    </div>
-                </div>
-                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-calendar-days"></i></div>
-                        <h4 class="text-lg font-semibold mb-2">Calendar & Deadline Tracking</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Automated triggers tracking active inspection timelines, clear title review cutoffs, and contingency tracking alerts.</p>
-                    </div>
-                </div>
-                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h4 class="text-lg font-semibold mb-2">Compliance & Documentation</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Meticulous organization of internal folders to ensure seamless broker file approval to isolate disbursement hold-ups.</p>
-                    </div>
-                </div>
-                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-house-chimney-crack"></i></div>
-                        <h4 class="text-lg font-semibold mb-2">Inspection Coordination</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Timely alignment of structural, pest, natural hazard, and appraisal walkthroughs between sellers and respective buying teams.</p>
-                    </div>
-                </div>
-                <div class="glass p-8 rounded-3xl premium-card shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-600 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-handshake"></i></div>
-                        <h4 class="text-lg font-semibold mb-2">Concierge Client Communication</h4>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 font-light">Serving as the polite point of contact handling coordination between buyers, escrow partners, lending teams, and agents.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Interactive Transaction Timeline Section -->
-    <section id="timeline" class="py-24 px-4 max-w-5xl mx-auto reveal">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">The Visual Roadmap</h2>
-            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Interactive Transaction Timeline</p>
-        </div>
-        
-        <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-4 md:ml-32 space-y-12 py-4" id="timeline-container">
-            <!-- Line Tracking Progress Filler Element via CSS Overlay -->
-            <div id="timeline-progress-bar" class="absolute top-0 left-[-2px] w-[2px] bg-gradient-to-b from-brand-dark to-brand-light transition-all ease-out duration-500" style="height: 0%;"></div>
-
-            <!-- Step 1 -->
-            <div class="relative pl-8 md:pl-12 timeline-item group">
-                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
-                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-lg text-brand-light"><i class="fa-solid fa-file-contract"></i></span>
-                        <h4 class="font-bold text-base">Offer Accepted</h4>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Immediate documentation auditing and parameter baseline intake mapping checks are finalized.</p>
-                </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="relative pl-8 md:pl-12 timeline-item group">
-                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
-                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-lg text-brand-light"><i class="fa-solid fa-key"></i></span>
-                        <h4 class="font-bold text-base">Escrow Opened</h4>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Opening structural alignment tracking records with escrow agents and coordinating earnest money verification tasks.</p>
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="relative pl-8 md:pl-12 timeline-item group">
-                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
-                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-lg text-brand-light"><i class="fa-solid fa-house-shield"></i></span>
-                        <h4 class="font-bold text-base">Inspection</h4>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Organizing vendor walkthrough workflows and tracking disclosure signature return loops proactively.</p>
-                </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="relative pl-8 md:pl-12 timeline-item group">
-                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
-                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-lg text-brand-light"><i class="fa-solid fa-calculator"></i></span>
-                        <h4 class="font-bold text-base">Appraisal</h4>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Securing formal evaluation timeline check-ins to safeguard transaction framework completion tracking paths.</p>
-                </div>
-            </div>
-
-            <!-- Step 5 -->
-            <div class="relative pl-8 md:pl-12 timeline-item group">
-                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
-                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-lg text-brand-light"><i class="fa-solid fa-building-columns"></i></span>
-                        <h4 class="font-bold text-base">Loan Approval</h4>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Aligning direct outreach pipelines to secure rapid sign-offs across all open contingencies.</p>
-                </div>
-            </div>
-
-            <!-- Step 6 -->
-            <div class="relative pl-8 md:pl-12 timeline-item group">
-                <div class="absolute left-[-13px] top-1.5 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-slate-50 dark:border-slate-950 flex items-center justify-center text-[10px] text-white transition-colors duration-500 timeline-dot"></div>
-                <div class="glass p-6 rounded-2xl border border-slate-200/60 dark:border-white/5 shadow-sm premium-card glow-card">
-                    <div class="flex items-center gap-3 mb-2">
-                        <span class="text-lg text-brand-light"><i class="fa-solid fa-handshake-angle"></i></span>
-                        <h4 class="font-bold text-base">Closing</h4>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light">Disbursement authorizations are completed, and keys are officially authorized for transfer cleanly.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Client Information Protection Section -->
-    <section id="protection" class="relative py-24 md:py-32 px-4 overflow-hidden reveal text-white">
-        <!-- Floating background particles -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-            <span class="protection-particle" style="width:5px;height:5px;left:8%;bottom:10%;animation-duration:9s;animation-delay:0s;"></span>
-            <span class="protection-particle" style="width:3px;height:3px;left:18%;bottom:30%;animation-duration:11s;animation-delay:1.2s;"></span>
-            <span class="protection-particle" style="width:4px;height:4px;left:32%;bottom:15%;animation-duration:8s;animation-delay:2.4s;"></span>
-            <span class="protection-particle" style="width:6px;height:6px;left:47%;bottom:40%;animation-duration:12s;animation-delay:0.6s;"></span>
-            <span class="protection-particle" style="width:3px;height:3px;left:61%;bottom:22%;animation-duration:10s;animation-delay:3s;"></span>
-            <span class="protection-particle" style="width:5px;height:5px;left:74%;bottom:8%;animation-duration:9.5s;animation-delay:1.8s;"></span>
-            <span class="protection-particle" style="width:4px;height:4px;left:85%;bottom:35%;animation-duration:13s;animation-delay:0.3s;"></span>
-            <span class="protection-particle" style="width:3px;height:3px;left:93%;bottom:18%;animation-duration:10.5s;animation-delay:2.1s;"></span>
-        </div>
-
-        <div class="max-w-7xl mx-auto relative">
-            <!-- Heading -->
-            <div class="text-center max-w-2xl mx-auto mb-16 relative">
-                <div class="relative w-24 h-24 mx-auto mb-8">
-                    <div class="protection-halo"></div>
-                    <div class="protection-icon-wrap relative w-24 h-24 rounded-full glass flex items-center justify-center border border-white/10">
-                        <i class="fa-solid fa-shield-halved text-3xl bg-gradient-to-br from-sky-400 to-emerald-400 bg-clip-text text-transparent"></i>
-                    </div>
-                </div>
-                <h2 class="text-xs font-bold tracking-widest text-gold uppercase eyebrow">Security &amp; Confidentiality</h2>
-                <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">🔒 Client Information Protection</p>
-                <p class="text-sm sm:text-base text-slate-300 font-light mt-5 leading-relaxed">Your clients trust you with sensitive information. You can trust me to protect it with professionalism, discretion, and secure transaction handling from contract to close.</p>
-            </div>
-
-            <!-- Security Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="protection-card glass p-8 rounded-3xl border border-white/10 shadow-sm" style="transition-delay:0ms;">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/15 text-sky-400 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-user-lock"></i></div>
-                    <h4 class="text-lg font-semibold mb-2 text-white">Confidential Client Data</h4>
-                    <p class="text-sm text-slate-300 font-light">Buyer and seller information is kept strictly confidential.</p>
-                </div>
-                <div class="protection-card glass p-8 rounded-3xl border border-white/10 shadow-sm" style="transition-delay:100ms;">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-folder-closed"></i></div>
-                    <h4 class="text-lg font-semibold mb-2 text-white">Secure Document Handling</h4>
-                    <p class="text-sm text-slate-300 font-light">Contracts, disclosures, and transaction files remain in approved systems.</p>
-                </div>
-                <div class="protection-card glass p-8 rounded-3xl border border-white/10 shadow-sm" style="transition-delay:200ms;">
-                    <div class="w-12 h-12 rounded-2xl bg-sky-500/15 text-sky-400 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-key"></i></div>
-                    <h4 class="text-lg font-semibold mb-2 text-white">Authorized Access Only</h4>
-                    <p class="text-sm text-slate-300 font-light">Only necessary and approved access is used for each transaction.</p>
-                </div>
-                <div class="protection-card glass p-8 rounded-3xl border border-white/10 shadow-sm" style="transition-delay:300ms;">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-folder-tree"></i></div>
-                    <h4 class="text-lg font-semibold mb-2 text-white">Professional File Management</h4>
-                    <p class="text-sm text-slate-300 font-light">Documents are organized carefully to prevent errors or misplacement.</p>
-                </div>
-                <div class="protection-card glass p-8 rounded-3xl border border-white/10 shadow-sm" style="transition-delay:400ms;">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-comments"></i></div>
-                    <h4 class="text-lg font-semibold mb-2 text-white">Private Communication</h4>
-                    <p class="text-sm text-slate-300 font-light">Client conversations remain professional and confidential.</p>
-                </div>
-                <div class="protection-card glass p-8 rounded-3xl border border-white/10 shadow-sm" style="transition-delay:500ms;">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/15 text-sky-400 flex items-center justify-center mb-6 text-xl"><i class="fa-solid fa-laptop-code"></i></div>
-                    <h4 class="text-lg font-semibold mb-2 text-white">Secure Remote Workspace</h4>
-                    <p class="text-sm text-slate-300 font-light">Password-protected devices, secure internet connection, and updated software.</p>
-                </div>
-            </div>
-
-            <!-- Trust Statement Banner -->
-            <div class="protection-banner mt-14 rounded-3xl p-[1px] bg-gradient-to-r from-sky-500 via-blue-500 to-emerald-500">
-                <div class="rounded-3xl bg-slate-950/90 backdrop-blur-xl px-6 sm:px-10 py-8 flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
-                    <i class="fa-solid fa-circle-check text-3xl sm:text-4xl text-emerald-400 shrink-0" style="filter: drop-shadow(0 0 10px rgba(16,185,129,0.6));"></i>
-                    <p class="text-sm sm:text-base text-slate-200 font-light leading-relaxed">Your reputation depends on protecting your clients' information. Every transaction I manage is handled with professionalism, discretion, and confidentiality from contract to close.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Why Partner With Me Section -->
-    <section id="why-me" class="py-24 px-4 max-w-7xl mx-auto reveal">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">The ROI Transformation</h2>
-            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">In This Business, Time Is Literally Money</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 premium-card">
-                <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-brand-dark dark:text-brand-light flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-hourglass-half"></i></div>
-                <h4 class="text-lg font-bold mb-2">More Freedom</h4>
-                <p class="text-sm font-light text-slate-500 leading-relaxed">Reclaim 10–15 hours per file transaction. Shift away from manual administrative paperwork patterns and focus completely on active field production.</p>
-            </div>
-            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 premium-card">
-                <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-brain"></i></div>
-                <h4 class="text-lg font-bold mb-2">Absolute Peace of Mind</h4>
-                <p class="text-sm font-light text-slate-500 leading-relaxed">Never worry about a missed disclosure file, omitted compliance line, or delayed escrow milestone signature update parameters again.</p>
-            </div>
-            <div class="glass p-8 rounded-3xl shadow-sm border border-white/20 premium-card">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-star"></i></div>
-                <h4 class="text-lg font-bold mb-2">Better Professional Reputation</h4>
-                <p class="text-sm font-light text-slate-500 leading-relaxed">Your professional clients deserve a completely modern closing experience, and my white-glove support updates ensure they receive it every single step.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. Testimonials Section -->
-    <section id="testimonials" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 reveal">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Real Agent Experiences</h2>
-                <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Trusted By Real Estate Producers</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between premium-card">
-                    <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"Christian completely turned my transaction tracking operations around. I saved over 14 hours on my last residential property closing process alone!"</p>
-                    <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">SM</div>
-                        <span class="text-xs font-semibold tracking-tight">Sarah Mitchell</span>
-                    </div>
-                </div>
-                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between premium-card">
-                    <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"File audits used to give me headaches every single month. With Christian tracking compliance logs, my DAs release seamlessly without delays."</p>
-                    <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">JC</div>
-                        <span class="text-xs font-semibold tracking-tight">James Carter</span>
-                    </div>
-                </div>
-                <div class="glass p-6 rounded-3xl shadow-sm flex flex-col justify-between premium-card">
-                    <p class="text-xs font-light italic text-slate-600 dark:text-slate-400">"The absolute highest standard of transaction communication support. He monitors escrow, text lines, and lending operations with elite professionalism."</p>
-                    <div class="mt-4 pt-4 border-t border-slate-200/50 flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-slate-300 font-bold text-xs flex items-center justify-center text-slate-700">AR</div>
-                        <span class="text-xs font-semibold tracking-tight">Amanda Reyes</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. Tools & Platforms Section -->
-    <section id="tools" class="py-24 px-4 max-w-7xl mx-auto reveal">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">High-Performance Tech Stack</h2>
-            <p class="text-2xl font-bold mt-2 tracking-tight">Fully Integrated With the Tools You Already Use</p>
-        </div>
-        
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-sky-500/10 text-brand-light flex items-center justify-center text-md"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                <span class="text-xs font-medium tracking-tight">SkySlope</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 flex items-center justify-center text-md"><i class="fa-solid fa-circle-nodes"></i></div>
-                <span class="text-xs font-medium tracking-tight">Dotloop</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center text-md"><i class="fa-solid fa-bolt"></i></div>
-                <span class="text-xs font-medium tracking-tight">OpenToClose</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-600 flex items-center justify-center text-md"><i class="fa-solid fa-file-signature"></i></div>
-                <span class="text-xs font-medium tracking-tight">DocuSign</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center text-md"><i class="fa-solid fa-database"></i></div>
-                <span class="text-xs font-medium tracking-tight">kvCORE</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-md"><i class="fa-brands fa-hubspot"></i></div>
-                <span class="text-xs font-medium tracking-tight">HubSpot</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-md"><i class="fa-solid fa-palette"></i></div>
-                <span class="text-xs font-medium tracking-tight">Canva</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 flex items-center justify-center text-md"><i class="fa-solid fa-trello"></i></div>
-                <span class="text-xs font-medium tracking-tight">Trello</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-slate-500/10 text-slate-600 flex items-center justify-center text-md"><i class="fa-brands fa-google"></i></div>
-                <span class="text-xs font-medium tracking-tight">Workspace</span>
-            </div>
-            <div class="glass p-4 rounded-2xl flex items-center gap-3 bg-white/50 hover:bg-white dark:hover:bg-slate-900 shadow-sm transition premium-card">
-                <div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-600 flex items-center justify-center text-md"><i class="fa-solid fa-key"></i></div>
-                <span class="text-xs font-medium tracking-tight">LastPass</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. FAQ / AI Assistant Teaser Section -->
-    <section id="faq" class="py-24 px-4 max-w-3xl mx-auto reveal text-center">
-        <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Operations Assistant</h2>
-        <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight">Have a Question? Ask ChristianIO.</p>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-3 font-light max-w-xl mx-auto">My AI portfolio assistant can answer questions about experience, skills, software, availability, and more — instantly, 24/7.</p>
-        <button onclick="openChatWidget()" class="mt-8 inline-flex items-center gap-2 bg-gradient-to-r from-brand-dark to-brand-light text-white px-6 py-3.5 rounded-2xl font-medium shadow-xl hover:shadow-2xl hover:scale-[1.02] transition">
-            <i class="fa-solid fa-comment-dots"></i> Chat with ChristianIO
-        </button>
-    </section>
-
-    <!-- 7. Calendly Integration Section -->
-    <section id="calendar" class="py-24 px-4 bg-slate-100/50 dark:bg-slate-900/20 reveal">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Secure Your Competitive Engine</h2>
-            <p class="text-3xl sm:text-4xl font-display font-bold mt-2 tracking-tight mb-8">Let’s Scale Your Real Estate Business</p>
-            
-            <div class="glass p-4 sm:p-6 rounded-3xl shadow-xl border border-white/40 text-left glow-card overflow-hidden">
-                <!-- Embedded native Calendly widget -->
-                <div class="w-full">
-                    <!-- Calendly inline widget begin -->
-                    <div class="calendly-inline-widget" data-url="https://calendly.com/christianpaulbabida" style="min-width:320px;height:700px;"></div>
-                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-                    <!-- Calendly inline widget end -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium CTA Banner -->
-    <section class="px-4 py-16 reveal">
-        <div class="max-w-6xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brand-dark via-blue-600 to-brand-light p-10 sm:p-16 text-center shadow-2xl">
-            <div class="absolute -top-24 -right-24 w-72 h-72 bg-white/20 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-accent/30 rounded-full blur-3xl"></div>
-            <div class="relative z-10">
-                <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white max-w-2xl mx-auto leading-tight">Ready to Close More Deals Without Administrative Stress?</h2>
-                <p class="mt-4 text-sm sm:text-base text-blue-50/90 max-w-xl mx-auto font-light">Let me manage your paperwork while you focus on serving clients and closing more transactions.</p>
-                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#calendar" class="bg-white text-brand-dark px-8 py-4 rounded-2xl font-semibold shadow-xl hover:scale-[1.02] transition text-center">Book Discovery Call</a>
-                    <a href="resume.pdf" download class="bg-white/10 border border-white/40 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/20 transition text-center flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-file-arrow-down"></i> Download Resume
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 10. Contact Integration Section -->
-    <section id="contact" class="py-24 px-4 max-w-7xl mx-auto reveal">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div class="lg:col-span-5 space-y-6">
-                <h2 class="text-xs font-bold tracking-widest text-gold-dark dark:text-gold uppercase eyebrow">Direct Communication Matrix</h2>
-                <h3 class="text-3xl font-bold tracking-tight">Let's Establish Your Operations Pipeline</h3>
-                <p class="text-slate-500 font-light text-sm leading-relaxed">Ready to stop chasing administrative paperwork and start scaling your active local real estate commissions? Reach out on any channel below.</p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-medium">
-                    <a href="mailto:christianbabida13@outlook.com" class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-brand-light/40 to-transparent premium-card">
-                        <div class="glass rounded-2xl p-4 h-full flex flex-col gap-2">
-                            <div class="w-9 h-9 rounded-xl bg-brand-light/10 text-brand-dark dark:text-brand-light flex items-center justify-center text-base"><i class="fa-solid fa-envelope"></i></div>
-                            <p class="font-bold text-sm">Email</p>
-                            <p class="text-[10px] text-slate-400 leading-relaxed">Best for detailed inquiries</p>
-                            <span class="text-[11px] text-brand-light group-hover:underline break-all">christianbabida13@outlook.com</span>
-                        </div>
-                    </a>
-                    <a href="https://wa.me/639617445321" target="_blank" class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-emerald-500/40 to-transparent premium-card">
-                        <div class="glass rounded-2xl p-4 h-full flex flex-col gap-2">
-                            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-base"><i class="fa-brands fa-whatsapp"></i></div>
-                            <p class="font-bold text-sm">WhatsApp</p>
-                            <p class="text-[10px] text-slate-400 leading-relaxed">Fastest response time</p>
-                            <span class="text-[11px] text-emerald-500 group-hover:underline">+63 961 744 5321</span>
-                        </div>
-                    </a>
-                    <a href="https://www.linkedin.com/in/christian-paul-babida-2017b9321" target="_blank" class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-blue-500/40 to-transparent premium-card">
-                        <div class="glass rounded-2xl p-4 h-full flex flex-col gap-2">
-                            <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center text-base"><i class="fa-brands fa-linkedin"></i></div>
-                            <p class="font-bold text-sm">LinkedIn</p>
-                            <p class="text-[10px] text-slate-400 leading-relaxed">Professional background</p>
-                            <span class="text-[11px] text-blue-600 group-hover:underline">View Profile</span>
-                        </div>
-                    </a>
-                    <a href="resume.pdf" download class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-amber-500/40 to-transparent premium-card">
-                        <div class="glass rounded-2xl p-4 h-full flex flex-col gap-2">
-                            <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-base"><i class="fa-solid fa-file-arrow-down"></i></div>
-                            <p class="font-bold text-sm">Resume</p>
-                            <p class="text-[10px] text-slate-400 leading-relaxed">Full experience &amp; skills</p>
-                            <span class="text-[11px] text-amber-600 group-hover:underline">Download PDF</span>
-                        </div>
-                    </a>
-                    <a href="#calendar" class="group relative rounded-2xl p-[1px] bg-gradient-to-br from-brand-dark/40 to-transparent premium-card sm:col-span-2">
-                        <div class="glass rounded-2xl p-4 h-full flex items-center gap-4">
-                            <div class="w-9 h-9 rounded-xl bg-brand-dark/10 text-brand-dark dark:text-brand-light flex items-center justify-center text-base shrink-0"><i class="fa-solid fa-calendar-check"></i></div>
-                            <div>
-                                <p class="font-bold text-sm">Calendly</p>
-                                <p class="text-[10px] text-slate-400 leading-relaxed">Book a discovery call directly on my calendar</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="lg:col-span-7">
-                <form action="https://formspree.io/f/mgojggpr" method="POST" class="glass p-8 rounded-3xl shadow-sm border border-white/20 space-y-4 text-xs glow-card">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="space-y-1.5">
-                            <label class="font-semibold text-slate-400">Full Name</label>
-                            <input type="text" name="name" required class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm">
-                        </div>
-                        <div class="space-y-1.5">
-                            <label class="font-semibold text-slate-400">Brokerage / Team Email</label>
-                            <input type="email" name="email" required class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm">
-                        </div>
-                    </div>
-                    <div class="space-y-1.5">
-                        <label class="font-semibold text-slate-400">Subject / Active Escrow Volume</label>
-                        <input type="text" name="subject_volume" placeholder="e.g., File Management Support Query" class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm">
-                    </div>
-                    <div class="space-y-1.5">
-                        <label class="font-semibold text-slate-400">Pipeline Operational Requirements</label>
-                        <textarea name="requirements" rows="4" required placeholder="Describe your current transaction coordination roadblocks..." class="w-full p-3 rounded-xl bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 focus:outline-none focus:border-brand-light transition text-sm"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 py-3.5 rounded-xl font-bold tracking-tight shadow-md hover:opacity-90 transition text-sm premium-card">Initialize Onboarding Inquiry</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="border-t border-slate-200/60 dark:border-white/5 py-12 px-4 text-center text-xs text-slate-400 space-y-4">
-        <div class="flex justify-center items-center gap-3">
-            <img src="logo.png" alt="Logo" class="h-6 w-auto opacity-70">
-            <span class="font-semibold text-slate-500">Christian Paul Babida</span>
-        </div>
-        <p class="font-light">&copy; 2026. All Rights Reserved. Transaction Coordination Ecosystem Architecture.</p>
-    </footer>
-
-    <!-- Floating ChristianIO Chatbot Panel -->
-    <div id="chat-widget-panel" class="fixed bottom-24 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] max-w-[380px] h-[70vh] sm:h-[560px] max-h-[560px] hidden flex-col chat-widget-anim">
-        <div class="glass rounded-3xl shadow-2xl border border-white/40 overflow-hidden flex flex-col h-full glow-card">
-            <!-- Chat Header -->
-            <div class="bg-slate-900/5 dark:bg-white/5 px-5 py-4 border-b border-slate-200/60 dark:border-white/5 flex items-center gap-3">
-                <img src="bot.jpg" alt="ChristianIO" class="w-10 h-10 rounded-full object-cover shadow-sm border-2 border-white/50 dark:border-white/10">
-                <div>
-                    <h4 class="text-sm font-bold tracking-tight">ChristianIO</h4>
-                    <p class="text-[10px] text-slate-400 font-medium">AI Portfolio Assistant</p>
-                </div>
-                <div class="ml-auto flex items-center gap-3">
-                    <span class="text-[10px] text-emerald-500 font-medium flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Online
-                    </span>
-                    <button onclick="closeChatWidget()" aria-label="Close chat" class="w-7 h-7 rounded-full bg-slate-900/5 dark:bg-white/10 flex items-center justify-center hover:bg-slate-900/10 dark:hover:bg-white/20 transition"><i class="fa-solid fa-xmark text-xs"></i></button>
-                </div>
-            </div>
-
-            <!-- Chat Window Container -->
-            <div id="chat-window" class="flex-1 overflow-y-auto p-5 space-y-4 bg-white/10 dark:bg-slate-950/10">
-                <!-- Bot Welcome Message -->
-                <div class="flex gap-3 items-start max-w-[90%] chat-bubble-in">
-                    <img src="bot.jpg" alt="ChristianIO" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
-                    <div class="bot-bubble p-4 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm leading-relaxed space-y-2">
-                        <p>Hello! 👋 I'm <strong>ChristianIO</strong>.</p>
-                        <p>I'm here to answer anything about Christian Paul Babida, including:</p>
-                        <ul class="list-disc list-inside space-y-0.5 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300">
-                            <li>Experience &amp; Resume</li>
-                            <li>Skills &amp; Certifications</li>
-                            <li>Real Estate &amp; Transaction Coordination</li>
-                            <li>MLS Listings &amp; Customer Service</li>
-                            <li>Software &amp; Availability</li>
-                            <li>Contact Information</li>
-                        </ul>
-                        <p>Ask me anything! ✨</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Typing Indicator Bubble Container -->
-            <div id="typing-indicator" class="px-5 py-2 hidden">
-                <div class="flex gap-3 items-center">
-                    <div class="w-7 h-7 rounded-full bg-brand-light flex items-center justify-center text-white shrink-0 text-xs"><i class="fa-solid fa-robot"></i></div>
-                    <div class="bg-slate-200/50 dark:bg-slate-900/50 px-5 py-3.5 rounded-2xl rounded-tl-none flex items-center justify-center min-w-[50px]">
-                        <div class="dot-flashing"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Suggestions Interface -->
-            <div class="px-3 py-2 bg-slate-900/5 dark:bg-white/5 border-t border-slate-200/60 dark:border-white/5 flex flex-wrap gap-1.5 max-h-20 overflow-y-auto">
-                <button onclick="sendQuickQuestion('Tell me about Christian')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">About Christian</button>
-                <button onclick="sendQuickQuestion('What is your experience?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Experience</button>
-                <button onclick="sendQuickQuestion('Can I see your resume?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Resume</button>
-                <button onclick="sendQuickQuestion('What is transaction coordination?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Transaction Coordinator</button>
-                <button onclick="sendQuickQuestion('Can you create MLS listings?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">MLS Listing</button>
-                <button onclick="sendQuickQuestion('What customer service experience do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Customer Service</button>
-                <button onclick="sendQuickQuestion('Tell me about your healthcare experience')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Healthcare</button>
-                <button onclick="sendQuickQuestion('What real estate work have you done?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Real Estate</button>
-                <button onclick="sendQuickQuestion('What software do you use?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Software</button>
-                <button onclick="sendQuickQuestion('What certifications do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Certifications</button>
-                <button onclick="sendQuickQuestion('What are your skills?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Skills</button>
-                <button onclick="sendQuickQuestion('Can I see your portfolio?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Portfolio</button>
-                <button onclick="sendQuickQuestion('How can I contact you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Contact</button>
-                <button onclick="sendQuickQuestion('Are you available for work?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Availability</button>
-                <button onclick="sendQuickQuestion('Why should I hire you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 transition">Why Hire You?</button>
-            </div>
-
-            <!-- Custom Message Inputs Layout -->
-            <form id="chat-input-form" class="p-3 bg-white/40 dark:bg-slate-900/40 border-t border-slate-200/60 dark:border-white/5 flex gap-2">
-                <input id="chat-user-input" type="text" placeholder="Ask about platforms, response speed, or client management..." class="flex-1 p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-xs sm:text-sm focus:outline-none focus:border-brand-light transition">
-                <button type="submit" class="bg-brand-dark text-white px-4 rounded-xl text-sm font-medium hover:bg-brand-light transition flex items-center justify-center"><i class="fa-solid fa-paper-plane"></i></button>
-            </form>
-        </div>
+  <!-- SERVICES BENTO -->
+  <section id="services" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
+    <div class="max-w-2xl mb-10">
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 02 — Services</h2>
+      <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Comprehensive contract-to-close infrastructure</p>
     </div>
 
-    <!-- Fixed Buttons Layout Container -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
-        <!-- Floating ChristianIO Chat Launcher -->
-        <button id="chat-widget-launcher" onclick="toggleChatWidget()" aria-label="Open ChristianIO chat assistant" class="relative w-14 h-14 rounded-full bg-gradient-to-br from-brand-dark to-brand-light text-white flex items-center justify-center shadow-2xl hover:scale-110 transition text-xl border border-white/10">
-            <span class="absolute top-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-white dark:border-slate-950 animate-pulse"></span>
-            <i class="fa-solid fa-comment-dots" id="chat-launcher-icon-open"></i>
-            <i class="fa-solid fa-xmark hidden" id="chat-launcher-icon-close"></i>
-        </button>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 auto-rows-[minmax(180px,auto)]" style="grid-auto-flow:dense;">
+      <div class="bento-card col-span-1 sm:col-span-2 lg:col-span-2 row-span-1 p-7 sm:p-8 flex flex-col justify-between bg-gradient-to-br from-ink to-ink-light text-white">
+        <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center mb-6 text-lg"><i class="fa-solid fa-file-signature"></i></div>
+        <div>
+          <h3 class="text-lg font-semibold mb-2">Contract-to-Close Management</h3>
+          <p class="text-sm text-white/70 font-light leading-relaxed">Full management of paperwork, signatures, and document processing from purchase agreement to escrow closing.</p>
+        </div>
+      </div>
+      <div class="bento-card p-7 flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-signal/10 text-signal flex items-center justify-center mb-5 text-base"><i class="fa-solid fa-list-check"></i></div>
+        <div><h3 class="text-base font-semibold mb-1.5">MLS Listing Management</h3><p class="text-[13px] text-ink/60 dark:text-white/60 font-light leading-relaxed">Accurate property data, media uploads, and status audits.</p></div>
+      </div>
+      <div class="bento-card p-7 flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-brass/10 text-brass-dark dark:text-brass-light flex items-center justify-center mb-5 text-base"><i class="fa-solid fa-calendar-days"></i></div>
+        <div><h3 class="text-base font-semibold mb-1.5">Calendar &amp; Deadline Tracking</h3><p class="text-[13px] text-ink/60 dark:text-white/60 font-light leading-relaxed">Inspection windows, title review cutoffs, and contingency alerts.</p></div>
+      </div>
+      <div class="bento-card p-7 flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-verified/10 text-verified flex items-center justify-center mb-5 text-base"><i class="fa-solid fa-shield-halved"></i></div>
+        <div><h3 class="text-base font-semibold mb-1.5">Compliance &amp; Documentation</h3><p class="text-[13px] text-ink/60 dark:text-white/60 font-light leading-relaxed">Meticulous file organization for seamless broker approval.</p></div>
+      </div>
+      <div class="bento-card p-7 flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-5 text-base"><i class="fa-solid fa-house-chimney-crack"></i></div>
+        <div><h3 class="text-base font-semibold mb-1.5">Inspection Coordination</h3><p class="text-[13px] text-ink/60 dark:text-white/60 font-light leading-relaxed">Structural, pest, hazard, and appraisal walkthroughs — aligned.</p></div>
+      </div>
+      <div class="bento-card p-7 flex flex-col justify-between">
+        <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-600 flex items-center justify-center mb-5 text-base"><i class="fa-solid fa-handshake"></i></div>
+        <div><h3 class="text-base font-semibold mb-1.5">Concierge Communication</h3><p class="text-[13px] text-ink/60 dark:text-white/60 font-light leading-relaxed">One polite point of contact for buyers, escrow, lenders, and agents.</p></div>
+      </div>
+    </div>
+  </section>
 
-        <!-- 6. Floating Booking Button -->
-        <a href="#calendar" class="pulse-btn flex items-center gap-2 bg-gradient-to-r from-brand-dark to-brand-light text-white px-4 py-3 rounded-full shadow-2xl transition-transform duration-300 font-semibold text-xs tracking-wide group" aria-label="Book Discovery Call Container">
-            <span class="text-base group-hover:rotate-12 transition-transform duration-200">📅</span>
-            <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-out font-medium">Book Discovery Call</span>
-        </a>
-
-        <!-- Original WhatsApp Floating Button coexisting cleanly -->
-        <a href="https://wa.me/639617445321" target="_blank" class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-2xl hover:scale-110 transition text-xl border border-white/10" aria-label="Quick WhatsApp Line">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
+  <!-- WORKFLOW: sequence, so numbering is legitimate here -->
+  <section id="workflow" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
+    <div class="max-w-2xl mb-10">
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 03 — Workflow</h2>
+      <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Every file, the same six checkpoints</p>
     </div>
 
-    <!-- Scripts -->
-    <script>
-        // Light / Dark Mode Toggle
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-        });
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+      <div class="bento-card p-5 flex flex-col gap-3">
+        <span class="font-mono text-[11px] text-brass-dark dark:text-brass-light">01</span>
+        <i class="fa-solid fa-file-contract text-signal"></i>
+        <div><h3 class="text-sm font-semibold mb-1">Offer Accepted</h3><p class="text-[12px] text-ink/55 dark:text-white/55 font-light leading-snug">Documentation audit and baseline intake mapping.</p></div>
+      </div>
+      <div class="bento-card p-5 flex flex-col gap-3">
+        <span class="font-mono text-[11px] text-brass-dark dark:text-brass-light">02</span>
+        <i class="fa-solid fa-key text-signal"></i>
+        <div><h3 class="text-sm font-semibold mb-1">Escrow Opened</h3><p class="text-[12px] text-ink/55 dark:text-white/55 font-light leading-snug">Escrow alignment and earnest money verification.</p></div>
+      </div>
+      <div class="bento-card p-5 flex flex-col gap-3">
+        <span class="font-mono text-[11px] text-brass-dark dark:text-brass-light">03</span>
+        <i class="fa-solid fa-house-flag text-signal"></i>
+        <div><h3 class="text-sm font-semibold mb-1">Inspection</h3><p class="text-[12px] text-ink/55 dark:text-white/55 font-light leading-snug">Vendor walkthroughs and disclosure return loops.</p></div>
+      </div>
+      <div class="bento-card p-5 flex flex-col gap-3">
+        <span class="font-mono text-[11px] text-brass-dark dark:text-brass-light">04</span>
+        <i class="fa-solid fa-calculator text-signal"></i>
+        <div><h3 class="text-sm font-semibold mb-1">Appraisal</h3><p class="text-[12px] text-ink/55 dark:text-white/55 font-light leading-snug">Evaluation check-ins to protect the timeline.</p></div>
+      </div>
+      <div class="bento-card p-5 flex flex-col gap-3">
+        <span class="font-mono text-[11px] text-brass-dark dark:text-brass-light">05</span>
+        <i class="fa-solid fa-building-columns text-signal"></i>
+        <div><h3 class="text-sm font-semibold mb-1">Loan Approval</h3><p class="text-[12px] text-ink/55 dark:text-white/55 font-light leading-snug">Lender outreach to clear remaining contingencies.</p></div>
+      </div>
+      <div class="bento-card p-5 flex flex-col gap-3 bg-ink text-white">
+        <span class="font-mono text-[11px] text-brass-light">06</span>
+        <i class="fa-solid fa-handshake-angle text-brass-light"></i>
+        <div><h3 class="text-sm font-semibold mb-1">Closing</h3><p class="text-[12px] text-white/60 font-light leading-snug">Disbursement authorized — keys change hands.</p></div>
+      </div>
+    </div>
+  </section>
 
-        // Mobile Nav Menu Open/Close Logic
-        function toggleMobileNav() {
-            const panel = document.getElementById('mobile-nav-panel');
-            const btn = document.getElementById('mobileNavToggle');
-            const isOpen = panel.classList.toggle('open');
-            document.getElementById('mobileNavIconOpen').classList.toggle('hidden', isOpen);
-            document.getElementById('mobileNavIconClose').classList.toggle('hidden', !isOpen);
-            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        }
-        function closeMobileNav() {
-            const panel = document.getElementById('mobile-nav-panel');
-            if (!panel.classList.contains('open')) return;
-            panel.classList.remove('open');
-            document.getElementById('mobileNavIconOpen').classList.remove('hidden');
-            document.getElementById('mobileNavIconClose').classList.add('hidden');
-            document.getElementById('mobileNavToggle').setAttribute('aria-expanded', 'false');
-        }
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="py-16 sm:py-24 px-4 bg-ink/[0.025] dark:bg-white/[0.02] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-2xl mb-10">
+        <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 04 — Work Samples</h2>
+        <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Real dashboards, real deliverables</p>
+      </div>
 
-        // Floating ChristianIO Chat Widget Open/Close Logic
-        function openChatWidget() {
-            const panel = document.getElementById('chat-widget-panel');
-            panel.classList.remove('hidden');
-            requestAnimationFrame(() => panel.classList.add('open'));
-            document.getElementById('chat-launcher-icon-open').classList.add('hidden');
-            document.getElementById('chat-launcher-icon-close').classList.remove('hidden');
-        }
-        function closeChatWidget() {
-            const panel = document.getElementById('chat-widget-panel');
-            panel.classList.remove('open');
-            document.getElementById('chat-launcher-icon-open').classList.remove('hidden');
-            document.getElementById('chat-launcher-icon-close').classList.add('hidden');
-            setTimeout(() => { if (!panel.classList.contains('open')) panel.classList.add('hidden'); }, 350);
-        }
-        function toggleChatWidget() {
-            const panel = document.getElementById('chat-widget-panel');
-            if (panel.classList.contains('open')) { closeChatWidget(); } else { openChatWidget(); }
-        }
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <article class="bento-card overflow-hidden flex flex-col">
+          <img src="listing-sample.jpg" alt="Canva property listing flyer sample" loading="lazy" decoding="async" class="w-full h-44 object-cover object-top">
+          <div class="p-6 flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-sm"><i class="fa-solid fa-palette"></i></div>
+              <div><h3 class="font-semibold text-sm">Canva Marketing Layouts</h3><p class="text-[11px] text-ink/45 dark:text-white/45">Listing &amp; open-house assets</p></div>
+            </div>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Challenge:</span> agents needed polished flyers fast, without hiring a designer per property.</p>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Solution:</span> a repeatable Canva template system, on-brand for every agent.</p>
+            <p class="text-[12.5px] font-medium text-verified">Result: faster, consistent listing marketing.</p>
+          </div>
+        </article>
 
-        // Animated Stress-Meter Comparison Bars
-        let comparisonBarsFired = false;
-        function triggerComparisonBars() {
-            if (comparisonBarsFired) return;
-            comparisonBarsFired = true;
-            document.querySelectorAll('#comparison-container .bar-fill').forEach(bar => {
-                const target = bar.getAttribute('data-target');
-                requestAnimationFrame(() => { bar.style.width = target + '%'; });
-            });
-        }
-        const comparisonSection = document.getElementById('comparison-container');
-        if (comparisonSection) {
-            new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) triggerComparisonBars(); });
-            }, { threshold: 0.2 }).observe(comparisonSection);
-        }
+        <article class="bento-card overflow-hidden flex flex-col">
+          <img src="trello-screenshot.jpg" alt="Trello transaction pipeline dashboard sample" loading="lazy" decoding="async" class="w-full h-44 object-cover object-top">
+          <div class="p-6 flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-red-500/10 text-red-600 flex items-center justify-center text-sm"><i class="fa-brands fa-trello"></i></div>
+              <div><h3 class="font-semibold text-sm">Trello Transaction Pipeline</h3><p class="text-[11px] text-ink/45 dark:text-white/45">Milestone &amp; deadline tracker</p></div>
+            </div>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Challenge:</span> deadlines and statuses scattered across emails and calls.</p>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Solution:</span> one visual pipeline for every file stage and touchpoint.</p>
+            <p class="text-[12.5px] font-medium text-verified">Result: zero missed deadlines, full compliance.</p>
+          </div>
+        </article>
 
-        // 9. Premium Loading Screen Implementation
-        window.addEventListener('DOMContentLoaded', () => {
-            const bar = document.getElementById('loading-bar');
-            const screen = document.getElementById('loading-screen');
-            const msgEl = document.getElementById('loading-msg');
+        <article class="bento-card overflow-hidden flex flex-col">
+          <img src="asana-sample.jpg" alt="Asana MLS listing task dashboard sample" loading="lazy" decoding="async" class="w-full h-44 object-cover object-top">
+          <div class="p-6 flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center text-sm"><i class="fa-solid fa-list-check"></i></div>
+              <div><h3 class="font-semibold text-sm">MLS Listing Management</h3><p class="text-[11px] text-ink/45 dark:text-white/45">Asana task &amp; compliance hub</p></div>
+            </div>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Challenge:</span> needed compliant MLS setup with zero room for data errors.</p>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Solution:</span> a centralized Asana checklist for listing and compliance review.</p>
+            <p class="text-[12.5px] font-medium text-verified">Result: fast turnaround, full audit trail.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-            const loadingMessages = [
-                '✔ Loading Portfolio...',
-                '✔ Initializing Dashboard...',
-                '✔ Loading Experience...',
-                '✔ Preparing AI Assistant...',
-                '✔ Almost Ready...'
-            ];
+  <!-- COMPARISON: merges before/after + comparison table into one clear pair -->
+  <section class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
+    <div class="max-w-2xl mb-10">
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 05 — Same Deal, Two Outcomes</h2>
+      <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Why agents choose to work with me</p>
+    </div>
 
-            // Progress bar animates smoothly across the full loading window
-            setTimeout(() => { bar.style.transitionDuration = '2200ms'; bar.style.width = '100%'; }, 80);
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div class="bento-card p-7 sm:p-8 border-red-500/20">
+        <h3 class="text-base font-semibold text-red-600 dark:text-red-400 flex items-center gap-2 mb-5"><i class="fa-solid fa-triangle-exclamation"></i> Without a dedicated TC</h3>
+        <ul class="space-y-3.5 text-sm text-ink/65 dark:text-white/65 font-light">
+          <li class="flex gap-2.5"><i class="fa-solid fa-xmark text-red-500 mt-0.5"></i> Basic admin processing, not strategic file management</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-xmark text-red-500 mt-0.5"></i> Waits for instructions instead of tracking deadlines proactively</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-xmark text-red-500 mt-0.5"></i> Slow, reactive communication with clients and vendors</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-xmark text-red-500 mt-0.5"></i> Generic support with no California-specific expertise</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-xmark text-red-500 mt-0.5"></i> Paper-based workflows with frequent missed dates</li>
+        </ul>
+      </div>
+      <div class="bento-card p-7 sm:p-8 border-verified/20 bg-verified/[0.03]">
+        <h3 class="text-base font-semibold text-verified flex items-center gap-2 mb-5"><i class="fa-solid fa-circle-check"></i> Working with me</h3>
+        <ul class="space-y-3.5 text-sm text-ink/70 dark:text-white/75 font-light">
+          <li class="flex gap-2.5"><i class="fa-solid fa-check text-verified mt-0.5"></i> Strategic, end-to-end transaction management</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-check text-verified mt-0.5"></i> Proactively tracks and secures every deadline</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-check text-verified mt-0.5"></i> Fast, proactive milestone updates for every party</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-check text-verified mt-0.5"></i> California-focused compliance expertise</li>
+          <li class="flex gap-2.5"><i class="fa-solid fa-check text-verified mt-0.5"></i> Modern tools and process automation, on schedule</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-            // Cycle loading messages every 0.8s with a subtle fade
-            let msgIndex = 0;
-            const cycleMessages = setInterval(() => {
-                msgIndex = (msgIndex + 1) % loadingMessages.length;
-                msgEl.style.opacity = '0';
-                msgEl.style.transform = 'translateY(4px)';
-                setTimeout(() => {
-                    msgEl.textContent = loadingMessages[msgIndex];
-                    msgEl.style.opacity = '1';
-                    msgEl.style.transform = 'translateY(0)';
-                }, 150);
-            }, 800);
+  <!-- SECURITY -->
+  <section id="security" class="relative py-20 sm:py-28 px-4 overflow-hidden text-white reveal">
+    <div class="max-w-7xl mx-auto relative">
+      <div class="text-center max-w-2xl mx-auto mb-14 relative">
+        <div class="relative w-20 h-20 mx-auto mb-7">
+          <div class="seal-halo" aria-hidden="true"></div>
+          <div class="relative w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-sm">
+            <i class="fa-solid fa-shield-halved text-2xl bg-gradient-to-br from-signal to-verified bg-clip-text text-transparent"></i>
+          </div>
+        </div>
+        <h2 class="text-[11px] font-semibold text-brass-light uppercase eyebrow">File No. 06 — Security &amp; Confidentiality</h2>
+        <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Client information protection</p>
+        <p class="text-sm text-white/60 font-light mt-4 leading-relaxed">Your clients trust you with sensitive information. You can trust me to protect it with discretion and secure handling, contract to close.</p>
+      </div>
 
-            // Graceful screen dismissal fading (2.5s total load time)
-            setTimeout(() => {
-                clearInterval(cycleMessages);
-                screen.style.opacity = '0';
-                setTimeout(() => {
-                    screen.style.display = 'none';
-                }, 500);
-            }, 2500);
-        });
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+        <div class="bento-card !bg-white/[0.04] !border-white/10 p-7">
+          <div class="w-11 h-11 rounded-2xl bg-signal/15 text-signal flex items-center justify-center mb-5 text-lg"><i class="fa-solid fa-user-lock"></i></div>
+          <h3 class="font-semibold mb-1.5">Confidential Client Data</h3>
+          <p class="text-[13px] text-white/60 font-light">Buyer and seller information stays strictly confidential.</p>
+        </div>
+        <div class="bento-card !bg-white/[0.04] !border-white/10 p-7">
+          <div class="w-11 h-11 rounded-2xl bg-verified/15 text-verified flex items-center justify-center mb-5 text-lg"><i class="fa-solid fa-folder-closed"></i></div>
+          <h3 class="font-semibold mb-1.5">Secure Document Handling</h3>
+          <p class="text-[13px] text-white/60 font-light">Contracts and disclosures remain in approved systems only.</p>
+        </div>
+        <div class="bento-card !bg-white/[0.04] !border-white/10 p-7">
+          <div class="w-11 h-11 rounded-2xl bg-brass/15 text-brass-light flex items-center justify-center mb-5 text-lg"><i class="fa-solid fa-key"></i></div>
+          <h3 class="font-semibold mb-1.5">Authorized Access Only</h3>
+          <p class="text-[13px] text-white/60 font-light">Only necessary, approved access per transaction.</p>
+        </div>
+        <div class="bento-card !bg-white/[0.04] !border-white/10 p-7">
+          <div class="w-11 h-11 rounded-2xl bg-indigo-500/15 text-indigo-300 flex items-center justify-center mb-5 text-lg"><i class="fa-solid fa-folder-tree"></i></div>
+          <h3 class="font-semibold mb-1.5">Professional File Management</h3>
+          <p class="text-[13px] text-white/60 font-light">Careful organization prevents errors or misplacement.</p>
+        </div>
+        <div class="bento-card !bg-white/[0.04] !border-white/10 p-7">
+          <div class="w-11 h-11 rounded-2xl bg-verified/15 text-verified flex items-center justify-center mb-5 text-lg"><i class="fa-solid fa-comments"></i></div>
+          <h3 class="font-semibold mb-1.5">Private Communication</h3>
+          <p class="text-[13px] text-white/60 font-light">Client conversations stay professional and confidential.</p>
+        </div>
+        <div class="bento-card !bg-white/[0.04] !border-white/10 p-7">
+          <div class="w-11 h-11 rounded-2xl bg-signal/15 text-signal flex items-center justify-center mb-5 text-lg"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3 class="font-semibold mb-1.5">Secure Remote Workspace</h3>
+          <p class="text-[13px] text-white/60 font-light">Password-protected devices and a secured connection.</p>
+        </div>
+      </div>
 
-        // 8. Scroll Progress Bar Tracking Setup
-        window.addEventListener('scroll', () => {
-            const progress = document.getElementById('scroll-progress');
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (totalHeight > 0) {
-                const percentage = (window.pageYOffset / totalHeight) * 100;
-                progress.style.width = percentage + '%';
-            }
-        });
+      <div class="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] px-6 sm:px-9 py-7 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+        <i class="fa-solid fa-circle-check text-3xl text-verified shrink-0"></i>
+        <p class="text-sm text-white/70 font-light leading-relaxed">Your reputation depends on protecting your clients' information. Every transaction I manage is handled with professionalism, discretion, and confidentiality, from contract to close.</p>
+      </div>
+    </div>
+  </section>
 
-        // Intersection Observer Configuration for Reveal items, Statistics, and Timelines
-        const activeObservers = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    
-                    // Trigger number counters if intersecting
-                    if(entry.target.id === 'stats-container') {
-                        triggerCounters();
-                    }
-                    
-                    // Trigger transaction timeline processing line animation
-                    if(entry.target.id === 'timeline-container') {
-                        animateTimelineProgress();
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('.reveal').forEach(el => activeObservers.observe(el));
-        
-        const statsSection = document.getElementById('stats-container');
-        if(statsSection) activeObservers.observe(statsSection);
-        
-        const timelineSection = document.getElementById('timeline-container');
-        if(timelineSection) activeObservers.observe(timelineSection);
+  <!-- ROI -->
+  <section class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
+    <div class="max-w-2xl mb-10">
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 07 — Return on Time</h2>
+      <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">In this business, time is literally money</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="bento-card p-7">
+        <div class="w-10 h-10 rounded-xl bg-signal/10 text-signal flex items-center justify-center mb-5"><i class="fa-solid fa-hourglass-half"></i></div>
+        <h3 class="font-semibold mb-1.5">More Freedom</h3>
+        <p class="text-[13px] text-ink/60 dark:text-white/60 font-light leading-relaxed">Reclaim 10–15 hours per transaction. Shift away from manual paperwork toward active field production.</p>
+      </div>
+      <div class="bento-card p-7">
+        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center mb-5"><i class="fa-solid fa-brain"></i></div>
+        <h3 class="font-semibold mb-1.5">Peace of Mind</h3>
+        <p class="text-[13px] text-ink/60 dark:text-white/60 font-light leading-relaxed">Never worry about a missed disclosure, omitted compliance line, or delayed escrow milestone again.</p>
+      </div>
+      <div class="bento-card p-7">
+        <div class="w-10 h-10 rounded-xl bg-verified/10 text-verified flex items-center justify-center mb-5"><i class="fa-solid fa-star"></i></div>
+        <h3 class="font-semibold mb-1.5">Stronger Reputation</h3>
+        <p class="text-[13px] text-ink/60 dark:text-white/60 font-light leading-relaxed">Your clients deserve a modern closing experience — white-glove updates, every step.</p>
+      </div>
+    </div>
+  </section>
 
-        // Staggered reveal for Client Information Protection cards
-        const protectionCards = document.querySelectorAll('.protection-card');
-        if(protectionCards.length){
-            const protectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting){
-                        entry.target.classList.add('active');
-                        protectionObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15 });
-            protectionCards.forEach(card => protectionObserver.observe(card));
-        }
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="py-16 sm:py-24 px-4 bg-ink/[0.025] dark:bg-white/[0.02] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-2xl mb-10">
+        <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 08 — Endorsements</h2>
+        <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Trusted by real estate producers</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <figure class="bento-card p-7 flex flex-col justify-between">
+          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"Christian completely turned my transaction tracking around. I saved over 14 hours on my last closing alone."</blockquote>
+          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">SM</div>
+            <span class="text-[12.5px] font-semibold">Sarah Mitchell</span>
+          </figcaption>
+        </figure>
+        <figure class="bento-card p-7 flex flex-col justify-between">
+          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"File audits used to give me headaches every month. With Christian tracking compliance, my DAs release without delay."</blockquote>
+          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">JC</div>
+            <span class="text-[12.5px] font-semibold">James Carter</span>
+          </figcaption>
+        </figure>
+        <figure class="bento-card p-7 flex flex-col justify-between">
+          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"The highest standard of transaction communication. He monitors escrow, lending, and clients with elite professionalism."</blockquote>
+          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">AR</div>
+            <span class="text-[12.5px] font-semibold">Amanda Reyes</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
-        // 1. Animated Statistics Execution Engine (plays once cleanly via requestAnimationFrame)
-        let countersFired = false;
-        function triggerCounters() {
-            if (countersFired) return;
-            countersFired = true;
+  <!-- TOOLS -->
+  <section id="tools" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
+    <div class="max-w-2xl mb-10">
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 09 — Tech Stack</h2>
+      <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Fully integrated with the tools you already use</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-600 flex items-center justify-center text-sm"><i class="fa-solid fa-cloud-arrow-up"></i></div><span class="text-[12.5px] font-medium">SkySlope</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 flex items-center justify-center text-sm"><i class="fa-solid fa-circle-nodes"></i></div><span class="text-[12.5px] font-medium">Dotloop</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center text-sm"><i class="fa-solid fa-bolt"></i></div><span class="text-[12.5px] font-medium">OpenToClose</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-600 flex items-center justify-center text-sm"><i class="fa-solid fa-file-signature"></i></div><span class="text-[12.5px] font-medium">DocuSign</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center text-sm"><i class="fa-solid fa-database"></i></div><span class="text-[12.5px] font-medium">kvCORE</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm"><i class="fa-brands fa-hubspot"></i></div><span class="text-[12.5px] font-medium">HubSpot</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-sm"><i class="fa-solid fa-palette"></i></div><span class="text-[12.5px] font-medium">Canva</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 flex items-center justify-center text-sm"><i class="fa-brands fa-trello"></i></div><span class="text-[12.5px] font-medium">Trello</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-slate-500/10 text-slate-600 dark:text-slate-300 flex items-center justify-center text-sm"><i class="fa-brands fa-google"></i></div><span class="text-[12.5px] font-medium">Workspace</span></div>
+      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-600 flex items-center justify-center text-sm"><i class="fa-solid fa-key"></i></div><span class="text-[12.5px] font-medium">LastPass</span></div>
+    </div>
+  </section>
 
-            const counters = document.querySelectorAll('.counter');
-            const baseDuration = 1800; // Total counting time duration window in milliseconds
+  <!-- FAQ / chatbot teaser -->
+  <section id="faq" class="py-16 sm:py-20 px-4 max-w-2xl mx-auto text-center reveal">
+    <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">Operations Assistant</h2>
+    <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Have a question? Ask ChristianIO.</p>
+    <p class="text-sm text-ink/60 dark:text-white/60 mt-3 font-light max-w-md mx-auto">My assistant can answer questions about experience, skills, software, and availability — instantly, 24/7.</p>
+    <button onclick="openChatWidget()" class="mt-7 inline-flex items-center gap-2 bg-ink text-white dark:bg-white dark:text-ink px-6 py-3.5 rounded-2xl font-medium shadow-lg hover:opacity-90 transition">
+      <i class="fa-solid fa-comment-dots"></i> Chat with ChristianIO
+    </button>
+  </section>
 
-            counters.forEach(counter => {
-                const targetValue = parseFloat(counter.getAttribute('data-target'));
-                const decimalPoints = parseInt(counter.getAttribute('data-decimals')) || 0;
-                let startTime = null;
+  <!-- CALENDAR (lazy-loaded Calendly embed) -->
+  <section id="calendar" class="py-16 sm:py-24 px-4 bg-ink/[0.025] dark:bg-white/[0.02] reveal">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 10 — Schedule</h2>
+      <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight mb-8">Let's scale your real estate business</p>
 
-                function stepAnimation(timestamp) {
-                    if (!startTime) startTime = timestamp;
-                    const elapsed = timestamp - startTime;
-                    const progressRate = Math.min(elapsed / baseDuration, 1);
-                    
-                    // Smooth easing profile out function calculation
-                    const easedProgress = 1 - Math.pow(1 - progressRate, 3);
-                    const currentVal = easedProgress * targetValue;
-                    
-                    counter.innerText = currentVal.toFixed(decimalPoints);
+      <div class="bento-card p-3 sm:p-5 text-left overflow-hidden">
+        <div id="calendly-mount" class="w-full min-h-[500px] flex items-center justify-center">
+          <button id="calendly-load-btn" class="flex flex-col items-center gap-3 py-16 text-ink/50 dark:text-white/50 hover:text-brass-dark dark:hover:text-brass-light transition mx-auto">
+            <i class="fa-solid fa-calendar-days text-3xl"></i>
+            <span class="text-sm font-medium">Tap to load the scheduler</span>
+          </button>
+        </div>
+        <p class="text-center text-[11px] text-ink/40 dark:text-white/40 mt-2">
+          Prefer not to load third-party scripts? <a href="https://calendly.com/christianpaulbabida" target="_blank" rel="noopener" class="underline hover:text-brass-dark dark:hover:text-brass-light">Open the scheduling page directly</a>.
+        </p>
+      </div>
+    </div>
+  </section>
 
-                    if (progressRate < 1) {
-                        window.requestAnimationFrame(stepAnimation);
-                    } else {
-                        counter.innerText = targetValue.toFixed(decimalPoints);
-                    }
-                }
-                window.requestAnimationFrame(stepAnimation);
-            });
-        }
+  <!-- CTA banner -->
+  <section class="px-4 py-14 reveal">
+    <div class="max-w-6xl mx-auto relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-ink via-signal-dark to-signal p-10 sm:p-16 text-center shadow-xl">
+      <div class="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl" aria-hidden="true"></div>
+      <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-verified/20 rounded-full blur-3xl" aria-hidden="true"></div>
+      <div class="relative z-10">
+        <h2 class="font-display text-2xl sm:text-4xl font-semibold tracking-tight text-white max-w-2xl mx-auto leading-tight">Ready to close more deals without the administrative stress?</h2>
+        <p class="mt-4 text-sm sm:text-base text-white/75 max-w-xl mx-auto font-light">Let me manage your paperwork while you focus on serving clients and closing transactions.</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="#calendar" class="bg-white text-ink px-7 py-3.5 rounded-2xl font-semibold shadow-lg hover:opacity-90 transition text-center">Book a Discovery Call</a>
+          <a href="resume.pdf" download class="bg-white/10 border border-white/30 text-white px-7 py-3.5 rounded-2xl font-semibold hover:bg-white/20 transition text-center flex items-center justify-center gap-2"><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // 4. Interactive Transaction Timeline Dynamic Lighting & Calculation Engine
-        function animateTimelineProgress() {
-            const lineProgress = document.getElementById('timeline-progress-bar');
-            const items = document.querySelectorAll('.timeline-item');
-            let itemIndex = 0;
+  <!-- CONTACT -->
+  <section id="contact" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
+    <div class="max-w-2xl mb-10">
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 11 — Contact</h2>
+      <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Let's set up your operations pipeline</p>
+      <p class="text-sm text-ink/60 dark:text-white/60 font-light mt-3 max-w-lg">Ready to stop chasing paperwork? Reach out on any channel below, or send details through the form.</p>
+    </div>
 
-            function processNextStep() {
-                if (itemIndex >= items.length) return;
-                
-                const item = items[itemIndex];
-                const dotElement = item.querySelector('.timeline-dot');
-                
-                // Light up components systematically
-                dotElement.style.backgroundColor = '#0ea5e9';
-                dotElement.style.boxShadow = '0 0 12px 2px rgba(14, 165, 233, 0.6)';
-                item.classList.add('active');
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 auto-rows-[minmax(120px,auto)]" style="grid-auto-flow:dense;">
+      <a href="mailto:christianbabida13@outlook.com" class="bento-card p-5 flex flex-col gap-2 group">
+        <div class="w-9 h-9 rounded-xl bg-signal/10 text-signal flex items-center justify-center text-sm"><i class="fa-solid fa-envelope"></i></div>
+        <p class="font-semibold text-sm mt-1">Email</p>
+        <p class="text-[11px] text-ink/45 dark:text-white/45">Best for detailed inquiries</p>
+        <span class="text-[11px] text-signal group-hover:underline break-all mt-auto">christianbabida13@outlook.com</span>
+      </a>
+      <a href="https://wa.me/639617445321" target="_blank" rel="noopener" class="bento-card p-5 flex flex-col gap-2 group">
+        <div class="w-9 h-9 rounded-xl bg-verified/10 text-verified flex items-center justify-center text-sm"><i class="fa-brands fa-whatsapp"></i></div>
+        <p class="font-semibold text-sm mt-1">WhatsApp</p>
+        <p class="text-[11px] text-ink/45 dark:text-white/45">Fastest response time</p>
+        <span class="text-[11px] text-verified group-hover:underline mt-auto">+63 961 744 5321</span>
+      </a>
+      <a href="https://www.linkedin.com/in/christian-paul-babida-2017b9321" target="_blank" rel="noopener" class="bento-card p-5 flex flex-col gap-2 group">
+        <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center text-sm"><i class="fa-brands fa-linkedin"></i></div>
+        <p class="font-semibold text-sm mt-1">LinkedIn</p>
+        <p class="text-[11px] text-ink/45 dark:text-white/45">Professional background</p>
+        <span class="text-[11px] text-blue-600 group-hover:underline mt-auto">View profile</span>
+      </a>
+      <a href="resume.pdf" download class="bento-card p-5 flex flex-col gap-2 group">
+        <div class="w-9 h-9 rounded-xl bg-brass/10 text-brass-dark dark:text-brass-light flex items-center justify-center text-sm"><i class="fa-solid fa-file-arrow-down"></i></div>
+        <p class="font-semibold text-sm mt-1">Résumé</p>
+        <p class="text-[11px] text-ink/45 dark:text-white/45">Full experience &amp; skills</p>
+        <span class="text-[11px] text-brass-dark dark:text-brass-light group-hover:underline mt-auto">Download PDF</span>
+      </a>
 
-                itemIndex++;
-                
-                // Advance line layout width height percentage ratios dynamically
-                const completePercent = (itemIndex / items.length) * 100;
-                lineProgress.style.height = completePercent + '%';
+      <!-- Form -->
+      <form action="https://formspree.io/f/mgojggpr" method="POST" class="bento-card col-span-2 lg:col-span-4 p-6 sm:p-8 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label for="contact-name" class="text-[12px] font-semibold text-ink/50 dark:text-white/50">Full name</label>
+            <input id="contact-name" type="text" name="name" required class="w-full p-3 rounded-xl bg-ink/[0.03] dark:bg-white/5 border border-ink/10 dark:border-white/10 focus:outline-none focus:border-brass transition text-sm">
+          </div>
+          <div class="space-y-1.5">
+            <label for="contact-email" class="text-[12px] font-semibold text-ink/50 dark:text-white/50">Brokerage / team email</label>
+            <input id="contact-email" type="email" name="email" required class="w-full p-3 rounded-xl bg-ink/[0.03] dark:bg-white/5 border border-ink/10 dark:border-white/10 focus:outline-none focus:border-brass transition text-sm">
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <label for="contact-subject" class="text-[12px] font-semibold text-ink/50 dark:text-white/50">Subject / active escrow volume</label>
+          <input id="contact-subject" type="text" name="subject_volume" placeholder="e.g., file management support inquiry" class="w-full p-3 rounded-xl bg-ink/[0.03] dark:bg-white/5 border border-ink/10 dark:border-white/10 focus:outline-none focus:border-brass transition text-sm">
+        </div>
+        <div class="space-y-1.5">
+          <label for="contact-requirements" class="text-[12px] font-semibold text-ink/50 dark:text-white/50">What do you need help with?</label>
+          <textarea id="contact-requirements" name="requirements" rows="4" required placeholder="Describe your current transaction coordination roadblocks..." class="w-full p-3 rounded-xl bg-ink/[0.03] dark:bg-white/5 border border-ink/10 dark:border-white/10 focus:outline-none focus:border-brass transition text-sm"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-ink text-white dark:bg-white dark:text-ink py-3.5 rounded-xl font-semibold tracking-tight shadow-md hover:opacity-90 transition text-sm">Send inquiry</button>
+      </form>
+    </div>
+  </section>
 
-                setTimeout(processNextStep, 400); // Step delay sequencing speed interval
-            }
-            processNextStep();
-        }
+</main>
 
-        // ==========================================================
+<!-- Footer -->
+<footer class="border-t border-ink/10 dark:border-white/10 py-12 px-4">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+    <div class="flex items-center gap-2.5">
+      <span class="seal"><i class="fa-solid fa-check"></i></span>
+      <span class="font-display font-semibold text-sm">Christian Paul Babida</span>
+    </div>
+    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-[12.5px] text-ink/55 dark:text-white/55">
+      <a href="#about" class="hover:text-brass-dark dark:hover:text-brass-light transition">About</a>
+      <a href="#services" class="hover:text-brass-dark dark:hover:text-brass-light transition">Services</a>
+      <a href="#portfolio" class="hover:text-brass-dark dark:hover:text-brass-light transition">Portfolio</a>
+      <a href="#tools" class="hover:text-brass-dark dark:hover:text-brass-light transition">Tools</a>
+      <a href="#contact" class="hover:text-brass-dark dark:hover:text-brass-light transition">Contact</a>
+    </div>
+    <p class="text-[11.5px] text-ink/40 dark:text-white/40 font-light">&copy; 2026 Christian Paul Babida. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Floating ChristianIO Chatbot Panel -->
+<div id="chat-widget-panel" class="fixed bottom-24 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] max-w-[380px] h-[70vh] sm:h-[560px] max-h-[560px] hidden flex-col chat-widget-anim">
+  <div class="bg-white dark:bg-[#101d2c] rounded-3xl shadow-2xl border border-ink/10 dark:border-white/10 overflow-hidden flex flex-col h-full">
+    <div class="bg-ink/[0.03] dark:bg-white/5 px-5 py-4 border-b border-ink/10 dark:border-white/10 flex items-center gap-3">
+      <img src="bot.jpg" alt="ChristianIO avatar" loading="lazy" class="w-10 h-10 rounded-full object-cover shadow-sm border-2 border-white/60 dark:border-white/10">
+      <div>
+        <h2 class="text-sm font-bold tracking-tight">ChristianIO</h2>
+        <p class="text-[10px] text-ink/45 dark:text-white/45 font-medium">AI Portfolio Assistant</p>
+      </div>
+      <div class="ml-auto flex items-center gap-3">
+        <span class="text-[10px] text-verified font-medium flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-verified animate-pulse"></span> Online</span>
+        <button onclick="closeChatWidget()" aria-label="Close chat" class="w-7 h-7 rounded-full bg-ink/5 dark:bg-white/10 flex items-center justify-center hover:bg-ink/10 dark:hover:bg-white/20 transition"><i class="fa-solid fa-xmark text-xs"></i></button>
+      </div>
+    </div>
+
+    <div id="chat-window" role="log" aria-live="polite" class="flex-1 overflow-y-auto p-5 space-y-4 bg-ink/[0.015] dark:bg-white/[0.015]">
+      <div class="flex gap-3 items-start max-w-[90%] chat-bubble-in">
+        <img src="bot.jpg" alt="" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
+        <div class="bg-ink/[0.04] dark:bg-white/5 p-4 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm leading-relaxed space-y-2">
+          <p>Hello! 👋 I'm <strong>ChristianIO</strong>.</p>
+          <p>I can answer questions about Christian, including:</p>
+          <ul class="list-disc list-inside space-y-0.5 text-[11px] sm:text-xs text-ink/65 dark:text-white/65">
+            <li>Experience &amp; résumé</li>
+            <li>Skills &amp; certifications</li>
+            <li>Transaction coordination</li>
+            <li>MLS listings &amp; customer service</li>
+            <li>Software &amp; availability</li>
+            <li>Contact information</li>
+          </ul>
+          <p>Ask me anything! ✨</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="typing-indicator" class="px-5 py-2 hidden">
+      <div class="flex gap-3 items-center">
+        <div class="w-7 h-7 rounded-full bg-signal flex items-center justify-center text-white shrink-0 text-xs"><i class="fa-solid fa-robot"></i></div>
+        <div class="bg-ink/[0.05] dark:bg-white/10 px-5 py-3.5 rounded-2xl rounded-tl-none flex items-center justify-center min-w-[50px]">
+          <div class="dot-flashing"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-3 py-2 bg-ink/[0.03] dark:bg-white/5 border-t border-ink/10 dark:border-white/10 flex flex-wrap gap-1.5 max-h-20 overflow-y-auto">
+      <button onclick="sendQuickQuestion('Tell me about Christian')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">About Christian</button>
+      <button onclick="sendQuickQuestion('What is your experience?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Experience</button>
+      <button onclick="sendQuickQuestion('Can I see your resume?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Resume</button>
+      <button onclick="sendQuickQuestion('What is transaction coordination?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Transaction Coordinator</button>
+      <button onclick="sendQuickQuestion('Can you create MLS listings?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">MLS Listing</button>
+      <button onclick="sendQuickQuestion('What customer service experience do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Customer Service</button>
+      <button onclick="sendQuickQuestion('Tell me about your healthcare experience')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Healthcare</button>
+      <button onclick="sendQuickQuestion('What real estate work have you done?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Real Estate</button>
+      <button onclick="sendQuickQuestion('What software do you use?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Software</button>
+      <button onclick="sendQuickQuestion('What certifications do you have?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Certifications</button>
+      <button onclick="sendQuickQuestion('What are your skills?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Skills</button>
+      <button onclick="sendQuickQuestion('Can I see your portfolio?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Portfolio</button>
+      <button onclick="sendQuickQuestion('How can I contact you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Contact</button>
+      <button onclick="sendQuickQuestion('Are you available for work?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Availability</button>
+      <button onclick="sendQuickQuestion('Why should I hire you?')" class="quick-chip text-[10px] px-2.5 py-1 rounded-lg bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10">Why Hire You?</button>
+    </div>
+
+    <form id="chat-input-form" class="p-3 bg-ink/[0.02] dark:bg-white/5 border-t border-ink/10 dark:border-white/10 flex gap-2">
+      <label for="chat-user-input" class="sr-only">Ask ChristianIO a question</label>
+      <input id="chat-user-input" type="text" placeholder="Ask about platforms, response speed, or client management..." class="flex-1 p-2.5 rounded-xl bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10 text-xs sm:text-sm focus:outline-none focus:border-brass transition">
+      <button type="submit" class="bg-ink dark:bg-white text-white dark:text-ink px-4 rounded-xl text-sm font-medium hover:opacity-85 transition flex items-center justify-center" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+</div>
+
+<!-- Floating action buttons -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+  <button id="chat-widget-launcher" onclick="toggleChatWidget()" aria-label="Open ChristianIO chat assistant" class="relative w-14 h-14 rounded-full bg-ink dark:bg-white text-white dark:text-ink flex items-center justify-center shadow-xl hover:scale-105 transition text-xl">
+    <span class="absolute top-0 right-0 w-3 h-3 rounded-full bg-verified border-2 border-paper dark:border-ink animate-pulse"></span>
+    <i class="fa-solid fa-comment-dots" id="chat-launcher-icon-open"></i>
+    <i class="fa-solid fa-xmark hidden" id="chat-launcher-icon-close"></i>
+  </button>
+  <a href="https://wa.me/639617445321" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-verified text-white flex items-center justify-center shadow-xl hover:scale-105 transition text-xl" aria-label="Message on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</div>
+
+<script>
+  // Theme toggle
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  });
+  (function initTheme() {
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) document.documentElement.classList.add('dark');
+  })();
+
+  // Mobile nav
+  function toggleMobileNav() {
+    const panel = document.getElementById('mobile-nav-panel');
+    const btn = document.getElementById('mobileNavToggle');
+    const isOpen = panel.classList.toggle('open');
+    document.getElementById('mobileNavIconOpen').classList.toggle('hidden', isOpen);
+    document.getElementById('mobileNavIconClose').classList.toggle('hidden', !isOpen);
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+  function closeMobileNav() {
+    const panel = document.getElementById('mobile-nav-panel');
+    if (!panel.classList.contains('open')) return;
+    panel.classList.remove('open');
+    document.getElementById('mobileNavIconOpen').classList.remove('hidden');
+    document.getElementById('mobileNavIconClose').classList.add('hidden');
+    document.getElementById('mobileNavToggle').setAttribute('aria-expanded', 'false');
+  }
+
+  // Chat widget open/close
+  function openChatWidget() {
+    const panel = document.getElementById('chat-widget-panel');
+    panel.classList.remove('hidden');
+    requestAnimationFrame(() => panel.classList.add('open'));
+    document.getElementById('chat-launcher-icon-open').classList.add('hidden');
+    document.getElementById('chat-launcher-icon-close').classList.remove('hidden');
+    document.getElementById('chat-user-input').focus({ preventScroll: true });
+  }
+  function closeChatWidget() {
+    const panel = document.getElementById('chat-widget-panel');
+    panel.classList.remove('open');
+    document.getElementById('chat-launcher-icon-open').classList.remove('hidden');
+    document.getElementById('chat-launcher-icon-close').classList.add('hidden');
+    setTimeout(() => { if (!panel.classList.contains('open')) panel.classList.add('hidden'); }, 320);
+  }
+  function toggleChatWidget() {
+    const panel = document.getElementById('chat-widget-panel');
+    if (panel.classList.contains('open')) closeChatWidget(); else openChatWidget();
+  }
+
+  // Scroll progress
+  window.addEventListener('scroll', () => {
+    const progress = document.getElementById('scroll-progress');
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (totalHeight > 0) progress.style.width = ((window.pageYOffset / totalHeight) * 100) + '%';
+  }, { passive: true });
+
+  // Scroll reveal + counters
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        if (entry.target.id === 'stats-container') triggerCounters();
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  const statsSection = document.getElementById('stats-container');
+  if (statsSection) revealObserver.observe(statsSection);
+
+  let countersFired = false;
+  function triggerCounters() {
+    if (countersFired) return;
+    countersFired = true;
+    const duration = 1600;
+    document.querySelectorAll('.counter').forEach(counter => {
+      const target = parseFloat(counter.getAttribute('data-target'));
+      const decimals = parseInt(counter.getAttribute('data-decimals')) || 0;
+      let start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        const progress = Math.min((ts - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.innerText = (eased * target).toFixed(decimals);
+        if (progress < 1) requestAnimationFrame(step); else counter.innerText = target.toFixed(decimals);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  // Lazy-load Calendly only when the user opts in (keeps initial load lean)
+  document.getElementById('calendly-load-btn')?.addEventListener('click', function loadCalendly() {
+    const mount = document.getElementById('calendly-mount');
+    mount.innerHTML = '<div class="calendly-inline-widget" data-url="https://calendly.com/christianpaulbabida" style="min-width:280px;height:650px;width:100%;"></div>';
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }, { once: true });
+
+  // ==========================================================
+</script>
+<script>
         // ChristianIO — AI Portfolio Assistant Knowledge Engine
         // 100% local keyword-matching FAQ engine. No external API.
         // ==========================================================
