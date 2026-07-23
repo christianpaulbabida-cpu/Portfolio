@@ -133,6 +133,10 @@
   html.dark .file-table td, html.dark .file-table th { border-color: rgba(255,255,255,0.07); }
 
   img { max-width: 100%; height: auto; }
+
+  /* Hero */
+  #hero-video { will-change: opacity; }
+  #hero-content { will-change: opacity, transform; }
 </style>
 </head>
 <body class="bg-paper text-ink dark:bg-ink dark:text-slate-50 transition-colors duration-300">
@@ -192,47 +196,24 @@
 <main id="main">
 
   <!-- HERO -->
-  <header class="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-28 pb-16 px-4">
-    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-25 dark:opacity-15 pointer-events-none" poster="profile.jpg">
-      <source src="background.mp4" type="video/mp4">
+  <header id="hero" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-4">
+    <!-- Background video -->
+    <video id="hero-video" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover" poster="profile.jpg">
+      <source src="hero.mp4" type="video/mp4">
     </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-ink/10 via-paper/70 to-paper dark:from-ink/40 dark:via-ink/70 dark:to-ink"></div>
 
-    <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
-      <img src="profile.jpg" alt="Christian Paul Babida" width="112" height="112" class="w-28 h-28 rounded-full object-cover border-4 border-white dark:border-ink shadow-xl mb-6">
+    <!-- Dark overlay for legibility -->
+    <div class="absolute inset-0 bg-black/55"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/35 to-ink"></div>
 
-      <div class="inline-flex items-center gap-2 bg-white/80 dark:bg-white/10 px-4 py-1.5 rounded-full text-[11px] font-medium border border-brass/30 mb-6 shadow-sm eyebrow">
-        <span class="relative flex h-2 w-2"><span class="ping-slow absolute inline-flex h-full w-full rounded-full bg-verified"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-verified"></span></span>
-        FILE STATUS — ACCEPTING NEW AGENT PARTNERS
-      </div>
-
-      <h1 class="font-display text-[2.1rem] leading-[1.15] sm:text-5xl md:text-[3.3rem] font-semibold tracking-tight max-w-3xl">
-        Close more deals. <span class="italic text-brass-dark dark:text-brass-light">Carry less paperwork.</span>
+    <!-- Hero content -->
+    <div id="hero-content" class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
+      <h1 class="font-display text-[2.1rem] leading-[1.15] sm:text-5xl md:text-[3.3rem] font-semibold tracking-tight max-w-3xl text-white">
+        Close more deals. Carry less paperwork.
       </h1>
-      <p class="mt-5 text-[15px] sm:text-lg text-ink/70 dark:text-white/70 max-w-xl font-light leading-relaxed">
-        I'm a California Transaction Coordinator managing every file from contract to close — deadlines, disclosures, and communication — so you can focus on selling.
+      <p class="mt-5 text-[15px] sm:text-lg text-white/75 max-w-xl font-light leading-relaxed eyebrow">
+        Christian Paul Babida — Transaction Coordinator
       </p>
-
-      <div class="mt-7 flex flex-wrap justify-center gap-2 max-w-xl">
-        <span class="inline-flex items-center gap-1.5 bg-white/80 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium"><i class="fa-solid fa-check text-verified text-[9px]"></i> California Market Specialist</span>
-        <span class="inline-flex items-center gap-1.5 bg-white/80 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium"><i class="fa-solid fa-check text-verified text-[9px]"></i> Contract-to-Close</span>
-        <span class="inline-flex items-center gap-1.5 bg-white/80 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium"><i class="fa-solid fa-check text-verified text-[9px]"></i> MLS Listing Management</span>
-        <span class="inline-flex items-center gap-1.5 bg-white/80 dark:bg-white/5 border border-ink/10 dark:border-white/10 px-3 py-1.5 rounded-full text-[11px] font-medium"><i class="fa-solid fa-check text-verified text-[9px]"></i> Compliance &amp; Documentation</span>
-      </div>
-
-      <div class="mt-8 flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center">
-        <a href="#calendar" class="bg-ink text-white dark:bg-white dark:text-ink px-7 py-3.5 rounded-2xl font-medium shadow-lg hover:opacity-90 hover:-translate-y-0.5 transition text-center">Book a Discovery Call</a>
-        <a href="resume.pdf" download class="bg-white/90 dark:bg-white/5 border border-ink/10 dark:border-white/15 px-7 py-3.5 rounded-2xl font-medium hover:bg-white transition text-center flex items-center justify-center gap-2">
-          <i class="fa-solid fa-file-arrow-down text-brass-dark dark:text-brass-light"></i> Download Resume
-        </a>
-      </div>
-
-      <div class="mt-10 flex gap-5 text-lg text-ink/40 dark:text-white/40">
-        <a href="mailto:christianbabida13@outlook.com" class="hover:text-brass transition" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/christian-paul-babida-2017b9321" target="_blank" rel="noopener" class="hover:text-brass transition" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="https://www.upwork.com/freelancers/~013aa34959cfaa9d45" target="_blank" rel="noopener" class="hover:text-brass transition" aria-label="Upwork"><i class="fa-brands fa-upwork"></i></a>
-        <a href="https://wa.me/639617445321" target="_blank" rel="noopener" class="hover:text-verified transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-      </div>
     </div>
   </header>
 
@@ -880,6 +861,39 @@
     const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (totalHeight > 0) progress.style.width = ((window.pageYOffset / totalHeight) * 100) + '%';
   }, { passive: true });
+
+  // Hero fade-out on scroll
+  (function () {
+    const hero = document.getElementById('hero');
+    const heroVideo = document.getElementById('hero-video');
+    const heroContent = document.getElementById('hero-content');
+    if (!hero || !heroVideo || !heroContent) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let ticking = false;
+
+    function updateHeroFade() {
+      const fadeDistance = hero.offsetHeight * 0.85; // fully faded a bit before hero scrolls out of view
+      const progress = Math.min(Math.max(window.scrollY / fadeDistance, 0), 1);
+      const opacity = 1 - progress;
+
+      heroVideo.style.opacity = opacity;
+      heroContent.style.opacity = opacity;
+      if (!reduceMotion) {
+        heroContent.style.transform = `translateY(${progress * 30}px)`;
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeroFade);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    updateHeroFade();
+  })();
 
   // Scroll reveal + counters
   const revealObserver = new IntersectionObserver((entries) => {
