@@ -274,12 +274,10 @@
         </div>
       </div>
 
-      <!-- Intro video, spans 2 -->
-      <div class="bento-card col-span-2 row-span-2 overflow-hidden relative">
-        <video controls controlsList="nodownload" playsinline poster="profile.jpg" preload="none" class="w-full h-full min-h-[220px] object-cover bg-ink">
-          <source src="intro.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+      <!-- Intro video, spans 2 (currently unavailable) -->
+      <div class="bento-card col-span-2 row-span-2 overflow-hidden relative min-h-[220px] bg-ink/95 flex flex-col items-center justify-center text-center p-6">
+        <i class="fa-solid fa-video-slash text-white/40 text-2xl mb-3"></i>
+        <span class="text-white/70 text-sm font-medium">Video temporarily unavailable</span>
         <div class="absolute top-3 left-3 bg-ink/70 text-white text-[10px] font-medium px-2.5 py-1 rounded-full backdrop-blur-sm eyebrow">60-second intro</div>
       </div>
 
@@ -545,43 +543,10 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="py-16 sm:py-24 px-4 bg-ink/[0.025] dark:bg-white/[0.02] reveal">
-    <div class="max-w-7xl mx-auto">
-      <div class="max-w-2xl mb-10">
-        <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 08 — Endorsements</h2>
-        <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Trusted by real estate producers</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <figure class="bento-card p-7 flex flex-col justify-between">
-          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"Christian completely turned my transaction tracking around. I saved over 14 hours on my last closing alone."</blockquote>
-          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">SM</div>
-            <span class="text-[12.5px] font-semibold">Sarah Mitchell</span>
-          </figcaption>
-        </figure>
-        <figure class="bento-card p-7 flex flex-col justify-between">
-          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"File audits used to give me headaches every month. With Christian tracking compliance, my DAs release without delay."</blockquote>
-          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">JC</div>
-            <span class="text-[12.5px] font-semibold">James Carter</span>
-          </figcaption>
-        </figure>
-        <figure class="bento-card p-7 flex flex-col justify-between">
-          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"The highest standard of transaction communication. He monitors escrow, lending, and clients with elite professionalism."</blockquote>
-          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">AR</div>
-            <span class="text-[12.5px] font-semibold">Amanda Reyes</span>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
   <!-- TOOLS -->
   <section id="tools" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
     <div class="max-w-2xl mb-10">
-      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 09 — Tech Stack</h2>
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 08 — Tech Stack</h2>
       <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Fully integrated with the tools you already use</p>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
@@ -601,17 +566,17 @@
   <!-- FAQ / chatbot teaser -->
   <section id="faq" class="py-16 sm:py-20 px-4 max-w-2xl mx-auto text-center reveal">
     <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">Operations Assistant</h2>
-    <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Have a question? Ask Christian.</p>
+    <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Have a question? Ask ChristianIO.</p>
     <p class="text-sm text-ink/60 dark:text-white/60 mt-3 font-light max-w-md mx-auto">My assistant can answer questions about experience, skills, software, and availability — instantly, 24/7.</p>
     <button onclick="openChatWidget()" class="mt-7 inline-flex items-center gap-2 bg-ink text-white dark:bg-white dark:text-ink px-6 py-3.5 rounded-2xl font-medium shadow-lg hover:opacity-90 transition">
-      <i class="fa-solid fa-comment-dots"></i> Chat with Christian.
+      <i class="fa-solid fa-comment-dots"></i> Chat with ChristianIO
     </button>
   </section>
 
   <!-- CALENDAR (lazy-loaded Calendly embed) -->
   <section id="calendar" class="py-16 sm:py-24 px-4 bg-ink/[0.025] dark:bg-white/[0.02] reveal">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 10 — Schedule</h2>
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 09 — Schedule</h2>
       <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight mb-8">Let's scale your real estate business</p>
 
       <div class="bento-card p-3 sm:p-5 text-left overflow-hidden">
@@ -647,7 +612,7 @@
   <!-- CONTACT -->
   <section id="contact" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
     <div class="max-w-2xl mb-10">
-      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 11 — Contact</h2>
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 10 — Contact</h2>
       <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Let's set up your operations pipeline</p>
       <p class="text-sm text-ink/60 dark:text-white/60 font-light mt-3 max-w-lg">Ready to stop chasing paperwork? Reach out on any channel below, or send details through the form.</p>
     </div>
@@ -723,13 +688,13 @@
   </div>
 </footer>
 
-<!-- Floating Christian Chatbot Panel -->
+<!-- Floating ChristianIO Chatbot Panel -->
 <div id="chat-widget-panel" class="fixed bottom-24 right-4 sm:right-6 z-50 w-[92vw] sm:w-[380px] max-w-[380px] h-[70vh] sm:h-[560px] max-h-[560px] hidden flex-col chat-widget-anim">
   <div class="bg-white dark:bg-[#101d2c] rounded-3xl shadow-2xl border border-ink/10 dark:border-white/10 overflow-hidden flex flex-col h-full">
     <div class="bg-ink/[0.03] dark:bg-white/5 px-5 py-4 border-b border-ink/10 dark:border-white/10 flex items-center gap-3">
-      <img src="bot.jpg" alt="Christian avatar" loading="lazy" class="w-10 h-10 rounded-full object-cover shadow-sm border-2 border-white/60 dark:border-white/10">
+      <img src="bot.jpg" alt="ChristianIO avatar" loading="lazy" class="w-10 h-10 rounded-full object-cover shadow-sm border-2 border-white/60 dark:border-white/10">
       <div>
-        <h2 class="text-sm font-bold tracking-tight">Christian</h2>
+        <h2 class="text-sm font-bold tracking-tight">ChristianIO</h2>
         <p class="text-[10px] text-ink/45 dark:text-white/45 font-medium">AI Portfolio Assistant</p>
       </div>
       <div class="ml-auto flex items-center gap-3">
@@ -742,7 +707,7 @@
       <div class="flex gap-3 items-start max-w-[90%] chat-bubble-in">
         <img src="bot.jpg" alt="" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
         <div class="bg-ink/[0.04] dark:bg-white/5 p-4 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm leading-relaxed space-y-2">
-          <p>Hello! 👋 I'm <strong>Christian</strong>.</p>
+          <p>Hello! 👋 I'm <strong>ChristianIO</strong>.</p>
           <p>I can answer questions about Christian, including:</p>
           <ul class="list-disc list-inside space-y-0.5 text-[11px] sm:text-xs text-ink/65 dark:text-white/65">
             <li>Experience &amp; résumé</li>
@@ -785,7 +750,7 @@
     </div>
 
     <form id="chat-input-form" class="p-3 bg-ink/[0.02] dark:bg-white/5 border-t border-ink/10 dark:border-white/10 flex gap-2">
-      <label for="chat-user-input" class="sr-only">Ask Christian a question</label>
+      <label for="chat-user-input" class="sr-only">Ask ChristianIO a question</label>
       <input id="chat-user-input" type="text" placeholder="Ask about platforms, response speed, or client management..." class="flex-1 p-2.5 rounded-xl bg-white dark:bg-[#0B1420] border border-ink/10 dark:border-white/10 text-xs sm:text-sm focus:outline-none focus:border-brass transition">
       <button type="submit" class="bg-ink dark:bg-white text-white dark:text-ink px-4 rounded-xl text-sm font-medium hover:opacity-85 transition flex items-center justify-center" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
     </form>
@@ -794,7 +759,7 @@
 
 <!-- Floating action buttons -->
 <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
-  <button id="chat-widget-launcher" onclick="toggleChatWidget()" aria-label="Open Christian chat assistant" class="relative w-14 h-14 rounded-full bg-ink dark:bg-white text-white dark:text-ink flex items-center justify-center shadow-xl hover:scale-105 transition text-xl">
+  <button id="chat-widget-launcher" onclick="toggleChatWidget()" aria-label="Open ChristianIO chat assistant" class="relative w-14 h-14 rounded-full bg-ink dark:bg-white text-white dark:text-ink flex items-center justify-center shadow-xl hover:scale-105 transition text-xl">
     <span class="absolute top-0 right-0 w-3 h-3 rounded-full bg-verified border-2 border-paper dark:border-ink animate-pulse"></span>
     <i class="fa-solid fa-comment-dots" id="chat-launcher-icon-open"></i>
     <i class="fa-solid fa-xmark hidden" id="chat-launcher-icon-close"></i>
@@ -941,7 +906,7 @@
   // ==========================================================
 </script>
 <script>
-        // Christian — AI Portfolio Assistant Knowledge Engine
+        // ChristianIO — AI Portfolio Assistant Knowledge Engine
         // 100% local keyword-matching FAQ engine. No external API.
         // ==========================================================
         const textForm = document.getElementById('chat-input-form');
@@ -1095,7 +1060,7 @@
             { keywords: ["linkedin"],
               answer: "You can find my professional background on LinkedIn — the link is available in the hero section and contact area of this site." },
             { keywords: ["portfolio website","this website","this site"],
-              answer: "This portfolio showcases my transaction coordination workflow, live metrics dashboard, work samples (Canva flyers, Trello and Asana boards), tools I use, and client testimonials." },
+              answer: "This portfolio showcases my transaction coordination workflow, live metrics dashboard, work samples (Canva flyers, Trello and Asana boards), and the tools I use." },
             { keywords: ["portfolio","work samples","dashboards"],
               answer: "My portfolio includes real work samples: Canva marketing flyers, a Trello transaction pipeline tracker, and an Asana task management dashboard — all shown in the Portfolio section above." },
             { keywords: ["resume download","download resume","see your resume","can i see your resume","resume"],
@@ -1190,7 +1155,7 @@
                 botBubble.className = 'flex flex-col items-start max-w-[90%] chat-bubble-in';
                 botBubble.innerHTML = `
                     <div class="flex gap-3 items-start">
-                        <img src="bot.jpg" alt="Christian" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
+                        <img src="bot.jpg" alt="ChristianIO" class="w-7 h-7 rounded-full object-cover shrink-0 shadow-sm">
                         <div class="bot-text-container bot-bubble p-3.5 rounded-2xl rounded-tl-none text-xs sm:text-sm font-light shadow-sm"></div>
                     </div>
                     <span class="text-[9px] text-slate-400 mt-1 ml-10">${currentTimestamp()}</span>`;
