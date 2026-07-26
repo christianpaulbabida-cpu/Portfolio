@@ -17,7 +17,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Montserrat:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -28,8 +28,8 @@
     theme: {
       extend: {
         fontFamily: {
-          sans: ['Montserrat', 'sans-serif'],
-          display: ['Playfair Display', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+          display: ['Fraunces', 'serif'],
           mono: ['IBM Plex Mono', 'monospace'],
         },
         colors: {
@@ -43,6 +43,9 @@
           card: '0 1px 2px rgba(11,20,32,0.04), 0 12px 32px -16px rgba(11,20,32,0.16)',
           cardHover: '0 1px 2px rgba(11,20,32,0.06), 0 24px 48px -16px rgba(11,20,32,0.24)',
         },
+        transitionTimingFunction: {
+          premium: 'cubic-bezier(.16,1,.3,1)',
+        },
       },
     },
   };
@@ -52,13 +55,13 @@
   :root { color-scheme: light; }
   html.dark { color-scheme: dark; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+  body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   }
 
-  .font-display { font-family: 'Playfair Display', serif; }
+  .font-display { font-family: 'Fraunces', serif; }
   .font-mono { font-family: 'IBM Plex Mono', monospace; }
   .eyebrow { letter-spacing: 0.14em; font-family: 'IBM Plex Mono', monospace; }
 
@@ -73,14 +76,39 @@
 
   /* Card system — the "case file" seal motif */
   .bento-card {
+    position: relative;
     background: #fff;
     border: 1px solid rgba(11,20,32,0.07);
     border-radius: 1.5rem;
-    transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1), border-color .35s ease;
+    box-shadow: 0 1px 1px rgba(11,20,32,0.03), 0 8px 20px -14px rgba(11,20,32,0.14);
+    transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s cubic-bezier(.16,1,.3,1), border-color .45s cubic-bezier(.16,1,.3,1);
+    isolation: isolate;
   }
-  html.dark .bento-card { background: #101d2c; border-color: rgba(255,255,255,0.06); }
-  .bento-card:hover { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(11,20,32,0.06), 0 24px 48px -16px rgba(11,20,32,0.28); border-color: rgba(184,135,74,0.35); }
-  html.dark .bento-card:hover { box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6); }
+  .bento-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(150deg, rgba(184,135,74,0), rgba(184,135,74,0) 60%, rgba(184,135,74,0) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: 0; transition: opacity .45s ease;
+    pointer-events: none; z-index: 1;
+  }
+  .bento-card:hover::before {
+    opacity: 1;
+    background: linear-gradient(150deg, rgba(184,135,74,.55), rgba(36,84,255,0) 55%, rgba(18,169,107,.25) 100%);
+  }
+  html.dark .bento-card { background: #101d2c; border-color: rgba(255,255,255,0.06); box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 8px 20px -14px rgba(0,0,0,0.4); }
+  .bento-card:hover {
+    transform: translateY(-6px) scale(1.008);
+    box-shadow: 0 2px 4px rgba(11,20,32,0.05), 0 32px 56px -20px rgba(11,20,32,0.30), 0 0 0 1px rgba(184,135,74,0.08);
+    border-color: rgba(184,135,74,0.35);
+  }
+  html.dark .bento-card:hover { box-shadow: 0 2px 4px rgba(0,0,0,.3), 0 32px 56px -20px rgba(0,0,0,0.65), 0 0 0 1px rgba(184,135,74,0.12); }
+  @media (prefers-reduced-motion: reduce) {
+    .bento-card:hover { transform: none; }
+  }
 
   .seal {
     width: 1.75rem; height: 1.75rem; border-radius: 9999px;
@@ -137,6 +165,70 @@
   /* Hero */
   #hero-video { will-change: opacity; }
   #hero-content { will-change: opacity, transform; }
+
+  /* ---- Premium refinement layer (visual polish only) ---- */
+
+  /* Typography rhythm */
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  .font-display { letter-spacing: -0.01em; }
+
+  /* Nav: scroll-aware shrink + glass depth */
+  #site-nav {
+    box-shadow: 0 1px 1px rgba(11,20,32,0.02), 0 12px 32px -20px rgba(11,20,32,0.25);
+    transition: box-shadow .4s cubic-bezier(.16,1,.3,1), background-color .4s ease, height .3s cubic-bezier(.16,1,.3,1);
+  }
+  html.dark #site-nav { box-shadow: 0 12px 32px -20px rgba(0,0,0,0.6); }
+  #site-nav.nav-condensed { box-shadow: 0 1px 1px rgba(11,20,32,0.04), 0 16px 40px -18px rgba(11,20,32,0.30); }
+  #site-nav .nav-inner { transition: height .3s cubic-bezier(.16,1,.3,1); }
+  #site-nav.nav-condensed .nav-inner { height: 3.25rem; }
+
+  .nav-link { position: relative; padding-bottom: 3px; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; right: 100%; bottom: -3px; height: 1.5px;
+    background: linear-gradient(90deg, #B8874A, #2454FF);
+    transition: right .35s cubic-bezier(.16,1,.3,1);
+  }
+  .nav-link:hover::after, .nav-link.active-link::after { right: 0; }
+  .nav-link.active-link { color: #B8874A; }
+  html.dark .nav-link.active-link { color: #D7AD73; }
+
+  /* Buttons: tactile premium interaction */
+  .btn-premium {
+    transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1), opacity .3s ease;
+    will-change: transform;
+  }
+  .btn-premium:hover { transform: translateY(-2px) scale(1.015); box-shadow: 0 14px 28px -12px rgba(11,20,32,0.35); }
+  .btn-premium:active { transform: translateY(0) scale(0.985); }
+  html.dark .btn-premium:hover { box-shadow: 0 14px 28px -12px rgba(0,0,0,0.55); }
+
+  /* Image reveal + zoom */
+  .img-zoom { overflow: hidden; }
+  .img-zoom img { transition: transform .7s cubic-bezier(.16,1,.3,1), filter .7s ease; }
+  .img-zoom:hover img { transform: scale(1.06); }
+
+  /* Icon micro-interaction inside cards */
+  .bento-card i.fa-solid, .bento-card i.fa-brands { transition: transform .35s cubic-bezier(.16,1,.3,1); }
+  .bento-card:hover > div > i, .bento-card:hover i:first-child { transform: translateY(-1px) scale(1.08); }
+
+  /* Profile portrait — "Meet Christian" card */
+  .profile-portrait {
+    border-radius: 1.25rem;
+    box-shadow: 0 1px 1px rgba(11,20,32,0.04), 0 20px 40px -20px rgba(11,20,32,0.35);
+    transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s cubic-bezier(.16,1,.3,1);
+  }
+  .profile-portrait:hover { transform: translateY(-3px) scale(1.015); box-shadow: 0 1px 1px rgba(11,20,32,0.05), 0 28px 52px -18px rgba(11,20,32,0.40); }
+  html.dark .profile-portrait { box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6); }
+  html.dark .profile-portrait:hover { box-shadow: 0 28px 52px -18px rgba(0,0,0,0.7); }
+
+  /* Hero entrance choreography */
+  .hero-line { opacity: 0; transform: translateY(16px); animation: heroRise .9s cubic-bezier(.16,1,.3,1) forwards; }
+  .hero-line.d1 { animation-delay: .15s; }
+  .hero-line.d2 { animation-delay: .38s; }
+  @keyframes heroRise { to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-line { animation: none; opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body class="bg-paper text-ink dark:bg-ink dark:text-slate-50 transition-colors duration-300">
@@ -150,7 +242,7 @@
 
 <!-- Nav -->
 <nav id="site-nav" class="fixed top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-50 rounded-2xl max-w-7xl mx-auto shadow-sm">
-  <div class="px-4 sm:px-6 h-16 flex items-center justify-between">
+  <div class="nav-inner px-4 sm:px-6 h-16 flex items-center justify-between">
     <a href="#main" class="flex items-center gap-2.5 font-display font-semibold tracking-tight">
       <span class="seal"><i class="fa-solid fa-check"></i></span>
       <span class="hidden sm:inline text-[15px]">Christian Paul Babida</span>
@@ -158,21 +250,21 @@
     </a>
 
     <div class="hidden lg:flex items-center gap-6 text-[13.5px] font-medium text-ink/70 dark:text-white/70">
-      <a href="#about" class="hover:text-brass transition">About</a>
-      <a href="#services" class="hover:text-brass transition">Services</a>
-      <a href="#workflow" class="hover:text-brass transition">Workflow</a>
-      <a href="#portfolio" class="hover:text-brass transition">Portfolio</a>
-      <a href="#security" class="hover:text-brass transition">Security</a>
-      <a href="#tools" class="hover:text-brass transition">Tools</a>
-      <a href="#contact" class="hover:text-brass transition">Contact</a>
+      <a href="#about" class="nav-link hover:text-brass transition-colors">About</a>
+      <a href="#services" class="nav-link hover:text-brass transition-colors">Services</a>
+      <a href="#workflow" class="nav-link hover:text-brass transition-colors">Workflow</a>
+      <a href="#portfolio" class="nav-link hover:text-brass transition-colors">Portfolio</a>
+      <a href="#security" class="nav-link hover:text-brass transition-colors">Security</a>
+      <a href="#tools" class="nav-link hover:text-brass transition-colors">Tools</a>
+      <a href="#contact" class="nav-link hover:text-brass transition-colors">Contact</a>
     </div>
 
     <div class="flex items-center gap-2 sm:gap-3">
-      <button id="themeToggle" class="w-9 h-9 rounded-xl bg-ink/5 dark:bg-white/10 hover:scale-105 transition grid place-items-center" aria-label="Toggle dark mode">
+      <button id="themeToggle" class="w-9 h-9 rounded-xl bg-ink/5 dark:bg-white/10 hover:scale-110 active:scale-95 transition-transform duration-300 grid place-items-center" aria-label="Toggle dark mode">
         <i class="fa-solid fa-moon text-xs dark:hidden"></i>
         <i class="fa-solid fa-sun text-xs hidden dark:block"></i>
       </button>
-      <a href="#calendar" class="hidden sm:inline-flex bg-ink text-white dark:bg-white dark:text-ink px-4 py-2 rounded-xl text-xs font-semibold hover:opacity-90 transition">Book a call</a>
+      <a href="#calendar" class="btn-premium hidden sm:inline-flex bg-ink text-white dark:bg-white dark:text-ink px-4 py-2 rounded-xl text-xs font-semibold hover:opacity-90">Book a call</a>
       <button id="mobileNavToggle" onclick="toggleMobileNav()" class="lg:hidden w-9 h-9 rounded-xl bg-ink/5 dark:bg-white/10 grid place-items-center" aria-label="Toggle navigation menu" aria-expanded="false">
         <i class="fa-solid fa-bars text-xs" id="mobileNavIconOpen"></i>
         <i class="fa-solid fa-xmark text-xs hidden" id="mobileNavIconClose"></i>
@@ -205,34 +297,18 @@
     <!-- Dark overlay for legibility -->
     <div class="absolute inset-0 bg-black/55"></div>
     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/35 to-ink"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
 
     <!-- Hero content -->
     <div id="hero-content" class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
-      <h1 class="font-display text-[2.1rem] leading-[1.15] sm:text-5xl md:text-[3.3rem] font-semibold tracking-tight max-w-3xl text-white">
+      <h1 class="hero-line d1 font-display text-[2.1rem] leading-[1.15] sm:text-5xl md:text-[3.3rem] font-semibold tracking-tight max-w-3xl text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.25)]">
         Close more deals. Carry less paperwork.
       </h1>
-      <p class="mt-5 text-[15px] sm:text-lg text-white/75 max-w-xl font-light leading-relaxed eyebrow">
+      <p class="hero-line d2 mt-5 text-[15px] sm:text-lg text-white/75 max-w-xl font-light leading-relaxed eyebrow">
         Christian Paul Babida — Transaction Coordinator
       </p>
     </div>
   </header>
-
-  <!-- PROFILE PORTRAIT: large signature image bridging hero and overview -->
-  <section class="relative px-4 -mt-24 sm:-mt-32 z-20 reveal" aria-label="Portrait of Christian Paul Babida">
-    <div class="max-w-3xl mx-auto">
-      <div class="relative rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-white/10">
-        <img src="profile.jpg" alt="Christian Paul Babida, California Transaction Coordinator" class="w-full h-[62vh] min-h-[380px] max-h-[640px] object-cover object-top" loading="eager" decoding="async">
-        <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
-        <div class="absolute inset-x-0 bottom-0 p-6 sm:p-9 flex items-end justify-between gap-4">
-          <div>
-            <p class="text-[11px] font-semibold uppercase eyebrow text-brass-light">Est. California Market</p>
-            <p class="font-display text-xl sm:text-2xl font-semibold text-white mt-1 tracking-tight">Christian Paul Babida</p>
-          </div>
-          <span class="seal shrink-0"><i class="fa-solid fa-check"></i></span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- OVERVIEW BENTO GRID: about + live stats + video + availability + resume -->
   <section id="about" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
@@ -250,8 +326,14 @@
             <span class="seal"><i class="fa-solid fa-house-chimney-window"></i></span>
             <span class="text-[11px] font-semibold uppercase eyebrow text-ink/50 dark:text-white/50">Meet Christian</span>
           </div>
-          <h3 class="font-display text-xl sm:text-2xl font-semibold leading-snug mb-3">Tired of drowning in paperwork while your next lead waits?</h3>
-          <p class="text-sm text-ink/65 dark:text-white/65 font-light leading-relaxed mb-3">I'm Christian, a California-focused Transaction Coordinator. I handle the administrative heavy lifting — from the moment a contract is signed to the day keys change hands — so you stay focused on clients and closings.</p>
+          <div class="flex flex-col sm:flex-row gap-5 sm:gap-6 mb-4">
+            <img src="profile.jpg" alt="Christian Paul Babida" loading="lazy" decoding="async"
+                 class="profile-portrait w-24 h-24 sm:w-28 sm:h-28 object-cover border border-ink/10 dark:border-white/10 shrink-0 mx-auto sm:mx-0">
+            <div>
+              <h3 class="font-display text-xl sm:text-2xl font-semibold leading-snug mb-3">Tired of drowning in paperwork while your next lead waits?</h3>
+              <p class="text-sm text-ink/65 dark:text-white/65 font-light leading-relaxed">I'm Christian, a California-focused Transaction Coordinator. I handle the administrative heavy lifting — from the moment a contract is signed to the day keys change hands — so you stay focused on clients and closings.</p>
+            </div>
+          </div>
           <p class="text-sm text-ink/65 dark:text-white/65 font-light leading-relaxed">With 2+ years in the CA market, I don't just process files — I clear the path: full compliance, total timeline monitoring, and a stress-free close.</p>
         </div>
         <div class="grid grid-cols-2 gap-3 pt-6 mt-2 border-t border-ink/10 dark:border-white/10">
@@ -291,10 +373,12 @@
         </div>
       </div>
 
-      <!-- Intro video, spans 2 (currently unavailable) -->
-      <div class="bento-card col-span-2 row-span-2 overflow-hidden relative min-h-[220px] bg-ink/95 flex flex-col items-center justify-center text-center p-6">
-        <i class="fa-solid fa-video-slash text-white/40 text-2xl mb-3"></i>
-        <span class="text-white/70 text-sm font-medium">Video temporarily unavailable</span>
+      <!-- Intro video, spans 2 -->
+      <div class="bento-card col-span-2 row-span-2 overflow-hidden relative">
+        <video controls controlsList="nodownload" playsinline poster="profile.jpg" preload="none" class="w-full h-full min-h-[220px] object-cover bg-ink">
+          <source src="intro.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
         <div class="absolute top-3 left-3 bg-ink/70 text-white text-[10px] font-medium px-2.5 py-1 rounded-full backdrop-blur-sm eyebrow">60-second intro</div>
       </div>
 
@@ -406,52 +490,43 @@
         <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Real dashboards, real deliverables</p>
       </div>
 
-      <div class="flex flex-col gap-10 sm:gap-14">
-        <article class="relative rounded-[1.75rem] overflow-hidden shadow-card group">
-          <img src="listing-sample.jpg" alt="Canva property listing flyer sample" loading="lazy" decoding="async" class="w-full h-[70vh] min-h-[420px] max-h-[780px] object-cover object-top transition duration-700 group-hover:scale-[1.02]">
-          <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 rounded-xl bg-indigo-500/20 backdrop-blur-sm text-indigo-200 flex items-center justify-center text-sm"><i class="fa-solid fa-palette"></i></div>
-              <div><h3 class="font-display font-semibold text-lg sm:text-xl text-white">Canva Marketing Layouts</h3><p class="text-[12px] text-white/60">Listing &amp; open-house assets</p></div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <article class="bento-card overflow-hidden flex flex-col">
+          <div class="img-zoom"><img src="listing-sample.jpg" alt="Canva property listing flyer sample" loading="lazy" decoding="async" class="w-full h-44 object-cover object-top"></div>
+          <div class="p-6 flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-sm"><i class="fa-solid fa-palette"></i></div>
+              <div><h3 class="font-semibold text-sm">Canva Marketing Layouts</h3><p class="text-[11px] text-ink/45 dark:text-white/45">Listing &amp; open-house assets</p></div>
             </div>
-            <div class="max-w-xl grid sm:grid-cols-3 gap-3 sm:gap-6">
-              <p class="text-[12.5px] text-white/75 font-light leading-relaxed"><span class="font-semibold text-white">Challenge:</span> agents needed polished flyers fast, without hiring a designer per property.</p>
-              <p class="text-[12.5px] text-white/75 font-light leading-relaxed"><span class="font-semibold text-white">Solution:</span> a repeatable Canva template system, on-brand for every agent.</p>
-              <p class="text-[12.5px] font-medium text-verified">Result: faster, consistent listing marketing.</p>
-            </div>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Challenge:</span> agents needed polished flyers fast, without hiring a designer per property.</p>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Solution:</span> a repeatable Canva template system, on-brand for every agent.</p>
+            <p class="text-[12.5px] font-medium text-verified">Result: faster, consistent listing marketing.</p>
           </div>
         </article>
 
-        <article class="relative rounded-[1.75rem] overflow-hidden shadow-card group">
-          <img src="trello-screenshot.jpg" alt="Trello transaction pipeline dashboard sample" loading="lazy" decoding="async" class="w-full h-[70vh] min-h-[420px] max-h-[780px] object-cover object-top transition duration-700 group-hover:scale-[1.02]">
-          <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 rounded-xl bg-red-500/20 backdrop-blur-sm text-red-200 flex items-center justify-center text-sm"><i class="fa-brands fa-trello"></i></div>
-              <div><h3 class="font-display font-semibold text-lg sm:text-xl text-white">Trello Transaction Pipeline</h3><p class="text-[12px] text-white/60">Milestone &amp; deadline tracker</p></div>
+        <article class="bento-card overflow-hidden flex flex-col">
+          <div class="img-zoom"><img src="trello-screenshot.jpg" alt="Trello transaction pipeline dashboard sample" loading="lazy" decoding="async" class="w-full h-44 object-cover object-top"></div>
+          <div class="p-6 flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-red-500/10 text-red-600 flex items-center justify-center text-sm"><i class="fa-brands fa-trello"></i></div>
+              <div><h3 class="font-semibold text-sm">Trello Transaction Pipeline</h3><p class="text-[11px] text-ink/45 dark:text-white/45">Milestone &amp; deadline tracker</p></div>
             </div>
-            <div class="max-w-xl grid sm:grid-cols-3 gap-3 sm:gap-6">
-              <p class="text-[12.5px] text-white/75 font-light leading-relaxed"><span class="font-semibold text-white">Challenge:</span> deadlines and statuses scattered across emails and calls.</p>
-              <p class="text-[12.5px] text-white/75 font-light leading-relaxed"><span class="font-semibold text-white">Solution:</span> one visual pipeline for every file stage and touchpoint.</p>
-              <p class="text-[12.5px] font-medium text-verified">Result: zero missed deadlines, full compliance.</p>
-            </div>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Challenge:</span> deadlines and statuses scattered across emails and calls.</p>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Solution:</span> one visual pipeline for every file stage and touchpoint.</p>
+            <p class="text-[12.5px] font-medium text-verified">Result: zero missed deadlines, full compliance.</p>
           </div>
         </article>
 
-        <article class="relative rounded-[1.75rem] overflow-hidden shadow-card group">
-          <img src="asana-sample.jpg" alt="Asana MLS listing task dashboard sample" loading="lazy" decoding="async" class="w-full h-[70vh] min-h-[420px] max-h-[780px] object-cover object-top transition duration-700 group-hover:scale-[1.02]">
-          <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/10 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 rounded-xl bg-purple-500/20 backdrop-blur-sm text-purple-200 flex items-center justify-center text-sm"><i class="fa-solid fa-list-check"></i></div>
-              <div><h3 class="font-display font-semibold text-lg sm:text-xl text-white">MLS Listing Management</h3><p class="text-[12px] text-white/60">Asana task &amp; compliance hub</p></div>
+        <article class="bento-card overflow-hidden flex flex-col">
+          <div class="img-zoom"><img src="asana-sample.jpg" alt="Asana MLS listing task dashboard sample" loading="lazy" decoding="async" class="w-full h-44 object-cover object-top"></div>
+          <div class="p-6 flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center text-sm"><i class="fa-solid fa-list-check"></i></div>
+              <div><h3 class="font-semibold text-sm">MLS Listing Management</h3><p class="text-[11px] text-ink/45 dark:text-white/45">Asana task &amp; compliance hub</p></div>
             </div>
-            <div class="max-w-xl grid sm:grid-cols-3 gap-3 sm:gap-6">
-              <p class="text-[12.5px] text-white/75 font-light leading-relaxed"><span class="font-semibold text-white">Challenge:</span> needed compliant MLS setup with zero room for data errors.</p>
-              <p class="text-[12.5px] text-white/75 font-light leading-relaxed"><span class="font-semibold text-white">Solution:</span> a centralized Asana checklist for listing and compliance review.</p>
-              <p class="text-[12.5px] font-medium text-verified">Result: fast turnaround, full audit trail.</p>
-            </div>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Challenge:</span> needed compliant MLS setup with zero room for data errors.</p>
+            <p class="text-[12.5px] text-ink/60 dark:text-white/60 font-light leading-relaxed"><span class="font-semibold text-ink/80 dark:text-white/80">Solution:</span> a centralized Asana checklist for listing and compliance review.</p>
+            <p class="text-[12.5px] font-medium text-verified">Result: fast turnaround, full audit trail.</p>
           </div>
         </article>
       </div>
@@ -569,10 +644,43 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="py-16 sm:py-24 px-4 bg-ink/[0.025] dark:bg-white/[0.02] reveal">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-2xl mb-10">
+        <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 08 — Endorsements</h2>
+        <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Trusted by real estate producers</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <figure class="bento-card p-7 flex flex-col justify-between">
+          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"Christian completely turned my transaction tracking around. I saved over 14 hours on my last closing alone."</blockquote>
+          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">SM</div>
+            <span class="text-[12.5px] font-semibold">Sarah Mitchell</span>
+          </figcaption>
+        </figure>
+        <figure class="bento-card p-7 flex flex-col justify-between">
+          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"File audits used to give me headaches every month. With Christian tracking compliance, my DAs release without delay."</blockquote>
+          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">JC</div>
+            <span class="text-[12.5px] font-semibold">James Carter</span>
+          </figcaption>
+        </figure>
+        <figure class="bento-card p-7 flex flex-col justify-between">
+          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"The highest standard of transaction communication. He monitors escrow, lending, and clients with elite professionalism."</blockquote>
+          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">AR</div>
+            <span class="text-[12.5px] font-semibold">Amanda Reyes</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- TOOLS -->
   <section id="tools" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
     <div class="max-w-2xl mb-10">
-      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 08 — Tech Stack</h2>
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 09 — Tech Stack</h2>
       <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Fully integrated with the tools you already use</p>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
@@ -594,7 +702,7 @@
     <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">Operations Assistant</h2>
     <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Have a question? Ask ChristianIO.</p>
     <p class="text-sm text-ink/60 dark:text-white/60 mt-3 font-light max-w-md mx-auto">My assistant can answer questions about experience, skills, software, and availability — instantly, 24/7.</p>
-    <button onclick="openChatWidget()" class="mt-7 inline-flex items-center gap-2 bg-ink text-white dark:bg-white dark:text-ink px-6 py-3.5 rounded-2xl font-medium shadow-lg hover:opacity-90 transition">
+    <button onclick="openChatWidget()" class="btn-premium mt-7 inline-flex items-center gap-2 bg-ink text-white dark:bg-white dark:text-ink px-6 py-3.5 rounded-2xl font-medium shadow-lg hover:opacity-90">
       <i class="fa-solid fa-comment-dots"></i> Chat with ChristianIO
     </button>
   </section>
@@ -602,7 +710,7 @@
   <!-- CALENDAR (lazy-loaded Calendly embed) -->
   <section id="calendar" class="py-16 sm:py-24 px-4 bg-ink/[0.025] dark:bg-white/[0.02] reveal">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 09 — Schedule</h2>
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 10 — Schedule</h2>
       <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight mb-8">Let's scale your real estate business</p>
 
       <div class="bento-card p-3 sm:p-5 text-left overflow-hidden">
@@ -628,8 +736,8 @@
         <h2 class="font-display text-2xl sm:text-4xl font-semibold tracking-tight text-white max-w-2xl mx-auto leading-tight">Ready to close more deals without the administrative stress?</h2>
         <p class="mt-4 text-sm sm:text-base text-white/75 max-w-xl mx-auto font-light">Let me manage your paperwork while you focus on serving clients and closing transactions.</p>
         <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="#calendar" class="bg-white text-ink px-7 py-3.5 rounded-2xl font-semibold shadow-lg hover:opacity-90 transition text-center">Book a Discovery Call</a>
-          <a href="resume.pdf" download class="bg-white/10 border border-white/30 text-white px-7 py-3.5 rounded-2xl font-semibold hover:bg-white/20 transition text-center flex items-center justify-center gap-2"><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
+          <a href="#calendar" class="btn-premium bg-white text-ink px-7 py-3.5 rounded-2xl font-semibold shadow-lg hover:opacity-90 text-center">Book a Discovery Call</a>
+          <a href="resume.pdf" download class="btn-premium bg-white/10 border border-white/30 text-white px-7 py-3.5 rounded-2xl font-semibold hover:bg-white/20 text-center flex items-center justify-center gap-2"><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
         </div>
       </div>
     </div>
@@ -638,7 +746,7 @@
   <!-- CONTACT -->
   <section id="contact" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
     <div class="max-w-2xl mb-10">
-      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 10 — Contact</h2>
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 11 — Contact</h2>
       <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Let's set up your operations pipeline</p>
       <p class="text-sm text-ink/60 dark:text-white/60 font-light mt-3 max-w-lg">Ready to stop chasing paperwork? Reach out on any channel below, or send details through the form.</p>
     </div>
@@ -689,7 +797,7 @@
           <label for="contact-requirements" class="text-[12px] font-semibold text-ink/50 dark:text-white/50">What do you need help with?</label>
           <textarea id="contact-requirements" name="requirements" rows="4" required placeholder="Describe your current transaction coordination roadblocks..." class="w-full p-3 rounded-xl bg-ink/[0.03] dark:bg-white/5 border border-ink/10 dark:border-white/10 focus:outline-none focus:border-brass transition text-sm"></textarea>
         </div>
-        <button type="submit" class="w-full bg-ink text-white dark:bg-white dark:text-ink py-3.5 rounded-xl font-semibold tracking-tight shadow-md hover:opacity-90 transition text-sm">Send inquiry</button>
+        <button type="submit" class="btn-premium w-full bg-ink text-white dark:bg-white dark:text-ink py-3.5 rounded-xl font-semibold tracking-tight shadow-md hover:opacity-90 text-sm">Send inquiry</button>
       </form>
     </div>
   </section>
@@ -785,12 +893,12 @@
 
 <!-- Floating action buttons -->
 <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
-  <button id="chat-widget-launcher" onclick="toggleChatWidget()" aria-label="Open ChristianIO chat assistant" class="relative w-14 h-14 rounded-full bg-ink dark:bg-white text-white dark:text-ink flex items-center justify-center shadow-xl hover:scale-105 transition text-xl">
+  <button id="chat-widget-launcher" onclick="toggleChatWidget()" aria-label="Open ChristianIO chat assistant" class="btn-premium relative w-14 h-14 rounded-full bg-ink dark:bg-white text-white dark:text-ink flex items-center justify-center shadow-xl text-xl">
     <span class="absolute top-0 right-0 w-3 h-3 rounded-full bg-verified border-2 border-paper dark:border-ink animate-pulse"></span>
     <i class="fa-solid fa-comment-dots" id="chat-launcher-icon-open"></i>
     <i class="fa-solid fa-xmark hidden" id="chat-launcher-icon-close"></i>
   </button>
-  <a href="https://wa.me/639617445321" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-verified text-white flex items-center justify-center shadow-xl hover:scale-105 transition text-xl" aria-label="Message on WhatsApp">
+  <a href="https://wa.me/639617445321" target="_blank" rel="noopener" class="btn-premium w-12 h-12 rounded-full bg-verified text-white flex items-center justify-center shadow-xl text-xl" aria-label="Message on WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 </div>
@@ -852,6 +960,39 @@
     const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (totalHeight > 0) progress.style.width = ((window.pageYOffset / totalHeight) * 100) + '%';
   }, { passive: true });
+
+  // Nav: condense on scroll
+  (function () {
+    const nav = document.getElementById('site-nav');
+    if (!nav) return;
+    let ticking = false;
+    function updateNavState() {
+      nav.classList.toggle('nav-condensed', window.scrollY > 40);
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { window.requestAnimationFrame(updateNavState); ticking = true; }
+    }, { passive: true });
+    updateNavState();
+  })();
+
+  // Nav: active section indicator
+  (function () {
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    if (!navLinks.length) return;
+    const sections = navLinks
+      .map(link => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean);
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = '#' + entry.target.id;
+          navLinks.forEach(link => link.classList.toggle('active-link', link.getAttribute('href') === id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(section => sectionObserver.observe(section));
+  })();
 
   // Hero fade-out on scroll
   (function () {
@@ -1086,7 +1227,7 @@
             { keywords: ["linkedin"],
               answer: "You can find my professional background on LinkedIn — the link is available in the hero section and contact area of this site." },
             { keywords: ["portfolio website","this website","this site"],
-              answer: "This portfolio showcases my transaction coordination workflow, live metrics dashboard, work samples (Canva flyers, Trello and Asana boards), and the tools I use." },
+              answer: "This portfolio showcases my transaction coordination workflow, live metrics dashboard, work samples (Canva flyers, Trello and Asana boards), tools I use, and client testimonials." },
             { keywords: ["portfolio","work samples","dashboards"],
               answer: "My portfolio includes real work samples: Canva marketing flyers, a Trello transaction pipeline tracker, and an Asana task management dashboard — all shown in the Portfolio section above." },
             { keywords: ["resume download","download resume","see your resume","can i see your resume","resume"],
