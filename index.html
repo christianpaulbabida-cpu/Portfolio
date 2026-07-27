@@ -4,7 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Christian Paul Babida | California Transaction Coordinator</title>
-<link rel="icon" type="image/jpeg" href="pavicon.jpg">
+<!-- Favicon (versioned query string busts stale browser/CDN caching — bump ?v= whenever the icon file changes) -->
+<link rel="icon" href="favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/png" href="favicon-32x32.png?v=2" sizes="32x32">
+<link rel="icon" type="image/png" href="favicon-16x16.png?v=2" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="manifest" href="site.webmanifest?v=2">
 <meta name="theme-color" content="#0B1420">
 <meta name="description" content="Christian Paul Babida — California Transaction Coordinator helping real estate agents close more deals, contract-to-close, with less stress.">
 <meta name="color-scheme" content="light dark">
@@ -116,6 +121,24 @@
     display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: .6rem; flex-shrink: 0;
     box-shadow: inset 0 1px 1px rgba(255,255,255,.4), 0 2px 6px rgba(140,101,53,.4);
+  }
+
+  /* Brand logo (nav, replaces old verification checkmark) */
+  .brand-logo {
+    width: 1.85rem; height: 1.85rem; border-radius: 9999px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+    background: rgba(11,20,32,0.04);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,.3), 0 2px 6px rgba(11,20,32,0.12);
+    transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s cubic-bezier(.16,1,.3,1);
+  }
+  html.dark .brand-logo { background: rgba(255,255,255,0.06); box-shadow: inset 0 1px 1px rgba(255,255,255,.08), 0 2px 6px rgba(0,0,0,0.3); }
+  .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
+  .brand-link:hover .brand-logo, .brand-link:focus-visible .brand-logo {
+    transform: scale(1.1) rotate(-6deg);
+    box-shadow: 0 6px 16px -4px rgba(184,135,74,.45);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .brand-link:hover .brand-logo { transform: none; }
   }
 
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
@@ -243,8 +266,8 @@
 <!-- Nav -->
 <nav id="site-nav" class="fixed top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-50 rounded-2xl max-w-7xl mx-auto shadow-sm">
   <div class="nav-inner px-4 sm:px-6 h-16 flex items-center justify-between">
-    <a href="#main" class="flex items-center gap-2.5 font-display font-semibold tracking-tight">
-      <span class="seal"><i class="fa-solid fa-check"></i></span>
+    <a href="#main" class="brand-link flex items-center gap-2.5 font-display font-semibold tracking-tight">
+      <span class="brand-logo"><img src="logo.png" alt="Christian Paul Babida" loading="eager" decoding="async"></span>
       <span class="hidden sm:inline text-[15px]">Christian Paul Babida</span>
       <span class="sm:hidden text-[15px]">C. Babida</span>
     </a>
@@ -290,14 +313,15 @@
   <!-- HERO -->
   <header id="hero" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-4">
     <!-- Background video -->
-    <video id="hero-video" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover" poster="profile.jpg">
+    <video id="hero-video" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover" poster="profile.jpg" style="filter: brightness(1.14) saturate(1.06);">
       <source src="hero.mp4" type="video/mp4">
     </video>
 
-    <!-- Dark overlay for legibility -->
-    <div class="absolute inset-0 bg-black/55"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/35 to-ink"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+    <!-- Light overlay for legibility — brighter overall, with a soft focused vignette behind the copy -->
+    <div class="absolute inset-0 bg-black/28"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/18 via-black/14 to-ink"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-transparent"></div>
+    <div class="absolute inset-0" style="background: radial-gradient(ellipse 62% 48% at 50% 46%, rgba(0,0,0,0.32), transparent 72%);"></div>
 
     <!-- Hero content -->
     <div id="hero-content" class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
@@ -644,56 +668,132 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="py-16 sm:py-24 px-4 bg-ink/[0.025] dark:bg-white/[0.02] reveal">
-    <div class="max-w-7xl mx-auto">
-      <div class="max-w-2xl mb-10">
-        <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 08 — Endorsements</h2>
-        <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Trusted by real estate producers</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <figure class="bento-card p-7 flex flex-col justify-between">
-          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"Christian completely turned my transaction tracking around. I saved over 14 hours on my last closing alone."</blockquote>
-          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">SM</div>
-            <span class="text-[12.5px] font-semibold">Sarah Mitchell</span>
-          </figcaption>
-        </figure>
-        <figure class="bento-card p-7 flex flex-col justify-between">
-          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"File audits used to give me headaches every month. With Christian tracking compliance, my DAs release without delay."</blockquote>
-          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">JC</div>
-            <span class="text-[12.5px] font-semibold">James Carter</span>
-          </figcaption>
-        </figure>
-        <figure class="bento-card p-7 flex flex-col justify-between">
-          <blockquote class="text-[13.5px] font-light italic text-ink/70 dark:text-white/70 leading-relaxed">"The highest standard of transaction communication. He monitors escrow, lending, and clients with elite professionalism."</blockquote>
-          <figcaption class="mt-5 pt-4 border-t border-ink/10 dark:border-white/10 flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-ink/10 dark:bg-white/10 font-semibold text-[11px] flex items-center justify-center">AR</div>
-            <span class="text-[12.5px] font-semibold">Amanda Reyes</span>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
   <!-- TOOLS -->
   <section id="tools" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
     <div class="max-w-2xl mb-10">
-      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 09 — Tech Stack</h2>
+      <h2 class="text-[11px] font-semibold text-brass-dark dark:text-brass-light uppercase eyebrow">File No. 08 — Tech Stack</h2>
       <p class="text-2xl sm:text-3xl font-display font-semibold mt-2 tracking-tight">Fully integrated with the tools you already use</p>
     </div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-600 flex items-center justify-center text-sm"><i class="fa-solid fa-cloud-arrow-up"></i></div><span class="text-[12.5px] font-medium">SkySlope</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 flex items-center justify-center text-sm"><i class="fa-solid fa-circle-nodes"></i></div><span class="text-[12.5px] font-medium">Dotloop</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center text-sm"><i class="fa-solid fa-bolt"></i></div><span class="text-[12.5px] font-medium">OpenToClose</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-600 flex items-center justify-center text-sm"><i class="fa-solid fa-file-signature"></i></div><span class="text-[12.5px] font-medium">DocuSign</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center text-sm"><i class="fa-solid fa-database"></i></div><span class="text-[12.5px] font-medium">kvCORE</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-sm"><i class="fa-brands fa-hubspot"></i></div><span class="text-[12.5px] font-medium">HubSpot</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-sm"><i class="fa-solid fa-palette"></i></div><span class="text-[12.5px] font-medium">Canva</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 flex items-center justify-center text-sm"><i class="fa-brands fa-trello"></i></div><span class="text-[12.5px] font-medium">Trello</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-slate-500/10 text-slate-600 dark:text-slate-300 flex items-center justify-center text-sm"><i class="fa-brands fa-google"></i></div><span class="text-[12.5px] font-medium">Workspace</span></div>
-      <div class="bento-card p-4 flex items-center gap-2.5"><div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-600 flex items-center justify-center text-sm"><i class="fa-solid fa-key"></i></div><span class="text-[12.5px] font-medium">LastPass</span></div>
+    <div id="tech-stack-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4">
+
+      <div class="tech-tile" data-depth="0.03">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center shrink-0 overflow-hidden shadow-sm ring-1 ring-ink/5"><img src="assets/logos/skyslope.png" alt="SkySlope" loading="lazy" decoding="async" class="w-full h-full object-contain p-1"></div>
+          <span class="text-[12.5px] font-medium">SkySlope</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="-0.045">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center shrink-0 overflow-hidden shadow-sm ring-1 ring-ink/5"><img src="assets/logos/dotloop.png" alt="Dotloop" loading="lazy" decoding="async" class="w-full h-full object-contain p-1"></div>
+          <span class="text-[12.5px] font-medium">Dotloop</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="0.05">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center text-sm shrink-0"><i class="fa-solid fa-bolt"></i></div>
+          <span class="text-[12.5px] font-medium">OpenToClose</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="-0.03">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-orange-500/10 text-orange-600 flex items-center justify-center text-sm shrink-0"><i class="fa-solid fa-file-signature"></i></div>
+          <span class="text-[12.5px] font-medium">DocuSign</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="0.045">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center text-sm shrink-0"><i class="fa-solid fa-database"></i></div>
+          <span class="text-[12.5px] font-medium">kvCORE</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="-0.05">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center shrink-0 overflow-hidden shadow-sm ring-1 ring-ink/5"><img src="assets/logos/hubspot.png" alt="HubSpot" loading="lazy" decoding="async" class="w-full h-full object-contain p-1.5"></div>
+          <span class="text-[12.5px] font-medium">HubSpot</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="0.03">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center shrink-0 overflow-hidden shadow-sm ring-1 ring-ink/5"><img src="assets/logos/canva.png" alt="Canva" loading="lazy" decoding="async" class="w-full h-full object-contain p-1"></div>
+          <span class="text-[12.5px] font-medium">Canva</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="-0.04">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center shrink-0 overflow-hidden shadow-sm ring-1 ring-ink/5"><img src="assets/logos/trello.png" alt="Trello" loading="lazy" decoding="async" class="w-full h-full object-contain p-1"></div>
+          <span class="text-[12.5px] font-medium">Trello</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="0.04">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center shrink-0 overflow-hidden shadow-sm ring-1 ring-ink/5"><img src="assets/logos/asana.png" alt="Asana" loading="lazy" decoding="async" class="w-full h-full object-contain p-1"></div>
+          <span class="text-[12.5px] font-medium">Asana</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="-0.035">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-slate-500/10 text-slate-600 dark:text-slate-300 flex items-center justify-center text-sm shrink-0"><i class="fa-brands fa-google"></i></div>
+          <span class="text-[12.5px] font-medium">Workspace</span>
+        </div>
+      </div>
+
+      <div class="tech-tile" data-depth="0.05">
+        <div class="tech-card bento-card p-4 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-rose-500/10 text-rose-600 flex items-center justify-center text-sm shrink-0"><i class="fa-solid fa-key"></i></div>
+          <span class="text-[12.5px] font-medium">LastPass</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIMITED-TIME OFFER -->
+  <section id="offer" class="py-16 sm:py-24 px-4 max-w-7xl mx-auto reveal">
+    <div class="bento-card relative overflow-hidden p-8 sm:p-14 text-center">
+      <div aria-hidden="true" class="absolute -top-24 -right-16 w-72 h-72 bg-brass/20 rounded-full blur-3xl"></div>
+      <div aria-hidden="true" class="absolute -bottom-24 -left-16 w-72 h-72 bg-signal/15 rounded-full blur-3xl"></div>
+
+      <div class="relative z-10 max-w-xl mx-auto flex flex-col items-center">
+        <span class="offer-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brass to-brass-dark text-white text-[11px] font-semibold uppercase eyebrow shadow-lg">
+          🔥 50% OFF Limited-Time Offer
+        </span>
+        <h2 class="font-display text-2xl sm:text-3xl font-semibold mt-5 tracking-tight">Save 50% on your Real Estate Transaction Coordinator services</h2>
+        <p class="text-sm text-ink/60 dark:text-white/60 mt-3 font-light max-w-md">Lock in dedicated contract-to-close support at half the rate. Offer ends on September 20, 2026.</p>
+
+        <div id="countdown" class="mt-8 grid grid-cols-4 gap-2.5 sm:gap-4 w-full max-w-sm" data-deadline="2026-09-20T23:59:59-07:00" role="timer" aria-live="polite" aria-atomic="true">
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-days">00</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-hours">00</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-mins">00</span>
+            <span class="countdown-label">Min</span>
+          </div>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-secs">00</span>
+            <span class="countdown-label">Sec</span>
+          </div>
+        </div>
+
+        <p id="offer-expired-msg" class="hidden mt-6 text-sm font-semibold text-ink/50 dark:text-white/50">This offer has expired — reach out to ask about current availability.</p>
+
+        <a href="#calendar" id="claim-offer-btn" class="btn-premium mt-9 inline-flex items-center gap-2 bg-ink text-white dark:bg-white dark:text-ink px-7 py-4 rounded-2xl font-semibold shadow-lg hover:opacity-90">
+          <i class="fa-solid fa-tag"></i> Claim 50% Discount
+        </a>
+      </div>
     </div>
   </section>
 
